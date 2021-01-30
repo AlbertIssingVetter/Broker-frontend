@@ -4,6 +4,7 @@ import Signup from "../login/Signup";
 import Login from "../login/Login";
 import ForgetPassword from "../login/ForgetPassword";
 import Main from "../main/Main";
+import {Helmet} from "react-helmet";
 
 export default class App extends React.Component {
 
@@ -11,7 +12,9 @@ export default class App extends React.Component {
         return (
             <Router>
                 <div>
-
+                    <Helmet>
+                        <link rel="stylesheet" href={localStorage.getItem('lang') === 'fa'? '/style.rtl.css': '/style.css'} />
+                    </Helmet>
                     <Switch>
                         <Route path="/login" component={Login}/>
                         <Route path="/signup" component={Signup}/>

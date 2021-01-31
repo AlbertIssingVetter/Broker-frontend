@@ -11,17 +11,16 @@ export default class App extends React.Component {
     render() {
         return (
             <Router>
-                <div>
-                    <Helmet>
-                        <link rel="stylesheet" href={localStorage.getItem('lang') === 'fa'? '/style.rtl.css': '/style.css'} />
-                    </Helmet>
-                    <Switch>
-                        <Route path="/login" component={Login}/>
-                        <Route path="/signup" component={Signup}/>
-                        <Route path="/forget-password" component={ForgetPassword}/>
-                        <Route path="/" component={Main}/>
-                    </Switch>
-                </div>
+                <Helmet>
+                    <link rel="stylesheet"
+                          href={localStorage.getItem('lang') === 'fa' ? '/style.rtl.css' : '/style.css'}/>
+                </Helmet>
+                <Switch>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/signup" component={Signup}/>
+                    <Route path="/forget-password" component={ForgetPassword}/>
+                    <Route path="/" component={Main}/>
+                </Switch>
             </Router>
         );
     }

@@ -13,6 +13,8 @@ import Pattern from "./Pattern";
 import {Link} from "react-router-dom";
 import {withRouter} from 'react-router-dom'
 import {Visibility, VisibilityOff} from "@material-ui/icons";
+import LanguageSelector from "../langauge-selector/LanguageSelector";
+import t from "../../lang/t"
 
 export default class Login extends React.Component {
 
@@ -43,7 +45,7 @@ export default class Login extends React.Component {
                             history.push('/signup')
                         }}
                         variant='outlined' color='primary'>
-                    sign up
+                    {t('signup')}
                 </Button>
             )
         )
@@ -53,19 +55,20 @@ export default class Login extends React.Component {
             <div className='login'>
                 <Pattern/>
                 <div className='form'>
+                    <LanguageSelector />
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <Typography variant='h3'>COIN</Typography>
+                            <Typography variant='h3'>{t('appName')}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography>Welcome back! Please login to your account.</Typography>
+                            <Typography>{t('loginWelcome')}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField label='username' ref={this.inputUser}/>
+                            <TextField label={t('username')} ref={this.inputUser}/>
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl>
-                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                <InputLabel htmlFor="standard-adornment-password">{t('password')}</InputLabel>
                                 <Input
                                     ref={this.inputPass}
                                     type={this.state.showPassword ? 'text' : 'password'}
@@ -84,12 +87,12 @@ export default class Login extends React.Component {
                         </Grid>
                         <Grid item xs={12}>
                             <div className='forget-row'>
-                                <FormControlLabel control={<Checkbox/>} label='Remember me'/>
-                                <Link to='/forget-password'>Forget Password</Link>
+                                <FormControlLabel control={<Checkbox/>} label={t('rememberMe')}/>
+                                <Link to='/forget-password'>{t('forgetPassword')}</Link>
                             </div>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button style={{float: 'right'}} onClick={this.handleLoginBtnClick} variant='contained' color='primary'>login</Button>
+                            <Button style={{float: 'right'}} onClick={this.handleLoginBtnClick} variant='contained' color='primary'>{t('login')}</Button>
                         </Grid>
 
                         <Grid item xs={6}>

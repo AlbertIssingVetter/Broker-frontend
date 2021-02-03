@@ -22,7 +22,12 @@ html, body, #root {
     @media only screen and (min-width: 600px) {
       width: 50%
     }
-    .MuiFormControl-root, .forget-row {
+    .change-lang {
+      position: absolute;
+      top: -100px;
+      right: 100px;
+    }
+    .MuiFormControl-root, .forget-row, .change-lang {
       width: 60%;
       min-width: 250px;
       max-width: 450px;
@@ -43,4 +48,13 @@ html, body, #root {
       max-width: 219px;
     }
   }
+}
+
+.language-selector {
+  .MuiInputBase-root {
+    width: 66px;
+  }
+}
+.language-selector-image {
+  width: 20px;
 }

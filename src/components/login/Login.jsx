@@ -57,6 +57,7 @@ class Login extends React.Component {
             const data = res.data;
             if (data.status) {
                 localStorage.setItem('token', data.token);
+                axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
                 this.props.history.push('/');
             } else {
                 this.dialog = {

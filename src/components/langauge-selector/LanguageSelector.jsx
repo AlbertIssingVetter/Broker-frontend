@@ -19,7 +19,7 @@ export default class LanguageSelector extends React.Component {
                         {
                             Object.keys(langList).map((lang) =>
                                 (
-                                    <MenuItem value={langList[lang].name}>
+                                    <MenuItem key={langList[lang].name} value={langList[lang].name}>
                                         <img className='language-selector-image' src={langList[lang].icon} alt={langList[lang].name}/>
                                         {langList[lang].name}
                                     </MenuItem>

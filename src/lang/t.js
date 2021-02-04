@@ -30,5 +30,12 @@ export function getLang() {
 }
 
 export default function t(key, ...params) {
+    let obj = langList[getLang()].obj
+    if (!(key in obj)) {
+        obj = langList[defaultLang].obj;
+        if (!(key in obj)) {
+            return key;
+        }
+    }
     return langList[getLang()].obj[key].format(params);
 }

@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/App';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import {getLang} from "./lang/t";
 
 const theme = createMuiTheme({
-    direction: localStorage.getItem('lang') === 'fa' ? 'rtl' : 'ltr',
+    direction: getLang() === 'fa' ? 'rtl' : 'ltr',
     palette: {
         type: localStorage.getItem('mode') ? localStorage.getItem('mode') : 'light',
     }

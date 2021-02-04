@@ -6,6 +6,7 @@ import ForgetPassword from "../login/ForgetPassword";
 import Main from "../main/Main";
 import {Helmet} from "react-helmet";
 import {} from '../../utils/axiosDefault'
+import {getLang} from "../../lang/t";
 
 export default class App extends React.Component {
 
@@ -14,7 +15,7 @@ export default class App extends React.Component {
             <Router>
                 <Helmet>
                     <link rel="stylesheet"
-                          href={localStorage.getItem('lang') === 'fa' ? '/style.rtl.css' : '/style.css'}/>
+                          href={getLang() === 'fa' ? '/style.rtl.css' : '/style.css'}/>
                 </Helmet>
                 <Switch>
                     <Route path="/login" component={Login}/>

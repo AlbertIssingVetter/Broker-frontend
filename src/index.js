@@ -8,6 +8,29 @@ const theme = createMuiTheme({
     direction: getLang() === 'fa' ? 'rtl' : 'ltr',
     palette: {
         type: localStorage.getItem('mode') ? localStorage.getItem('mode') : 'light',
+        primary: {
+            light: '#226CFC',
+            main: '#226CFC',
+        },
+        secondary: {
+            light: '#0859FC',
+            main: '#0859FC',
+        },
+        error: {
+            light: '#FC3A95',
+            main: '#FC3A95',
+        },
+        warnings: {
+            light: '#FCB108',
+            main: '#FCB108',
+        },
+        success: {
+            light: '#14FC19',
+            main: '#14FC19',
+        },
+    },
+    typography: {
+        fontFamily: 'Vazir',
     }
 });
 

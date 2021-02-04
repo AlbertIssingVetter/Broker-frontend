@@ -24,7 +24,12 @@ class Logout extends React.Component {
                 console.log(res.data)
             }
         }).catch(err => {
-            console.log(err.response.data)
+            if (err.response.status === 401) {
+                localStorage.removeItem('token');
+                this.props.history.push('/login')
+            } else {
+                console.log(err.response.data)
+            }
         })
     }
 }

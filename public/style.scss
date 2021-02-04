@@ -63,7 +63,12 @@ html, body, #root {
     width: rem(66px);
   }
 }
+
 .language-selector-image {
   @include marginEnd(10px);
   width: rem(20px);
+}
+
+.MuiBackdrop-root {
+  z-index: 1000;
 }

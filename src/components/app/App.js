@@ -5,6 +5,7 @@ import Login from "../login/Login";
 import ForgetPassword from "../login/ForgetPassword";
 import Main from "../main/Main";
 import {Helmet} from "react-helmet";
+import {} from '../../utils/axiosDefault'
 
 export default class App extends React.Component {
 

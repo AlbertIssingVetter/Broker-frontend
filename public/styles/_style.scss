@@ -15,6 +15,11 @@ html, body, #root {
     height: 100%;
     width: 50%;
     background-image: linear-gradient(to bottom left, #242348, #5A55AA);
+    svg {
+      position: absolute;
+      width: 50%;
+      bottom: 0;
+    }
   }
   .form {
     width: 100%;

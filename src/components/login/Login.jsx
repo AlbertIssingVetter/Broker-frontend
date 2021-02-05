@@ -118,16 +118,13 @@ class Login extends React.Component {
                             </div>
                         </Grid>
                         <Grid item xs={6}>
-                            <Button style={{float: 'right'}} onClick={this.handleLoginBtnClick} variant='contained'
+                            <Button className='float-end' onClick={this.handleLoginBtnClick} variant='contained'
                                     color='primary'>{t('login')}</Button>
                         </Grid>
 
                         <Grid item xs={6}>
-                            <Button style={{float: 'left'}}
-                                    onClick={this.handleSignupClick}
-                                    variant='outlined' color='primary'>
-                                {t('signup')}
-                            </Button>
+                            <Button className='float-start' onClick={this.handleSignupClick} variant='outlined'
+                                    color='primary'>{t('signup')}</Button>
                         </Grid>
                     </Grid>
                     <ErrorDialog title={this.dialog.title} open={this.state.errorDialog}

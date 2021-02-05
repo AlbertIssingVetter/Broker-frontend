@@ -1,7 +1,17 @@
 @mixin marginEnd($size) {
   margin-left: rem($size);
 }
+
+@mixin floatEnd {
+  float: left;
+}
+
+@mixin floatStart {
+  float: right;
+}
+
 body {
   direction: rtl;
 }
+
 @import './styles/style';

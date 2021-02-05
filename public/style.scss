@@ -2,4 +2,12 @@
   margin-right: rem($size);
 }
 
+@mixin floatEnd {
+  float: right;
+}
+
+@mixin floatStart {
+  float: left;
+}
+
 @import "./styles/style";

@@ -64,6 +64,11 @@ html, body, #root {
   @include marginEnd(10px);
   width: rem(20px);
 }
+.MuiSelect-select {
+  .language-selector-name {
+    display: none;
+  }
+}
 
 .MuiBackdrop-root {
   z-index: 1000;

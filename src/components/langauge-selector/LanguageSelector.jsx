@@ -21,7 +21,7 @@ export default class LanguageSelector extends React.Component {
                                 (
                                     <MenuItem key={langList[lang].name} value={langList[lang].name}>
                                         <img className='language-selector-image' src={langList[lang].icon} alt={langList[lang].name}/>
-                                        {langList[lang].name}
+                                        <div className='language-selector-name'>{langList[lang].name}</div>
                                     </MenuItem>
                                 )
                             )

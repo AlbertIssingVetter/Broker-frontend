@@ -10,8 +10,9 @@ class Main extends React.Component {
 
     constructor(props) {
         super(props)
+        const drawerOpen = localStorage.getItem('drawerOpen') != null ? localStorage.getItem('drawerOpen') === 'true' : true
         this.state = {
-            drawerOpen: false
+            drawerOpen,
         }
         if (!localStorage.getItem('token')) {
             this.props.history.push('/login')
@@ -20,14 +21,17 @@ class Main extends React.Component {
     }
 
     handleDrawerOpen = () => {
+        localStorage.setItem('drawerOpen', 'true');
         this.setState({drawerOpen: true})
     }
 
     handleDrawerToggle = () => {
+        localStorage.setItem('drawerOpen', `${!this.state.drawerOpen}`);
         this.setState({drawerOpen: !this.state.drawerOpen})
     }
 
     handleDrawerClose = () => {
+        localStorage.setItem('drawerOpen', 'false');
         this.setState({drawerOpen: false})
     }
 

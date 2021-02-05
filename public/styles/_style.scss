@@ -1,0 +1,92 @@
+@function rem($size) {
+  @return $size / 16px * 1rem;
+}
+
+html, body, #root {
+  margin: 0;
+  height: 100%
+}
+
+.login {
+  height: 100%;
+  .pattern {
+    margin: 0;
+    float: left;
+    height: 100%;
+    width: 50%;
+    background-image: linear-gradient(to bottom left, #242348, #5A55AA);
+  }
+  .form {
+    width: 100%;
+    position: absolute;
+    right: rem(12px);
+    top: 50%;
+    transform: translate(0, -50%);
+    text-align: center;
+    @media only screen and (min-width: 600px) {
+      width: 50%
+    }
+    .change-lang {
+      position: absolute;
+      top: rem(-100px);
+      right: rem(100px);
+    }
+    .MuiFormControl-root, .forget-row, .change-lang {
+      width: 60%;
+      min-width: rem(250px);
+      max-width: rem(450px);
+    }
+    .forget-row {
+      margin: auto;
+      a {
+        float: right;
+        margin-top: rem(12px);
+      }
+      label {
+        float: left;
+      }
+    }
+    .MuiButton-root {
+      width: calc(60% - 6px);
+      min-width: rem(119px);
+      max-width: rem(219px);
+    }
+  }
+}
+
+.language-selector {
+  .MuiInputBase-root {
+    width: rem(66px);
+  }
+}
+
+.language-selector-image {
+  @include marginEnd(10px);
+  width: rem(20px);
+}
+
+.MuiBackdrop-root {
+  z-index: 1000;
+}
+
+.MuiDialog-paper {
+  z-index: 1001;
+}
+
+.sidebar-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.MuiDrawer-paper {
+  top: rem(64px);
+  width: rem(200px);
+}
+
+.main {
+  .MuiContainer-root {
+    position: absolute;
+    top: rem(64px);
+    transition: all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  }
+}

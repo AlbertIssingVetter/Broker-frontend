@@ -76,3 +76,21 @@ html, body, #root {
 .MuiDialog-paper {
   z-index: 1001;
 }
+
+.sidebar-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.MuiDrawer-paper {
+  top: rem(64px);
+  width: rem(200px);
+}
+
+.main {
+  .MuiContainer-root {
+    position: absolute;
+    top: rem(64px);
+    transition: all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  }
+}

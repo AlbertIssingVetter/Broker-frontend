@@ -5,12 +5,13 @@ import Dashboard from "../dashboard/Dashboard";
 import {Container} from "@material-ui/core";
 import Profile from "../profile/Profile";
 import {getLang} from "../../lang/t";
+import withWidth from "@material-ui/core/withWidth";
 
 class Main extends React.Component {
 
     constructor(props) {
         super(props)
-        const drawerOpen = localStorage.getItem('drawerOpen') != null ? localStorage.getItem('drawerOpen') === 'true' : true
+        const drawerOpen = props.width === 'xs' ? false : localStorage.getItem('drawerOpen') != null ? localStorage.getItem('drawerOpen') === 'true' : true
         this.state = {
             drawerOpen,
         }
@@ -37,15 +38,17 @@ class Main extends React.Component {
 
     render() {
         let styles = {}
-        if (getLang() === 'fa') {
-            styles = {
-                marginRight: this.state.drawerOpen ? '12.5rem': '0',
-                width: this.state.drawerOpen ? 'calc(100% - 12.5rem)': '100%'
-            }
-        } else {
-            styles = {
-                marginLeft: this.state.drawerOpen ? '12.5rem': '0',
-                width: this.state.drawerOpen ? 'calc(100% - 12.5rem)': '100%'
+        if (this.props.width !== 'xs') {
+            if (getLang() === 'fa') {
+                styles = {
+                    marginRight: this.state.drawerOpen ? '12.5rem': '0',
+                    width: this.state.drawerOpen ? 'calc(100% - 12.5rem)': '100%'
+                }
+            } else {
+                styles = {
+                    marginLeft: this.state.drawerOpen ? '12.5rem': '0',
+                    width: this.state.drawerOpen ? 'calc(100% - 12.5rem)': '100%'
+                }
             }
         }
         return <div className='main'>
@@ -68,4 +71,4 @@ class Main extends React.Component {
     }
 }
 
-export default withRouter(Main);
+export default withRouter(withWidth()(Main));

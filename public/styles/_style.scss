@@ -84,8 +84,11 @@ html, body, #root {
 }
 
 .MuiDrawer-paper {
-  top: rem(64px);
+  top: 0;
   width: rem(200px);
+  @media only screen and (min-width: 600px) {
+    top: rem(64px)
+  }
 }
 
 .main {

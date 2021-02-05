@@ -17,6 +17,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import Logout from "../login/Logout";
 import LanguageSelector from "../langauge-selector/LanguageSelector";
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import withWidth from '@material-ui/core/withWidth';
 
 class Sidebar extends React.Component {
 
@@ -41,10 +42,10 @@ class Sidebar extends React.Component {
                         <LanguageSelector />
                     </Toolbar>
                 </AppBar>
-                <Drawer variant='persistent'
+                <Drawer variant={this.props.width === 'xs' ? 'temporary' : 'persistent'}
                         anchor='left' open={this.props.drawerOpen} onClose={this.props.handleDrawerClose}>
                     <List>
-                        <Link className='sidebar-link' to='/'>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : ''} className='sidebar-link' to='/'>
                             <ListItem button>
                                 <ListItemIcon>
                                     <HomeIcon/>
@@ -54,7 +55,7 @@ class Sidebar extends React.Component {
                         </Link>
                     </List>
                     <List>
-                        <Link className='sidebar-link' to='/profile'>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : ''} className='sidebar-link' to='/profile'>
                             <ListItem button>
                                 <ListItemIcon>
                                     <AssignmentIndIcon/>
@@ -69,4 +70,4 @@ class Sidebar extends React.Component {
     }
 }
 
-export default withRouter(Sidebar);
+export default withRouter(withWidth()(Sidebar));

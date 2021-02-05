@@ -4,6 +4,7 @@ import Sidebar from "../sidebar/Sidebar";
 import Dashboard from "../dashboard/Dashboard";
 import {Container} from "@material-ui/core";
 import Profile from "../profile/Profile";
+import {getLang} from "../../lang/t";
 
 class Main extends React.Component {
 
@@ -31,18 +32,30 @@ class Main extends React.Component {
     }
 
     render() {
+        let styles = {}
+        if (getLang() === 'fa') {
+            styles = {
+                marginRight: this.state.drawerOpen ? '12.5rem': '0',
+                width: this.state.drawerOpen ? 'calc(100% - 12.5rem)': '100%'
+            }
+        } else {
+            styles = {
+                marginLeft: this.state.drawerOpen ? '12.5rem': '0',
+                width: this.state.drawerOpen ? 'calc(100% - 12.5rem)': '100%'
+            }
+        }
         return <div className='main'>
 
             <Sidebar handleDrawerClose={this.handleDrawerClose} drawerOpen={this.state.drawerOpen}
                      handleDrawerToggle={this.handleDrawerToggle} />
             <Switch>
                 <Route path="/profile">
-                    <Container style={{marginLeft: this.state.drawerOpen ? '12.5rem': '0', width: this.state.drawerOpen ? 'calc(100% - 12.5rem)': '100%'}}>
+                    <Container style={styles}>
                         <Profile/>
                     </Container>
                 </Route>
                 <Route path="/">
-                    <Container style={{marginLeft: this.state.drawerOpen ? '12.5rem': '0', width: this.state.drawerOpen ? 'calc(100% - 12.5rem)': '100%'}}>
+                    <Container style={styles}>
                         <Dashboard/>
                     </Container>
                 </Route>

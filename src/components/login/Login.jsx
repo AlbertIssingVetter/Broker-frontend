@@ -114,7 +114,7 @@ class Login extends React.Component {
                         <Grid item xs={12}>
                             <div className='forget-row'>
                                 <FormControlLabel control={<Checkbox/>} label={t('rememberMe')}/>
-                                <Link to='/forget-password'>{t('forgetPassword')}</Link>
+                                <Link to='/forget-password'><Typography>{t('forgetPassword')}</Typography></Link>
                             </div>
                         </Grid>
                         <Grid item xs={6}>

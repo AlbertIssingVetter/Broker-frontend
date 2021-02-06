@@ -65,9 +65,12 @@ html, body, #root {
     width: rem(66px);
   }
 }
-
+.MuiListItem-button {
+  .language-selector-image {
+    @include marginEnd(10px);
+  }
+}
 .language-selector-image {
-  @include marginEnd(10px);
   width: rem(20px);
 }
 .MuiSelect-select {
@@ -116,4 +119,34 @@ html, body, #root {
 
 .MuiFormControl-root {
   direction: ltr;
+}
+
+.profile-icon-drop-down {
+  width: rem(42px);
+  height: rem(42px);
+}
+
+.profile-angle-drop-down {
+  width: rem(12px);
+  height: rem(8px);
+  @include marginStart(8px);
+  margin-bottom: rem(17px)
+}
+
+.profile-drop-down {
+  cursor: pointer;
+  position: absolute;
+  @include positionEnd(10px);
+  top: rem(12px);
+  .MuiCardContent-root {
+    padding: rem(2px);
+    .MuiButtonBase-root {
+      display: block;
+    }
+  }
+}
+
+.language-selector-header {
+  position: absolute;
+  @include positionEnd(100px)
 }

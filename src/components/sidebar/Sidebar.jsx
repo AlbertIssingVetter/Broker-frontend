@@ -14,10 +14,10 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import t from "../../lang/t";
 import HomeIcon from "@material-ui/icons/Home";
-import Logout from "../login/Logout";
 import LanguageSelector from "../langauge-selector/LanguageSelector";
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import withWidth from '@material-ui/core/withWidth';
+import ProfileDropDown from "../main/ProfileDropDown";
 
 class Sidebar extends React.Component {
 
@@ -38,8 +38,8 @@ class Sidebar extends React.Component {
                         <Typography variant="h6" noWrap>
                             {t('appName')}
                         </Typography>
-                        <Logout variant='text'/>
-                        <LanguageSelector />
+                        <LanguageSelector className="language-selector-header" />
+                        <ProfileDropDown/>
                     </Toolbar>
                 </AppBar>
                 <Drawer variant={this.props.width === 'xs' ? 'temporary' : 'persistent'}

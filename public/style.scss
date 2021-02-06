@@ -2,6 +2,18 @@
   margin-right: rem($size);
 }
 
+@mixin marginStart($size) {
+  margin-left: rem($size);
+}
+
+@mixin positionEnd($size) {
+  right: rem($size);
+}
+
+@mixin positionStart($size) {
+  left: rem($size);
+}
+
 @mixin floatEnd {
   float: right;
 }

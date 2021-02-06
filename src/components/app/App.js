@@ -7,12 +7,14 @@ import Main from "../main/Main";
 import {Helmet} from "react-helmet";
 import {} from '../../utils/axiosDefault'
 import {getLang} from "../../lang/t";
+import {CssBaseline} from "@material-ui/core";
 
 export default class App extends React.Component {
 
     render() {
         return (
             <Router>
+                <CssBaseline />
                 <Helmet>
                     <link rel="stylesheet"
                           href={getLang() === 'fa' ? '/style.rtl.css' : '/style.css'}/>

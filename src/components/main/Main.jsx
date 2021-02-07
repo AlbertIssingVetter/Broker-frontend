@@ -52,6 +52,7 @@ class Main extends React.Component {
             }
         }
         styles.marginTop = '1rem';
+        styles.maxWidth = '100%';
         return <div className='main'>
 
             <Sidebar handleDrawerClose={this.handleDrawerClose} drawerOpen={this.state.drawerOpen}

@@ -150,3 +150,44 @@ html, body, #root {
   position: absolute;
   @include positionEnd(100px)
 }
+
+.coin-card-name, .coin-card-price, .coin-card-percent {
+  display: block;
+}
+
+.coin-card-percent {
+  margin-top: rem(10px);
+  direction: ltr;
+}
+
+.coin-card-price-div {
+  @include floatEnd;
+  text-align: center;
+  margin-bottom: rem(16px);
+  .MuiSkeleton-text {
+    transform: scale(1, 1);
+  }
+  span:first-child {
+    margin-bottom: rem(10px);
+  }
+}
+
+.coin-card-icon {
+  @include floatStart;
+  width: rem(64px);
+  height: rem(64px);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.coin-card-name {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  @include marginStart(74px)
+}
+
+.coin-card {
+  position: relative;
+}

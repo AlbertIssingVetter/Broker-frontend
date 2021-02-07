@@ -23,7 +23,13 @@ const en =  {
     error: 'Error code {0}',
     validationError: 'Filed validation Error',
     signupError: 'Please fill fields correctly.',
-    fixSignupError: 'Please fill below fields correctly:'
+    fixSignupError: 'Please fill below fields correctly:',
+    home: 'Home',
+    profile: 'Profile',
+    price: '{0} TOMAN',
+    bitcoin: 'Bitcoin',
+    ethereum: 'Ethereum',
+    tether: 'Tether',
 }
 
 export default en;

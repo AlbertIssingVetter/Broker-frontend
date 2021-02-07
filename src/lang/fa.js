@@ -7,6 +7,12 @@ const fa =  {
     forgetPassword: 'بازیابی رمز عبور',
     login: 'ورود',
     signup: 'ساخت حساب',
+    home: 'خانه',
+    profile: 'پروفایل',
+    price: '{0} تومان',
+    bitcoin: 'بیتکوین',
+    ethereum: 'اتریم',
+    tether: 'تتر',
 }
 
 export default fa;

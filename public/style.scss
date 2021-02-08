@@ -22,4 +22,12 @@
   float: left;
 }
 
+@mixin textAlignStart {
+  text-align: left;
+}
+
+@mixin textAlignEnd {
+  text-align: right;
+}
+
 @import "./styles/style";

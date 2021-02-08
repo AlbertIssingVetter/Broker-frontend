@@ -22,6 +22,14 @@
   float: right;
 }
 
+@mixin textAlignStart {
+  text-align: right;
+}
+
+@mixin textAlignEnd {
+  text-align: left;
+}
+
 body {
   direction: rtl;
 }

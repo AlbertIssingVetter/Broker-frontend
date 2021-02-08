@@ -45,7 +45,7 @@ class Sidebar extends React.Component {
                 <Drawer variant={this.props.width === 'xs' ? 'temporary' : 'persistent'}
                         anchor='left' open={this.props.drawerOpen} onClose={this.props.handleDrawerClose}>
                     <List>
-                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : ''} className='sidebar-link' to='/'>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='sidebar-link' to='/'>
                             <ListItem button>
                                 <ListItemIcon>
                                     <HomeIcon/>
@@ -55,7 +55,7 @@ class Sidebar extends React.Component {
                         </Link>
                     </List>
                     <List>
-                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : ''} className='sidebar-link' to='/profile'>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='sidebar-link' to='/profile'>
                             <ListItem button>
                                 <ListItemIcon>
                                     <AssignmentIndIcon/>

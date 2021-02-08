@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/App';
+//findDOMNode is deprecated in StrictMode error can fixed with unstable_createMuiStrictModeTheme as createMuiTheme
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import {getLang} from "./lang/t";
 

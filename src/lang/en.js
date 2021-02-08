@@ -30,6 +30,12 @@ const en =  {
     bitcoin: 'Bitcoin',
     ethereum: 'Ethereum',
     tether: 'Tether',
+    logout: 'Logout',
+    firstName: 'Firstname',
+    lastName: 'Lastname',
+    nationalCode: 'National Code',
+    save: 'Save',
+    financialInformation: 'Financial Information',
 }
 
 export default en;

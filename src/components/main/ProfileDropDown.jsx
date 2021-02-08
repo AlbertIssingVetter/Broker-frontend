@@ -1,8 +1,7 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
-import LanguageSelector from "../langauge-selector/LanguageSelector";
 import ProfileIcon from "../../svg-icon/ProfileIcon";
-import {Button, Card, CardContent, Grow, Paper, Toolbar} from "@material-ui/core";
+import {Button, Card, CardContent, Grow} from "@material-ui/core";
 import AngleDownIcon from "../../svg-icon/AngleDownIcon";
 import Logout from "../login/Logout";
 import t from "../../lang/t";

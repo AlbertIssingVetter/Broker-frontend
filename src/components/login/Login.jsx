@@ -76,6 +76,12 @@ class Login extends React.Component {
         this.props.history.push('/signup')
     }
 
+    handleKeyDown = (e) => {
+        if(e.keyCode === 13) {
+            this.handleLoginBtnClick();
+        }
+    }
+
     render() {
         return (
             <div className='login'>
@@ -90,12 +96,13 @@ class Login extends React.Component {
                             <Typography>{t('loginWelcome')}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField label={t('username')} inputRef={this.inputUser}/>
+                            <TextField label={t('username')} onKeyDown={this.handleKeyDown} inputRef={this.inputUser}/>
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl>
                                 <InputLabel htmlFor="standard-adornment-password">{t('password')}</InputLabel>
                                 <Input
+                                    onKeyDown={this.handleKeyDown}
                                     inputRef={this.inputPass}
                                     type={this.state.showPassword ? 'text' : 'password'}
                                     endAdornment={

@@ -44,6 +44,13 @@ const en =  {
     status: 'Status',
     noItem: 'There is no item available',
     add: 'Add',
+    bankAccount: 'Bank Account',
+    mailVerificationDialogTitle: 'Verify your email',
+    mailVerificationDialogContent: 'Your email address not verified yet, You must verify your email to have more access.',
+    later: 'Later',
+    sendCode: 'Send code',
+    mobileVerificationDialogTitle: 'Verify your mobile',
+    mobileVerificationDialogContent: 'Your mobile not verified yet, You must verify your mobile to have more access.',
 }
 
 export default en;

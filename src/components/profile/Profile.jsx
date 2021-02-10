@@ -4,14 +4,16 @@ import {
     Button,
     Card,
     CardActions,
-    CardContent,
-    Grid,
+    CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl,
+    Grid, IconButton, Input, InputAdornment,
     Table, TableBody, TableCell,
     TableHead,
     TableRow,
     TextField,
     Typography
 } from "@material-ui/core";
+import ErrorIcon from '@material-ui/icons/Error';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import t from "../../lang/t";
 import {Skeleton} from "@material-ui/lab";
@@ -23,7 +25,9 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            user: {}
+            user: {},
+            dialogEmailVerificationError: false,
+            dialogMobileVerificationError: false,
         }
     }
 
@@ -37,6 +41,23 @@ class Profile extends React.Component {
                 user: res.data
             })
         })
+    }
+
+    handleMailVerificationClick = () => {
+        this.setState({dialogMailVerificationError: true})
+    }
+
+    handleDialogMailClose = () => {
+        this.setState({dialogMailVerificationError: false})
+    }
+
+
+    handleMobileVerificationClick = () => {
+        this.setState({dialogMobileVerificationError: true})
+    }
+
+    handleDialogMobileClose = () => {
+        this.setState({dialogMobileVerificationError: false})
     }
 
 
@@ -53,7 +74,17 @@ class Profile extends React.Component {
                                     {
                                         this.state.loading ?
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                            <TextField defaultValue={this.state.user.mail}/>
+                                            <FormControl>
+                                                <Input
+                                                    defaultValue={this.state.user.mail}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton onClick={this.handleMailVerificationClick}>
+                                                                {this.state.user.mail_verify ? <CheckCircleIcon color='secondary'/> : <ErrorIcon color='error'/>}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }/>
+                                            </FormControl>
                                     }
                                 </Grid>
                             </Grid>
@@ -97,7 +128,17 @@ class Profile extends React.Component {
                                     {
                                         this.state.loading ?
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                            <TextField defaultValue={this.state.user.mob}/>
+                                            <FormControl>
+                                                <Input
+                                                    defaultValue={this.state.user.mob}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton onClick={this.handleMobileVerificationClick}>
+                                                                {this.state.user.mob_verify ? <CheckCircleIcon color='secondary'/> : <ErrorIcon color='error'/>}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }/>
+                                            </FormControl>
                                     }
                                 </Grid>
                             </Grid>
@@ -140,7 +181,7 @@ class Profile extends React.Component {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>{t('bankAccounts')}</TableCell>
+                                        <TableCell>{t('bankAccount')}</TableCell>
                                         <TableCell>{t('status')}</TableCell>
                                         <TableCell>{t('operation')}</TableCell>
                                     </TableRow>
@@ -195,6 +236,45 @@ class Profile extends React.Component {
                         </CardActions>
                     </Card>
                 </Grid>
+                <Dialog
+                    open={this.state.dialogMailVerificationError}
+                    onClose={this.handleDialogMailClose}
+                >
+                    <DialogTitle>{t('mailVerificationDialogTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('mailVerificationDialogContent')}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleDialogMailClose}>
+                            {t('later')}
+                        </Button>
+                        <Button onClick={this.handleDialogMailClose} color="primary">
+                            {t('sendCode')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.dialogMobileVerificationError}
+                    onClose={this.handleDialogMobileClose}
+                >
+                    <DialogTitle>{t('mobileVerificationDialogTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('mobileVerificationDialogContent')}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleDialogMobileClose}>
+                            {t('later')}
+                        </Button>
+                        <Button onClick={this.handleDialogMobileClose} color="primary">
+                            {t('sendCode')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Grid>
         );
     }

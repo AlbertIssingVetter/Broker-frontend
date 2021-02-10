@@ -197,7 +197,7 @@ html, body, #root {
   @include textAlignStart;
 }
 
-.profile-profile {
+.profile {
   .row {
     margin-top: rem(16px);
   }
@@ -209,6 +209,9 @@ html, body, #root {
   }
   .actions {
     padding: rem(16px);
+  }
+  .no-item {
+    text-align: center;
   }
 }
 

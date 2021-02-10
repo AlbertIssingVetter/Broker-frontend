@@ -36,6 +36,14 @@ const en =  {
     nationalCode: 'National Code',
     save: 'Save',
     financialInformation: 'Financial Information',
+    furtherInformation: 'Further Information',
+    tel: 'Telephone',
+    bank: 'Bank',
+    cardNumber: 'Card Number',
+    operation: 'Operation',
+    status: 'Status',
+    noItem: 'There is no item available',
+    add: 'Add',
 }
 
 export default en;

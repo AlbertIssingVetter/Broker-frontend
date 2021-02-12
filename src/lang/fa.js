@@ -1,5 +1,5 @@
 const fa =  {
-    appName: 'کوین',
+    appName: 'تراست مارکت',
     loginWelcome: 'خوش آمدید، لطفا به اکانت خود وارد شوید.',
     username: 'نام کاربری',
     password: 'گذرواژه',

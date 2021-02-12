@@ -1,5 +1,5 @@
 const en =  {
-    appName: 'COIN',
+    appName: 'Trust Market',
     loginWelcome: 'Welcome back! Please login to your account.',
     username: 'Username',
     password: 'Password',
@@ -51,6 +51,12 @@ const en =  {
     sendCode: 'Send code',
     mobileVerificationDialogTitle: 'Verify your mobile',
     mobileVerificationDialogContent: 'Your mobile not verified yet, You must verify your mobile to have more access.',
+    mobileCodeDialogTitle: 'Verify your mobile',
+    mobileCodeDialogContent: 'A code text to your mobile, Please enter the code and verify your mobile.',
+    code: 'code',
+    verify: 'verify',
+    mailCodeDialogTitle: 'Verify your email address',
+    mailCodeDialogContent: 'A code mail to your email address, Please enter the code and verify your email.',
 }
 
 export default en;

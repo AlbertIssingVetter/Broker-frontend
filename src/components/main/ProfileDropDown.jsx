@@ -1,7 +1,7 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
 import ProfileIcon from "../../svg-icon/ProfileIcon";
-import {Button, Card, CardContent, Grow} from "@material-ui/core";
+import {Button, Card, CardContent, Popover} from "@material-ui/core";
 import AngleDownIcon from "../../svg-icon/AngleDownIcon";
 import Logout from "../login/Logout";
 import t from "../../lang/t";
@@ -11,12 +11,16 @@ class ProfileDropDown extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: false,
+            anchorEl: null,
         }
     }
 
-    handleDropDownToggle = () => {
-        this.setState({open: !this.state.open})
+    handleDropDownOpen = (event) => {
+        this.setState({anchorEl: event.currentTarget})
+    }
+
+    handleDropDownClose = () => {
+        this.setState({anchorEl: null})
     }
 
     handleProfileClick = () => {
@@ -24,18 +28,34 @@ class ProfileDropDown extends React.Component {
     }
 
     render() {
+        console.log((this.state.anchorEl));
         return (
-            <div onClick={this.handleDropDownToggle} className="profile-drop-down" >
-                <ProfileIcon className="profile-icon-drop-down"/>
-                <AngleDownIcon className="profile-angle-drop-down"/>
-                <Grow in={this.state.open}>
+            <div className="profile-drop-down" >
+                <div onClick={this.handleDropDownOpen}>
+                    <ProfileIcon className="profile-icon-drop-down"/>
+                    <AngleDownIcon className="profile-angle-drop-down"/>
+                </div>
+                <Popover
+                    className='profile-drop-down-popover'
+                    open={Boolean(this.state.anchorEl)}
+                    anchorEl={this.state.anchorEl}
+                    onClose={this.handleDropDownClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                >
                     <Card>
                         <CardContent>
                             <Button onClick={this.handleProfileClick}>{t('profile')}</Button>
                             <Logout/>
                         </CardContent>
                     </Card>
-                </Grow>
+                </Popover>
             </div>
         );
     }

@@ -130,6 +130,9 @@ html, body, #root {
   position: absolute;
   @include positionEnd(10px);
   top: rem(12px);
+}
+
+.profile-drop-down-popover {
   .MuiCardContent-root {
     padding: rem(2px);
     .MuiButtonBase-root {

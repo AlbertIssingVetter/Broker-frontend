@@ -215,7 +215,7 @@ class Signup extends React.Component {
                         {this.dialog.content}
                     </ErrorDialog>
                 </div>
-                <Backdrop open={this.state.loading}>
+                <Backdrop style={{zIndex: 10}} open={this.state.loading}>
                     <CircularProgress color='primary' />
                 </Backdrop>
             </div>

@@ -28,7 +28,6 @@ class ProfileDropDown extends React.Component {
     }
 
     render() {
-        console.log((this.state.anchorEl));
         return (
             <div className="profile-drop-down" >
                 <div onClick={this.handleDropDownOpen}>

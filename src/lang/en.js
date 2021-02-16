@@ -57,6 +57,12 @@ const en =  {
     verify: 'verify',
     mailCodeDialogTitle: 'Verify your email address',
     mailCodeDialogContent: 'A code mail to your email address, Please enter the code and verify your email.',
+    profileEditedSuccessfully: 'Your profile edited successfully.',
+    nationalCardVerificationDialogTitle: 'Verify who you are',
+    nationalCardVerificationDialogContent: 'Your first and last name and also national code not verified yet, please send an image of your national card to verify them.',
+    sendImage: 'Send image',
+    selectFile: 'Select file or drag here',
+    selectedFiles: '{0} file selected.',
 }
 
 export default en;

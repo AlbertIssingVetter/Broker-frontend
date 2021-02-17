@@ -6,7 +6,7 @@ import {
     Card,
     CardActions,
     CardContent, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl,
-    Grid, IconButton, Input, InputAdornment,
+    Grid, IconButton, Input, InputAdornment, Snackbar,
     Table, TableBody, TableCell,
     TableHead,
     TableRow,
@@ -17,8 +17,11 @@ import ErrorIcon from '@material-ui/icons/Error';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import t from "../../lang/t";
-import {Skeleton} from "@material-ui/lab";
+import {Alert, Skeleton} from "@material-ui/lab";
 import axios from "axios";
+import Upload from "../upload/Upload";
+import ErrorDialog from "../error-dialog/ErrorDialog";
+import {withTheme} from '@material-ui/core/styles';
 
 class Profile extends React.Component {
 
@@ -29,12 +32,23 @@ class Profile extends React.Component {
             user: {},
             dialogMailVerificationError: false,
             dialogMobileVerificationError: false,
+            dialogNationalCardVerificationError: false,
             apiLoading: false,
             dialogMobileCode: false,
             dialogMailCode: false,
+            snackbarOpen: false,
+            errorDialog: false,
         }
         this.txtMobileCode = React.createRef();
         this.txtMailCode = React.createRef();
+        this.txtMail = React.createRef();
+        this.txtFirstName = React.createRef();
+        this.txtLastName = React.createRef();
+        this.txtNationalCode = React.createRef();
+        this.txtMobile = React.createRef();
+        this.txtAddress = React.createRef();
+        this.txtTelephone = React.createRef();
+        this.errorDialog = {}
     }
 
     componentDidMount() {
@@ -42,6 +56,7 @@ class Profile extends React.Component {
             url: '/user/profile',
             method: 'POST',
         }).then(res => {
+            console.log(res.data)
             this.setState({
                 loading: false,
                 user: res.data
@@ -62,6 +77,10 @@ class Profile extends React.Component {
         this.setState({dialogMobileVerificationError: true})
     }
 
+    handleNationalCardVerificationClick = () => {
+        this.setState({dialogNationalCardVerificationError: true})
+    }
+
     handleDialogMobileClose = () => {
         this.setState({dialogMobileVerificationError: false})
     }
@@ -72,6 +91,61 @@ class Profile extends React.Component {
 
     handleDialogMailCodeClose = () => {
         this.setState({dialogMailCode: false})
+    }
+
+    handleDialogNationalCardClose = () => {
+        this.setState({dialogNationalCardVerificationError: false})
+    }
+
+    handleSnackbarClose = () => {
+        this.setState({snackbarOpen: false})
+    }
+
+    handleSaveProfileClick = () => {
+        this.setState({apiLoading: true});
+        axios({
+            url: '/user/profile/edit',
+            method: 'POST',
+            data: {
+                nationalCode: this.txtNationalCode.current.value,
+                name: this.txtFirstName.current.value,
+                family: this.txtLastName.current.value,
+                mail: this.txtMail.current.value,
+                mob: this.txtMobile.current.value,
+            }
+        }).then(r => {
+            this.snackbarMessage = t('profileEditedSuccessfully')
+            this.setState({apiLoading: false, snackbarOpen: true});
+            console.log(r.data);
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+
+    handleSaveFurtherInformationClick = () => {
+        this.setState({apiLoading: true});
+        axios({
+            url: '/user/profile/edit',
+            method: 'POST',
+            data: {
+                tel: this.txtTelephone.current.value,
+                address: this.txtAddress.current.value,
+            }
+        }).then(r => {
+            this.snackbarMessage = t('furtherInformationEditedSuccessfully')
+            this.setState({apiLoading: false, snackbarOpen: true});
+            console.log(r.data);
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+
+    handleNationalCardFileChange = (files) => {
+        this.nationalCardImage = files[0]
+    }
+
+    handleBtnErrorDialogClose = () => {
+        this.setState({errorDialog: false})
     }
 
     sendMailVerificationCode = () => {
@@ -87,7 +161,6 @@ class Profile extends React.Component {
             this.setState({apiLoading: false, dialogMailCode: true});
             console.log(r.data);
         }).catch(e => {
-            this.setState({apiLoading: false, dialogMailCode: true});
             console.log(e.response.data);
         })
     }
@@ -99,11 +172,19 @@ class Profile extends React.Component {
             url: '/user/verify',
             method: 'POST',
             data: {
-                type: 'send_mobile_code'
+                type: 'send_mob_code'
             }
         }).then(r => {
-            this.setState({apiLoading: false, dialogMobileCode: true});
-            console.log(r.data);
+            if (r.data.status) {
+                this.setState({apiLoading: false, dialogMobileCode: true});
+            } else {
+                this.errorDialog = {
+                    title: t('error', r.data.error.code),
+                    content: r.data.error.message,
+                    btn: t('ok'),
+                }
+                this.setState({apiLoading: false, errorDialog: true});
+            }
         }).catch(e => {
             console.log(e.response.data);
         })
@@ -116,15 +197,15 @@ class Profile extends React.Component {
             url: '/user/checkCode',
             method: 'POST',
             data: {
-                type: "check_mob_code",
+                type: "check_mobile_code",
                 code: this.txtMobileCode.current.value,
             }
         }).then(r => {
             this.setState({
                 apiLoading: false,
                 user: {
-                    mob_verify: true,
-                    mail_verify: this.state.user.mail_verify,
+                    mobVerify: true,
+                    mailVerify: this.state.user.mailVerify,
                 }
             });
             console.log(r.data);
@@ -147,8 +228,8 @@ class Profile extends React.Component {
             this.setState({
                 apiLoading: false,
                 user: {
-                    mail_verify: true,
-                    mob_verify: this.state.user.mob_verify,
+                    mailVerify: true,
+                    mobVerify: this.state.user.mobVerify,
                 }
             });
             console.log(r.data);
@@ -157,11 +238,29 @@ class Profile extends React.Component {
         })
     }
 
+    verifyNationalCard = () => {
+        this.setState({apiLoading: true})
+        this.handleDialogNationalCardClose()
+        const formData = new FormData();
+        formData.append("nationalCodePic", this.nationalCardImage)
+        axios.post('/user/profile/edit', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(r => {
+            this.setState({apiLoading: false})
+            console.log(r.data);
+        }).catch(e => {
+            this.setState({apiLoading: false})
+            console.log(e.response.data)
+        })
+    }
+
     render() {
         return (
             <Grid container spacing={3} className='profile'>
-                <Grid item sm={12} md={6}>
-                    <Card className='profile-profile'>
+                <Grid style={{width: '100%'}} item sm={12} md={6}>
+                    <Card>
                         <CardContent>
                             <Typography className='header' variant="h4">{t('profile')}</Typography>
                             <Grid container className='row'>
@@ -172,13 +271,14 @@ class Profile extends React.Component {
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
                                             <FormControl>
                                                 <Input
+                                                    inputRef={this.txtMail}
                                                     defaultValue={this.state.user.mail}
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
-                                                                onClick={this.state.user.mail_verify ? null : this.handleMailVerificationClick}>
-                                                                {this.state.user.mail_verify ?
-                                                                    <CheckCircleIcon color='secondary'/> :
+                                                                onClick={this.state.user.mailVerify ? null : this.handleMailVerificationClick}>
+                                                                {this.state.user.mailVerify ?
+                                                                    <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/> :
                                                                     <ErrorIcon color='error'/>}
                                                             </IconButton>
                                                         </InputAdornment>
@@ -194,7 +294,23 @@ class Profile extends React.Component {
                                     {
                                         this.state.loading ?
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                            <TextField defaultValue={this.state.user.name}/>
+                                            <FormControl>
+                                                <Input
+                                                    inputRef={this.txtFirstName}
+                                                    defaultValue={this.state.user.name}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                onClick={this.state.user.nationalCodePic ? null : this.handleNationalCardVerificationClick}>
+                                                                {this.state.user.nationalCodePic ?
+                                                                    (this.state.user.status === 1 ? <CheckCircleIcon
+                                                                            style={{color: this.props.theme.palette.success.main}}/> :
+                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>) :
+                                                                    <ErrorIcon color='error'/>}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }/>
+                                            </FormControl>
                                     }
                                 </Grid>
                             </Grid>
@@ -205,7 +321,23 @@ class Profile extends React.Component {
                                     {
                                         this.state.loading ?
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                            <TextField defaultValue={this.state.user.family}/>
+                                            <FormControl>
+                                                <Input
+                                                    inputRef={this.txtLastName}
+                                                    defaultValue={this.state.user.family}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                onClick={this.state.user.nationalCodePic ? null : this.handleNationalCardVerificationClick}>
+                                                                {this.state.user.nationalCodePic ?
+                                                                    (this.state.user.status === 1 ? <CheckCircleIcon
+                                                                            style={{color: this.props.theme.palette.success.main}}/> :
+                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>) :
+                                                                    <ErrorIcon color='error'/>}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }/>
+                                            </FormControl>
                                     }
                                 </Grid>
                             </Grid>
@@ -216,7 +348,23 @@ class Profile extends React.Component {
                                     {
                                         this.state.loading ?
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                            <TextField defaultValue={this.state.user.nationalCode}/>
+                                            <FormControl>
+                                                <Input
+                                                    inputRef={this.txtNationalCode}
+                                                    defaultValue={this.state.user.nationalCode}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                onClick={this.state.user.nationalCodePic ? null : this.handleNationalCardVerificationClick}>
+                                                                {this.state.user.nationalCodePic ?
+                                                                    (this.state.user.status === 1 ? <CheckCircleIcon
+                                                                            style={{color: this.props.theme.palette.success.main}}/> :
+                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>) :
+                                                                    <ErrorIcon color='error'/>}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }/>
+                                            </FormControl>
                                     }
                                 </Grid>
                             </Grid>
@@ -229,13 +377,14 @@ class Profile extends React.Component {
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
                                             <FormControl>
                                                 <Input
+                                                    inputRef={this.txtMobile}
                                                     defaultValue={this.state.user.mob}
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
-                                                                onClick={this.state.user.mob_verify ? null : this.handleMobileVerificationClick}>
-                                                                {this.state.user.mob_verify ?
-                                                                    <CheckCircleIcon color='secondary'/> :
+                                                                onClick={this.state.user.mobVerify ? null : this.handleMobileVerificationClick}>
+                                                                {this.state.user.mobVerify ?
+                                                                    <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/> :
                                                                     <ErrorIcon color='error'/>}
                                                             </IconButton>
                                                         </InputAdornment>
@@ -246,11 +395,12 @@ class Profile extends React.Component {
                             </Grid>
                         </CardContent>
                         <CardActions className='actions'>
-                            <Button variant='contained' color="primary">{t('save')}</Button>
+                            <Button onClick={this.handleSaveProfileClick} variant='contained'
+                                    color="primary">{t('save')}</Button>
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid item sm={12} md={6}>
+                <Grid style={{width: '100%'}} item sm={12} md={6}>
                     <Card>
                         <CardContent>
                             <Typography className='header' variant="h4">{t('financialInformation')}</Typography>
@@ -317,7 +467,8 @@ class Profile extends React.Component {
                                     {
                                         this.state.loading ?
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                            <TextField defaultValue={this.state.user.address}/>
+                                            <TextField inputRef={this.txtAddress}
+                                                       defaultValue={this.state.user.address}/>
                                     }
                                 </Grid>
                             </Grid>
@@ -328,13 +479,13 @@ class Profile extends React.Component {
                                     {
                                         this.state.loading ?
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                            <TextField defaultValue={this.state.user.tel}/>
+                                            <TextField inputRef={this.txtTelephone} defaultValue={this.state.user.tel}/>
                                     }
                                 </Grid>
                             </Grid>
                         </CardContent>
                         <CardActions>
-                            <Button variant='contained' color='primary'>{t('save')}</Button>
+                            <Button variant='contained' onClick={this.handleSaveFurtherInformationClick} color='primary'>{t('save')}</Button>
                         </CardActions>
                     </Card>
                 </Grid>
@@ -416,12 +567,41 @@ class Profile extends React.Component {
                     </DialogActions>
                 </Dialog>
 
+                <Dialog
+                    open={this.state.dialogNationalCardVerificationError}
+                    onClose={this.handleDialogNationalCardClose}>
+                    <DialogTitle>{t('nationalCardVerificationDialogTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('nationalCardVerificationDialogContent')}
+                        </DialogContentText>
+                        <Upload onChange={this.handleNationalCardFileChange}/>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleDialogNationalCardClose}>
+                            {t('later')}
+                        </Button>
+                        <Button onClick={this.verifyNationalCard} color="primary">
+                            {t('sendImage')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
                 <Backdrop style={{zIndex: 1201}} open={this.state.apiLoading}>
                     <CircularProgress color='primary'/>
                 </Backdrop>
+                <Snackbar open={this.state.snackbarOpen} autoHideDuration={5000} onClose={this.handleSnackbarClose}>
+                    <Alert onClose={this.handleSnackbarClose} severity="success">
+                        {this.snackbarMessage}
+                    </Alert>
+                </Snackbar>
+                <ErrorDialog title={this.errorDialog.title} open={this.state.errorDialog}
+                             btns={<Button onClick={this.handleBtnErrorDialogClose}>{this.errorDialog.btn}</Button>}>
+                    {this.errorDialog.content}
+                </ErrorDialog>
             </Grid>
         );
     }
 }
 
-export default withRouter(Profile);
+export default withRouter(withTheme(Profile));

@@ -204,8 +204,8 @@ class Profile extends React.Component {
             this.setState({
                 apiLoading: false,
                 user: {
+                    ...this.state.user,
                     mobVerify: true,
-                    mailVerify: this.state.user.mailVerify,
                 }
             });
             console.log(r.data);
@@ -228,8 +228,8 @@ class Profile extends React.Component {
             this.setState({
                 apiLoading: false,
                 user: {
+                    ...this.state.user,
                     mailVerify: true,
-                    mobVerify: this.state.user.mobVerify,
                 }
             });
             console.log(r.data);
@@ -248,7 +248,13 @@ class Profile extends React.Component {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(r => {
-            this.setState({apiLoading: false})
+            this.setState({
+                apiLoading: false,
+                user: {
+                    ...this.state.user,
+                    nationalCodePic: true,
+                }
+            })
             console.log(r.data);
         }).catch(e => {
             this.setState({apiLoading: false})

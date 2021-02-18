@@ -10,7 +10,7 @@ import {
     Table, TableBody, TableCell,
     TableHead,
     TableRow,
-    TextField,
+    TextField, Tooltip,
     Typography
 } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
@@ -38,6 +38,7 @@ class Profile extends React.Component {
             dialogMailCode: false,
             snackbarOpen: false,
             errorDialog: false,
+            dialogAddCard: false,
         }
         this.txtMobileCode = React.createRef();
         this.txtMailCode = React.createRef();
@@ -284,8 +285,12 @@ class Profile extends React.Component {
                                                             <IconButton
                                                                 onClick={this.state.user.mailVerify ? null : this.handleMailVerificationClick}>
                                                                 {this.state.user.mailVerify ?
-                                                                    <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/> :
-                                                                    <ErrorIcon color='error'/>}
+                                                                    <Tooltip title={t('verified')}>
+                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
+                                                                    </Tooltip> :
+                                                                    <Tooltip title={t('notVerified')}>
+                                                                        <ErrorIcon color='error'/>
+                                                                    </Tooltip>}
                                                             </IconButton>
                                                         </InputAdornment>
                                                     }/>
@@ -309,10 +314,16 @@ class Profile extends React.Component {
                                                             <IconButton
                                                                 onClick={this.state.user.nationalCodePic ? null : this.handleNationalCardVerificationClick}>
                                                                 {this.state.user.nationalCodePic ?
-                                                                    (this.state.user.status === 1 ? <CheckCircleIcon
-                                                                            style={{color: this.props.theme.palette.success.main}}/> :
-                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>) :
-                                                                    <ErrorIcon color='error'/>}
+                                                                    (this.state.user.status === 1 ?
+                                                                        <Tooltip title={t('verified')}>
+                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
+                                                                        </Tooltip>:
+                                                                        <Tooltip title={t('waitingForVerification')}>
+                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>
+                                                                        </Tooltip>) :
+                                                                    <Tooltip title={t('notVerified')}>
+                                                                        <ErrorIcon color='error'/>
+                                                                    </Tooltip>}
                                                             </IconButton>
                                                         </InputAdornment>
                                                     }/>
@@ -336,10 +347,16 @@ class Profile extends React.Component {
                                                             <IconButton
                                                                 onClick={this.state.user.nationalCodePic ? null : this.handleNationalCardVerificationClick}>
                                                                 {this.state.user.nationalCodePic ?
-                                                                    (this.state.user.status === 1 ? <CheckCircleIcon
-                                                                            style={{color: this.props.theme.palette.success.main}}/> :
-                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>) :
-                                                                    <ErrorIcon color='error'/>}
+                                                                    (this.state.user.status === 1 ?
+                                                                        <Tooltip title={t('verified')}>
+                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
+                                                                        </Tooltip>:
+                                                                        <Tooltip title={t('waitingForVerification')}>
+                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>
+                                                                        </Tooltip>) :
+                                                                    <Tooltip title={t('notVerified')}>
+                                                                        <ErrorIcon color='error'/>
+                                                                    </Tooltip>}
                                                             </IconButton>
                                                         </InputAdornment>
                                                     }/>
@@ -363,10 +380,16 @@ class Profile extends React.Component {
                                                             <IconButton
                                                                 onClick={this.state.user.nationalCodePic ? null : this.handleNationalCardVerificationClick}>
                                                                 {this.state.user.nationalCodePic ?
-                                                                    (this.state.user.status === 1 ? <CheckCircleIcon
-                                                                            style={{color: this.props.theme.palette.success.main}}/> :
-                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>) :
-                                                                    <ErrorIcon color='error'/>}
+                                                                    (this.state.user.status === 1 ?
+                                                                        <Tooltip title={t('verified')}>
+                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
+                                                                        </Tooltip>:
+                                                                        <Tooltip title={t('waitingForVerification')}>
+                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>
+                                                                        </Tooltip>) :
+                                                                    <Tooltip title={t('notVerified')}>
+                                                                        <ErrorIcon color='error'/>
+                                                                    </Tooltip>}
                                                             </IconButton>
                                                         </InputAdornment>
                                                     }/>
@@ -390,8 +413,12 @@ class Profile extends React.Component {
                                                             <IconButton
                                                                 onClick={this.state.user.mobVerify ? null : this.handleMobileVerificationClick}>
                                                                 {this.state.user.mobVerify ?
-                                                                    <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/> :
-                                                                    <ErrorIcon color='error'/>}
+                                                                    <Tooltip title={t('verified')}>
+                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
+                                                                    </Tooltip>:
+                                                                    <Tooltip title={t('notVerified')}>
+                                                                        <ErrorIcon color='error'/>
+                                                                    </Tooltip>}
                                                             </IconButton>
                                                         </InputAdornment>
                                                     }/>

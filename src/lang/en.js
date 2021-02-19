@@ -63,7 +63,17 @@ const en =  {
     nationalCardVerificationDialogContent: 'Your first and last name and also national code not verified yet, please send an image of your national card to verify them.',
     sendImage: 'Send image',
     selectFile: 'Select file or drag here',
+    selectFileAuto: 'Select file or drag here to upload Automatically',
     selectedFiles: '{0} file selected.',
+    accountNumber: 'Account number',
+    addCardDialogTitle: 'Add bank account',
+    addCardDialogContent: 'You must add card number and account number of same account without any \'-\' or spaces.',
+    cardAddedSuccessfully: 'Your financial information added successfully.',
+    verified: 'verified',
+    waitingForVerification: 'Awaiting approval',
+    notVerified: 'Not verified yet',
+    zipCode: 'Zip Code',
+    identityConfirmation: 'Identity Confirmation'
 }
 
 export default en;

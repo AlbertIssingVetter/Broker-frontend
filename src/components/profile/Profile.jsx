@@ -6,7 +6,7 @@ import {
     Card,
     CardActions,
     CardContent, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl,
-    Grid, IconButton, Input, InputAdornment, Snackbar,
+    Grid, Hidden, IconButton, Input, InputAdornment, Snackbar,
     Table, TableBody, TableCell,
     TableHead,
     TableRow,
@@ -15,8 +15,7 @@ import {
 } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import DeleteIcon from '@material-ui/icons/Delete';
-import t from "../../lang/t";
+import t, {getLang} from "../../lang/t";
 import {Alert, Skeleton} from "@material-ui/lab";
 import axios from "axios";
 import Upload from "../upload/Upload";
@@ -48,7 +47,10 @@ class Profile extends React.Component {
         this.txtNationalCode = React.createRef();
         this.txtMobile = React.createRef();
         this.txtAddress = React.createRef();
+        this.txtZipCode = React.createRef();
         this.txtTelephone = React.createRef();
+        this.txtAccountNumber = React.createRef();
+        this.txtCardNumber = React.createRef();
         this.errorDialog = {}
     }
 
@@ -102,6 +104,42 @@ class Profile extends React.Component {
         this.setState({snackbarOpen: false})
     }
 
+    handleDialogAddCardClose = () => {
+        this.setState({dialogAddCard: false});
+    }
+
+    handleAddCardClick = () => {
+        this.setState({dialogAddCard: true})
+    }
+
+    handleAddCard = () => {
+        this.setState({apiLoading: true,});
+        this.handleDialogAddCardClose()
+        axios({
+            url: '/account/add',
+            method: 'POST',
+            data: {
+                accountNumber: this.txtAccountNumber.current.value,
+                cardNumber: this.txtCardNumber.current.value
+            }
+        }).then(r => {
+            if (r.data.status) {
+                this.snackbarMessage = t('cardAddedSuccessfully')
+                this.setState({apiLoading: false, snackbarOpen: true});
+            } else {
+                this.errorDialog = {
+                    title: t('error', r.data.error.code),
+                    content: r.data.error.message,
+                    btn: t('ok'),
+                }
+                this.setState({apiLoading: false, errorDialog: true})
+            }
+            console.log(r.data);
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+
     handleSaveProfileClick = () => {
         this.setState({apiLoading: true});
         axios({
@@ -125,24 +163,40 @@ class Profile extends React.Component {
 
     handleSaveFurtherInformationClick = () => {
         this.setState({apiLoading: true});
-        axios({
-            url: '/user/profile/edit',
-            method: 'POST',
-            data: {
-                tel: this.txtTelephone.current.value,
-                address: this.txtAddress.current.value,
+        const formData = new FormData();
+        formData.append("tel", this.txtTelephone.current.value)
+        formData.append("address", this.txtAddress.current.value)
+        formData.append("zipCode", this.txtZipCode.current.value)
+        formData.append("undertakingPic", this.undertakingPic)
+        axios.post('/user/profile/edit', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
             }
         }).then(r => {
-            this.snackbarMessage = t('furtherInformationEditedSuccessfully')
-            this.setState({apiLoading: false, snackbarOpen: true});
+            if (r.data.status) {
+                this.snackbarMessage = t('furtherInformationEditedSuccessfully')
+                this.setState({apiLoading: false, snackbarOpen: true});
+            } else {
+                this.errorDialog = {
+                    title: t('error', r.data.error.code),
+                    content: r.data.error.message,
+                    btn: t('ok'),
+                }
+                this.setState({apiLoading: false, errorDialog: true});
+            }
             console.log(r.data);
         }).catch(e => {
-            console.log(e);
+            this.setState({apiLoading: false})
+            console.log(e.response.data)
         })
     }
 
     handleNationalCardFileChange = (files) => {
         this.nationalCardImage = files[0]
+    }
+
+    handleUndertakingPic = (files) => {
+        this.undertakingPic = files[0]
     }
 
     handleBtnErrorDialogClose = () => {
@@ -173,7 +227,7 @@ class Profile extends React.Component {
             url: '/user/verify',
             method: 'POST',
             data: {
-                type: 'send_mob_code'
+                type: 'send_mobile_code'
             }
         }).then(r => {
             if (r.data.status) {
@@ -266,7 +320,7 @@ class Profile extends React.Component {
     render() {
         return (
             <Grid container spacing={3} className='profile'>
-                <Grid style={{width: '100%'}} item sm={12} md={6}>
+                <Grid style={{width: '100%'}} className='rtl-input' item sm={12} md={6}>
                     <Card>
                         <CardContent>
                             <Typography className='header' variant="h4">{t('profile')}</Typography>
@@ -286,7 +340,8 @@ class Profile extends React.Component {
                                                                 onClick={this.state.user.mailVerify ? null : this.handleMailVerificationClick}>
                                                                 {this.state.user.mailVerify ?
                                                                     <Tooltip title={t('verified')}>
-                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
+                                                                        <CheckCircleIcon
+                                                                            style={{color: this.props.theme.palette.success.main}}/>
                                                                     </Tooltip> :
                                                                     <Tooltip title={t('notVerified')}>
                                                                         <ErrorIcon color='error'/>
@@ -316,10 +371,12 @@ class Profile extends React.Component {
                                                                 {this.state.user.nationalCodePic ?
                                                                     (this.state.user.status === 1 ?
                                                                         <Tooltip title={t('verified')}>
-                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
-                                                                        </Tooltip>:
+                                                                            <CheckCircleIcon
+                                                                                style={{color: this.props.theme.palette.success.main}}/>
+                                                                        </Tooltip> :
                                                                         <Tooltip title={t('waitingForVerification')}>
-                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>
+                                                                            <CheckCircleIcon
+                                                                                style={{color: this.props.theme.palette.warning.main}}/>
                                                                         </Tooltip>) :
                                                                     <Tooltip title={t('notVerified')}>
                                                                         <ErrorIcon color='error'/>
@@ -349,10 +406,12 @@ class Profile extends React.Component {
                                                                 {this.state.user.nationalCodePic ?
                                                                     (this.state.user.status === 1 ?
                                                                         <Tooltip title={t('verified')}>
-                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
-                                                                        </Tooltip>:
+                                                                            <CheckCircleIcon
+                                                                                style={{color: this.props.theme.palette.success.main}}/>
+                                                                        </Tooltip> :
                                                                         <Tooltip title={t('waitingForVerification')}>
-                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>
+                                                                            <CheckCircleIcon
+                                                                                style={{color: this.props.theme.palette.warning.main}}/>
                                                                         </Tooltip>) :
                                                                     <Tooltip title={t('notVerified')}>
                                                                         <ErrorIcon color='error'/>
@@ -382,10 +441,12 @@ class Profile extends React.Component {
                                                                 {this.state.user.nationalCodePic ?
                                                                     (this.state.user.status === 1 ?
                                                                         <Tooltip title={t('verified')}>
-                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
-                                                                        </Tooltip>:
+                                                                            <CheckCircleIcon
+                                                                                style={{color: this.props.theme.palette.success.main}}/>
+                                                                        </Tooltip> :
                                                                         <Tooltip title={t('waitingForVerification')}>
-                                                                            <CheckCircleIcon style={{color: this.props.theme.palette.warning.main}}/>
+                                                                            <CheckCircleIcon
+                                                                                style={{color: this.props.theme.palette.warning.main}}/>
                                                                         </Tooltip>) :
                                                                     <Tooltip title={t('notVerified')}>
                                                                         <ErrorIcon color='error'/>
@@ -414,8 +475,9 @@ class Profile extends React.Component {
                                                                 onClick={this.state.user.mobVerify ? null : this.handleMobileVerificationClick}>
                                                                 {this.state.user.mobVerify ?
                                                                     <Tooltip title={t('verified')}>
-                                                                        <CheckCircleIcon style={{color: this.props.theme.palette.success.main}}/>
-                                                                    </Tooltip>:
+                                                                        <CheckCircleIcon
+                                                                            style={{color: this.props.theme.palette.success.main}}/>
+                                                                    </Tooltip> :
                                                                     <Tooltip title={t('notVerified')}>
                                                                         <ErrorIcon color='error'/>
                                                                     </Tooltip>}
@@ -433,64 +495,7 @@ class Profile extends React.Component {
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid style={{width: '100%'}} item sm={12} md={6}>
-                    <Card>
-                        <CardContent>
-                            <Typography className='header' variant="h4">{t('financialInformation')}</Typography>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>{t('bank')}</TableCell>
-                                        <TableCell>{t('cardNumber')}</TableCell>
-                                        <TableCell>{t('status')}</TableCell>
-                                        <TableCell>{t('operation')}</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {this.state.user.cardNumbers ? this.state.user.cardNumbers.map(cardNumber => (
-                                        <TableRow>
-                                            <TableCell>{cardNumber.bank}</TableCell>
-                                            <TableCell>{cardNumber.number}</TableCell>
-                                            <TableCell>{cardNumber.status}</TableCell>
-                                            <TableCell><DeleteIcon/></TableCell>
-                                        </TableRow>
-                                    )) : (
-                                        <TableRow>
-                                            <TableCell className="no-item" colSpan={4}>{t('noItem')}</TableCell>
-                                        </TableRow>
-                                    )}
-                                </TableBody>
-                            </Table>
-                            <br/>
-                            <Button variant='contained' color='primary'>{t('add')}</Button>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>{t('bankAccount')}</TableCell>
-                                        <TableCell>{t('status')}</TableCell>
-                                        <TableCell>{t('operation')}</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {this.state.user.bankAccounts ? this.state.user.bankAccounts.map(bankAccount => (
-                                        <TableRow>
-                                            <TableCell>{bankAccount.number}</TableCell>
-                                            <TableCell>{bankAccount.status}</TableCell>
-                                            <TableCell><DeleteIcon/></TableCell>
-                                        </TableRow>
-                                    )) : (
-                                        <TableRow>
-                                            <TableCell className="no-item" colSpan={4}>{t('noItem')}</TableCell>
-                                        </TableRow>
-                                    )}
-                                </TableBody>
-                            </Table>
-                            <br/>
-                            <Button variant='contained' color='primary'>{t('add')}</Button>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item sm={12} md={6}>
+                <Grid style={{width: '100%'}} className='rtl-input' item sm={12} md={6}>
                     <Card>
                         <CardContent>
                             <Typography className='header' variant="h4">{t('furtherInformation')}</Typography>
@@ -507,6 +512,18 @@ class Profile extends React.Component {
                             </Grid>
 
                             <Grid container className='row'>
+                                <Grid item xs={3} className='center-vertically'>{t('zipCode')}</Grid>
+                                <Grid item xs={9}>
+                                    {
+                                        this.state.loading ?
+                                            <Skeleton animation='wave' height={32} width={'100%'}/> :
+                                            <TextField inputRef={this.txtZipCode}
+                                                       defaultValue={this.state.user.zipCode}/>
+                                    }
+                                </Grid>
+                            </Grid>
+
+                            <Grid container className='row'>
                                 <Grid item xs={3} className='center-vertically'>{t('tel')}</Grid>
                                 <Grid item xs={9}>
                                     {
@@ -516,10 +533,80 @@ class Profile extends React.Component {
                                     }
                                 </Grid>
                             </Grid>
+                            <Grid container className='row'>
+                                <Grid item xs={3} className='center-vertically'>{t('identityConfirmation')}</Grid>
+                                <Grid item xs={9}>
+                                    {
+                                        this.state.loading ?
+                                            <Skeleton animation='wave' height={'6rem'} width={'100%'}/> :
+                                            this.state.user.undertakingPic ?
+                                                (this.state.user.status ?
+                                                    <Typography className='undertaking'>{t('verified')}</Typography> :
+                                                    <Typography
+                                                        className='undertaking'>{t('waitingForVerification')}</Typography>) :
+                                                <Upload onChange={this.handleUndertakingPic}/>
+                                    }
+                                </Grid>
+                            </Grid>
                         </CardContent>
                         <CardActions>
-                            <Button variant='contained' onClick={this.handleSaveFurtherInformationClick} color='primary'>{t('save')}</Button>
+                            <Button variant='contained' onClick={this.handleSaveFurtherInformationClick}
+                                    color='primary'>{t('save')}</Button>
                         </CardActions>
+                    </Card>
+                </Grid>
+                <Grid style={{width: '100%'}} item sm={12}>
+                    <Card>
+                        <CardContent>
+                            <Typography className='header' variant="h4">{t('financialInformation')}</Typography>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align='center'>{t('bank')}</TableCell>
+                                        <TableCell align='center'>{t('cardNumber')}</TableCell>
+                                        <TableCell align='center'>{t('accountNumber')}</TableCell>
+                                        <Hidden xsDown><TableCell align='center'>{t('status')}</TableCell></Hidden>
+                                        <Hidden smDown><TableCell align='center'>{t('date')}</TableCell></Hidden>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {this.state.user.accounts ? this.state.user.accounts.map(account => (
+                                        <TableRow>
+                                            <TableCell align='center'>{account.accountBank}</TableCell>
+                                            <TableCell align='center'>{account.cardNumber}</TableCell>
+                                            <TableCell align='center'>{account.accountNumber}</TableCell>
+                                            <Hidden xsDown><TableCell
+                                                align='center'>{account.status}</TableCell></Hidden>
+                                            <Hidden smDown>
+                                                <TableCell align='center'>
+                                                    {
+                                                        new Date(account.created_at).toLocaleDateString(getLang() === 'fa' ? "fa-IR" : "en-US")
+                                                    }
+                                                </TableCell>
+                                            </Hidden>
+                                        </TableRow>
+                                    )) : this.state.loading ?
+                                        <TableRow>
+                                            <TableCell align='center'><Skeleton animation='wave'/></TableCell>
+                                            <TableCell align='center'><Skeleton animation='wave'/></TableCell>
+                                            <TableCell align='center'><Skeleton animation='wave'/></TableCell>
+                                            <Hidden xsDown><TableCell align='center'><Skeleton
+                                                animation='wave'/></TableCell></Hidden>
+                                            <Hidden smDown><TableCell align='center'><Skeleton
+                                                animation='wave'/></TableCell></Hidden>
+                                        </TableRow>
+                                        :
+                                        (
+                                            <TableRow>
+                                                <TableCell className="no-item" colSpan={5}>{t('noItem')}</TableCell>
+                                            </TableRow>
+                                        )}
+                                </TableBody>
+                            </Table>
+                            <br/>
+                            <Button variant='contained' onClick={this.handleAddCardClick}
+                                    color='primary'>{t('add')}</Button>
+                        </CardContent>
                     </Card>
                 </Grid>
                 <Dialog
@@ -619,6 +706,30 @@ class Profile extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Dialog
+                    open={this.state.dialogAddCard}
+                    onClose={this.handleDialogAddCardClose}>
+                    <DialogTitle>{t('addCardDialogTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('addCardDialogContent')}
+                        </DialogContentText>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} md={6}>
+                                <TextField inputRef={this.txtCardNumber} label={t('cardNumber')}/>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField inputRef={this.txtAccountNumber} label={t('accountNumber')}/>
+                            </Grid>
+                        </Grid>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleAddCard} color="primary">
+                            {t('add')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
 
                 <Backdrop style={{zIndex: 1201}} open={this.state.apiLoading}>
                     <CircularProgress color='primary'/>

@@ -113,6 +113,12 @@ html, body, #root {
   direction: ltr;
 }
 
+.rtl-input {
+  .MuiFormControl-root {
+    direction: inherit;
+  }
+}
+
 .profile-icon-drop-down {
   width: rem(42px);
   height: rem(42px);
@@ -217,7 +223,7 @@ html, body, #root {
 
 .upload {
   padding: rem(10px);
-  height: rem(100px);
+  height: rem(96px);
   position: relative;
   input {
     display: none;
@@ -230,4 +236,14 @@ html, body, #root {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.undertaking {
+  height: rem(96px);
+  display: table-cell;
+  vertical-align: middle;
 }

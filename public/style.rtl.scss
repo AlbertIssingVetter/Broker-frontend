@@ -34,4 +34,9 @@ body {
   direction: rtl;
 }
 
+.MuiIconButton-edgeStart {
+  margin-right: -12px;
+  margin-left: 0;
+}
+
 @import './styles/style';

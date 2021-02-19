@@ -48,9 +48,15 @@ class Upload extends React.Component {
                  border={this.state.border} borderColor={this.state.borderColor}
                  borderRadius='borderRadius' onDragLeave={this.handleDragLeave}>
                 <input type='file' onChange={this.handleInputChange} ref={this.input}/>
-                <div className='center'>
+                <div className='center width-100'>
                     <BackupIcon fontSize='large'/>
-                    <Typography>{this.state.files.length ? t('selectedFiles', this.state.files.length) : t('selectFile')}</Typography>
+                    <Typography>
+                        {
+                            this.state.files.length ?
+                                t('selectedFiles', this.state.files.length) :
+                                (this.props.text ? this.props.text : t('selectFile'))
+                        }
+                    </Typography>
                 </div>
             </Box>
         );

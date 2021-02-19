@@ -167,7 +167,9 @@ class Profile extends React.Component {
         formData.append("tel", this.txtTelephone.current.value)
         formData.append("address", this.txtAddress.current.value)
         formData.append("zipCode", this.txtZipCode.current.value)
-        formData.append("undertakingPic", this.undertakingPic)
+        if (!this.state.user.undertakingPic) {
+            formData.append("undertakingPic", this.undertakingPic)
+        }
         axios.post('/user/profile/edit', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'

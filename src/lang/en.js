@@ -73,7 +73,11 @@ const en =  {
     waitingForVerification: 'Awaiting approval',
     notVerified: 'Not verified yet',
     zipCode: 'Zip Code',
-    identityConfirmation: 'Identity Confirmation'
+    identityConfirmation: 'Identity Confirmation',
+    telephoneVerificationDialogTitle: 'Verify your telephone',
+    telephoneVerificationDialogContent: 'Your telephone not verified yet, You must verify your telephone to have more access.',
+    telephoneCodeDialogTitle: 'Verify your telephone',
+    telephoneCodeDialogContent: 'We will call you and give you a code, Please enter the code and verify your telephone.',
 }
 
 export default en;

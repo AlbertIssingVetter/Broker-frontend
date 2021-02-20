@@ -32,12 +32,14 @@ class Profile extends React.Component {
             dialogMailVerificationError: false,
             dialogMobileVerificationError: false,
             dialogNationalCardVerificationError: false,
+            dialogTelephoneVerificationError: false,
             apiLoading: false,
             dialogMobileCode: false,
             dialogMailCode: false,
             snackbarOpen: false,
             errorDialog: false,
             dialogAddCard: false,
+            dialogTelephoneCode: false,
         }
         this.txtMobileCode = React.createRef();
         this.txtMailCode = React.createRef();
@@ -51,6 +53,7 @@ class Profile extends React.Component {
         this.txtTelephone = React.createRef();
         this.txtAccountNumber = React.createRef();
         this.txtCardNumber = React.createRef();
+        this.txtTelephoneCode = React.createRef();
         this.errorDialog = {}
     }
 
@@ -80,6 +83,10 @@ class Profile extends React.Component {
         this.setState({dialogMobileVerificationError: true})
     }
 
+    handleTelephoneVerificationClick = () => {
+        this.setState({dialogTelephoneVerificationError: true})
+    }
+
     handleNationalCardVerificationClick = () => {
         this.setState({dialogNationalCardVerificationError: true})
     }
@@ -88,8 +95,16 @@ class Profile extends React.Component {
         this.setState({dialogMobileVerificationError: false})
     }
 
+    handleDialogTelephoneClose = () => {
+        this.setState({dialogTelephoneVerificationError: false})
+    }
+
     handleDialogMobileCodeClose = () => {
         this.setState({dialogMobileCode: false})
+    }
+
+    handleDialogTelephoneCodeClose = () => {
+        this.setState({dialogTelephoneCode: false})
     }
 
     handleDialogMailCodeClose = () => {
@@ -247,6 +262,31 @@ class Profile extends React.Component {
         })
     }
 
+    sendTelephoneVerificationCode = () => {
+        this.setState({apiLoading: true});
+        this.handleDialogTelephoneClose();
+        axios({
+            url: '/user/verify',
+            method: 'POST',
+            data: {
+                type: 'send_telephone_code'
+            }
+        }).then(r => {
+            if (r.data.status) {
+                this.setState({apiLoading: false, dialogTelephoneCode: true});
+            } else {
+                this.errorDialog = {
+                    title: t('error', r.data.error.code),
+                    content: r.data.error.message,
+                    btn: t('ok'),
+                }
+                this.setState({apiLoading: false, errorDialog: true});
+            }
+        }).catch(e => {
+            console.log(e.response.data);
+        })
+    }
+
     verifyMobile = () => {
         this.setState({apiLoading: true});
         this.handleDialogMobileCodeClose();
@@ -316,6 +356,30 @@ class Profile extends React.Component {
         }).catch(e => {
             this.setState({apiLoading: false})
             console.log(e.response.data)
+        })
+    }
+
+    verifyTelephone = () => {
+        this.setState({apiLoading: true})
+        this.handleDialogTelephoneCodeClose();
+        axios({
+            url: '/user/checkCode',
+            method: 'POST',
+            data: {
+                type: "check_telephone_code",
+                code: this.txtTelephoneCode.current.value,
+            }
+        }).then(r => {
+            this.setState({
+                apiLoading: false,
+                user: {
+                    ...this.state.user,
+                    telVerify: true,
+                }
+            });
+            console.log(r.data);
+        }).catch(e => {
+            console.log(e.response.data);
         })
     }
 
@@ -531,7 +595,26 @@ class Profile extends React.Component {
                                     {
                                         this.state.loading ?
                                             <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                            <TextField inputRef={this.txtTelephone} defaultValue={this.state.user.tel}/>
+                                            <FormControl>
+                                                <Input
+                                                    inputRef={this.txtTelephone}
+                                                    defaultValue={this.state.user.tel}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                onClick={this.state.user.telVerify ? null : this.handleTelephoneVerificationClick}>
+                                                                {this.state.user.telVerify ?
+                                                                    <Tooltip title={t('verified')}>
+                                                                        <CheckCircleIcon
+                                                                            style={{color: this.props.theme.palette.success.main}}/>
+                                                                    </Tooltip> :
+                                                                    <Tooltip title={t('notVerified')}>
+                                                                        <ErrorIcon color='error'/>
+                                                                    </Tooltip>}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }/>
+                                            </FormControl>
                                     }
                                 </Grid>
                             </Grid>
@@ -690,6 +773,45 @@ class Profile extends React.Component {
                 </Dialog>
 
                 <Dialog
+                    open={this.state.dialogTelephoneVerificationError}
+                    onClose={this.handleDialogTelephoneClose}>
+                    <DialogTitle>{t('telephoneVerificationDialogTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('telephoneVerificationDialogContent')}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleDialogTelephoneClose}>
+                            {t('later')}
+                        </Button>
+                        <Button onClick={this.sendTelephoneVerificationCode} color="primary">
+                            {t('sendCode')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.dialogTelephoneCode}
+                    onClose={this.handleDialogTelephoneCodeClose}>
+                    <DialogTitle>{t('telephoneCodeDialogTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('telephoneCodeDialogContent')}
+                        </DialogContentText>
+                        <TextField label={t('code')} inputRef={this.txtTelephoneCode}/>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleDialogTelephoneCodeClose}>
+                            {t('later')}
+                        </Button>
+                        <Button onClick={this.verifyTelephone} color="primary">
+                            {t('verify')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
                     open={this.state.dialogNationalCardVerificationError}
                     onClose={this.handleDialogNationalCardClose}>
                     <DialogTitle>{t('nationalCardVerificationDialogTitle')}</DialogTitle>
@@ -741,7 +863,7 @@ class Profile extends React.Component {
                         {this.snackbarMessage}
                     </Alert>
                 </Snackbar>
-                <ErrorDialog title={this.errorDialog.title} open={this.state.errorDialog}
+                <ErrorDialog title={this.errorDialog.title} open={this.state.errorDialog} onClose={this.handleBtnErrorDialogClose}
                              btns={<Button onClick={this.handleBtnErrorDialogClose}>{this.errorDialog.btn}</Button>}>
                     {this.errorDialog.content}
                 </ErrorDialog>

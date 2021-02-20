@@ -140,7 +140,17 @@ class Profile extends React.Component {
         }).then(r => {
             if (r.data.status) {
                 this.snackbarMessage = t('cardAddedSuccessfully')
-                this.setState({apiLoading: false, snackbarOpen: true});
+                this.setState({
+                    apiLoading: false,
+                    snackbarOpen: true,
+                    user: {
+                        ...this.state.user,
+                        accounts: [
+                            ...this.state.user.accounts,
+                            r.data,
+                        ]
+                    }
+                });
             } else {
                 this.errorDialog = {
                     title: t('error', r.data.error.code),
@@ -655,13 +665,13 @@ class Profile extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.state.user.accounts ? this.state.user.accounts.map(account => (
+                                    {this.state.user.accounts && this.state.user.accounts.length ? this.state.user.accounts.map(account => (
                                         <TableRow>
-                                            <TableCell align='center'>{account.accountBank}</TableCell>
+                                            <TableCell align='center'>{account['accountBank' + getLang().toUpperCase()]}</TableCell>
                                             <TableCell align='center'>{account.cardNumber}</TableCell>
                                             <TableCell align='center'>{account.accountNumber}</TableCell>
                                             <Hidden xsDown><TableCell
-                                                align='center'>{account.status}</TableCell></Hidden>
+                                                align='center'>{account.status === 1 ? t('verified') : t('notVerified')}</TableCell></Hidden>
                                             <Hidden smDown>
                                                 <TableCell align='center'>
                                                     {

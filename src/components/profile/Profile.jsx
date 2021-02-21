@@ -21,6 +21,7 @@ import axios from "axios";
 import Upload from "../upload/Upload";
 import ErrorDialog from "../error-dialog/ErrorDialog";
 import {withTheme} from '@material-ui/core/styles';
+import identityConfirmationPicExample from './identity-confirmation-pic-example.jpg'
 
 class Profile extends React.Component {
 
@@ -40,6 +41,7 @@ class Profile extends React.Component {
             errorDialog: false,
             dialogAddCard: false,
             dialogTelephoneCode: false,
+            dialogIdentityConfirmation: false,
         }
         this.txtMobileCode = React.createRef();
         this.txtMailCode = React.createRef();
@@ -192,7 +194,7 @@ class Profile extends React.Component {
         formData.append("tel", this.txtTelephone.current.value)
         formData.append("address", this.txtAddress.current.value)
         formData.append("zipCode", this.txtZipCode.current.value)
-        if (!this.state.user.undertakingPic) {
+        if (this.undertakingPic) {
             formData.append("undertakingPic", this.undertakingPic)
         }
         axios.post('/user/profile/edit', formData, {
@@ -223,7 +225,16 @@ class Profile extends React.Component {
     }
 
     handleUndertakingPic = (files) => {
-        this.undertakingPic = files[0]
+        this.undertakingPic = files[0];
+        this.handleDialogIdentityConfirmationClose();
+    }
+
+    handleDialogIdentityConfirmationClose = () => {
+        this.setState({dialogIdentityConfirmation: false})
+    }
+
+    handleUploadIdentityConfirmation = () => {
+        this.setState({dialogIdentityConfirmation: true})
     }
 
     handleBtnErrorDialogClose = () => {
@@ -633,13 +644,12 @@ class Profile extends React.Component {
                                 <Grid item xs={9}>
                                     {
                                         this.state.loading ?
-                                            <Skeleton animation='wave' height={'6rem'} width={'100%'}/> :
+                                            <Skeleton animation='wave' height={32} width={'100%'}/> :
                                             this.state.user.undertakingPic ?
                                                 (this.state.user.status ?
-                                                    <Typography className='undertaking'>{t('verified')}</Typography> :
-                                                    <Typography
-                                                        className='undertaking'>{t('waitingForVerification')}</Typography>) :
-                                                <Upload onChange={this.handleUndertakingPic}/>
+                                                    <Typography>{t('verified')}</Typography> :
+                                                    <Typography>{t('waitingForVerification')}</Typography>) :
+                                                <Button onClick={this.handleUploadIdentityConfirmation} variant='contained' >{t('uploadIdentityPicture')}</Button>
                                     }
                                 </Grid>
                             </Grid>
@@ -840,6 +850,20 @@ class Profile extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+
+                <Dialog
+                    open={this.state.dialogIdentityConfirmation}
+                    onClose={this.handleDialogIdentityConfirmationClose}>
+                    <DialogTitle>{t('identityConfirmationDialogTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('identityConfirmationDialogContent')}
+                        </DialogContentText>
+                        <img width={300} src={identityConfirmationPicExample} alt='example'/>
+                        <Upload onChange={this.handleUndertakingPic}/>
+                    </DialogContent>
+                </Dialog>
+
                 <Dialog
                     open={this.state.dialogAddCard}
                     onClose={this.handleDialogAddCardClose}>

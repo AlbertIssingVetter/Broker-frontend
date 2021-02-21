@@ -78,6 +78,9 @@ const en =  {
     telephoneVerificationDialogContent: 'Your telephone not verified yet, You must verify your telephone to have more access.',
     telephoneCodeDialogTitle: 'Verify your telephone',
     telephoneCodeDialogContent: 'We will call you and give you a code, Please enter the code and verify your telephone.',
+    uploadIdentityPicture: 'Select picture',
+    identityConfirmationDialogTitle: 'Identity Confirmation',
+    identityConfirmationDialogContent: 'You must send an image like this:',
 }
 
 export default en;

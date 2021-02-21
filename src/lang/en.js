@@ -21,7 +21,7 @@ const en =  {
     passwordValidationErrorNumber: 'at Least one numeric character',
     ok: 'Ok',
     error: 'Error code {0}',
-    validationError: 'Filed validation Error',
+    validationError: 'Field validation Error',
     signupError: 'Please fill fields correctly.',
     fixSignupError: 'Please fill below fields correctly:',
     home: 'Home',
@@ -81,6 +81,7 @@ const en =  {
     uploadIdentityPicture: 'Select picture',
     identityConfirmationDialogTitle: 'Identity Confirmation',
     identityConfirmationDialogContent: 'You must send an image like this:',
+    address: 'address',
 }
 
 export default en;

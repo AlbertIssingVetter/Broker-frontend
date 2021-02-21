@@ -44,4 +44,14 @@ body {
   margin-right: 8px;
 }
 
+.MuiAlert-action {
+  padding-right: 16px;
+  padding-left: 0;
+}
+
+.MuiAlert-icon {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
 @import './styles/style';

@@ -72,6 +72,15 @@ class Profile extends React.Component {
         })
     }
 
+    handleResponseError = (r) => {
+        this.errorDialog = {
+            title: t('error', r.data.error.code),
+            content: r.data.error.message,
+            btn: t('ok'),
+        }
+        this.setState({apiLoading: false, errorDialog: true});
+    }
+
     handleMailVerificationClick = () => {
         this.setState({dialogMailVerificationError: true})
     }
@@ -180,8 +189,12 @@ class Profile extends React.Component {
                 mob: this.txtMobile.current.value,
             }
         }).then(r => {
-            this.snackbarMessage = t('profileEditedSuccessfully')
-            this.setState({apiLoading: false, snackbarOpen: true});
+            if (r.data.status) {
+                this.snackbarMessage = t('profileEditedSuccessfully')
+                this.setState({apiLoading: false, snackbarOpen: true});
+            } else {
+                this.handleResponseError(r);
+            }
             console.log(r.data);
         }).catch(e => {
             console.log(e);
@@ -206,12 +219,7 @@ class Profile extends React.Component {
                 this.snackbarMessage = t('furtherInformationEditedSuccessfully')
                 this.setState({apiLoading: false, snackbarOpen: true});
             } else {
-                this.errorDialog = {
-                    title: t('error', r.data.error.code),
-                    content: r.data.error.message,
-                    btn: t('ok'),
-                }
-                this.setState({apiLoading: false, errorDialog: true});
+                this.handleResponseError(r);
             }
             console.log(r.data);
         }).catch(e => {
@@ -271,12 +279,7 @@ class Profile extends React.Component {
             if (r.data.status) {
                 this.setState({apiLoading: false, dialogMobileCode: true});
             } else {
-                this.errorDialog = {
-                    title: t('error', r.data.error.code),
-                    content: r.data.error.message,
-                    btn: t('ok'),
-                }
-                this.setState({apiLoading: false, errorDialog: true});
+                this.handleResponseError(r);
             }
         }).catch(e => {
             console.log(e.response.data);
@@ -290,18 +293,13 @@ class Profile extends React.Component {
             url: '/user/verify',
             method: 'POST',
             data: {
-                type: 'send_telephone_code'
+                type: 'send_tel_code'
             }
         }).then(r => {
             if (r.data.status) {
                 this.setState({apiLoading: false, dialogTelephoneCode: true});
             } else {
-                this.errorDialog = {
-                    title: t('error', r.data.error.code),
-                    content: r.data.error.message,
-                    btn: t('ok'),
-                }
-                this.setState({apiLoading: false, errorDialog: true});
+                this.handleResponseError(r);
             }
         }).catch(e => {
             console.log(e.response.data);
@@ -387,7 +385,7 @@ class Profile extends React.Component {
             url: '/user/checkCode',
             method: 'POST',
             data: {
-                type: "check_telephone_code",
+                type: "check_tel_code",
                 code: this.txtTelephoneCode.current.value,
             }
         }).then(r => {
@@ -649,7 +647,8 @@ class Profile extends React.Component {
                                                 (this.state.user.status ?
                                                     <Typography>{t('verified')}</Typography> :
                                                     <Typography>{t('waitingForVerification')}</Typography>) :
-                                                <Button onClick={this.handleUploadIdentityConfirmation} variant='contained' >{t('uploadIdentityPicture')}</Button>
+                                                <Button onClick={this.handleUploadIdentityConfirmation}
+                                                        variant='contained'>{t('uploadIdentityPicture')}</Button>
                                     }
                                 </Grid>
                             </Grid>
@@ -677,7 +676,8 @@ class Profile extends React.Component {
                                 <TableBody>
                                     {this.state.user.accounts && this.state.user.accounts.length ? this.state.user.accounts.map(account => (
                                         <TableRow>
-                                            <TableCell align='center'>{account['accountBank' + getLang().toUpperCase()]}</TableCell>
+                                            <TableCell
+                                                align='center'>{account['accountBank' + getLang().toUpperCase()]}</TableCell>
                                             <TableCell align='center'>{account.cardNumber}</TableCell>
                                             <TableCell align='center'>{account.accountNumber}</TableCell>
                                             <Hidden xsDown><TableCell
@@ -897,7 +897,8 @@ class Profile extends React.Component {
                         {this.snackbarMessage}
                     </Alert>
                 </Snackbar>
-                <ErrorDialog title={this.errorDialog.title} open={this.state.errorDialog} onClose={this.handleBtnErrorDialogClose}
+                <ErrorDialog title={this.errorDialog.title} open={this.state.errorDialog}
+                             onClose={this.handleBtnErrorDialogClose}
                              btns={<Button onClick={this.handleBtnErrorDialogClose}>{this.errorDialog.btn}</Button>}>
                     {this.errorDialog.content}
                 </ErrorDialog>

@@ -82,6 +82,7 @@ const fa =  {
     identityConfirmationDialogTitle: 'تایید هویت',
     identityConfirmationDialogContent: 'شما می بایست یک عکس شفاف مانند عکس زیر وارد کنید:',
     address: 'آدرس',
+    date: 'تاریخ'
 }
 
 export default fa;

@@ -82,6 +82,7 @@ const en =  {
     identityConfirmationDialogTitle: 'Identity Confirmation',
     identityConfirmationDialogContent: 'You must send an image like this:',
     address: 'address',
+    date: 'date',
 }
 
 export default en;

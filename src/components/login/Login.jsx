@@ -134,7 +134,7 @@ class Login extends React.Component {
                                     color='primary'>{t('signup')}</Button>
                         </Grid>
                     </Grid>
-                    <ErrorDialog title={this.dialog.title} open={this.state.errorDialog}
+                    <ErrorDialog title={this.dialog.title} open={this.state.errorDialog} onClose={this.handleBtnDialogClose}
                                  btns={<Button onClick={this.handleBtnDialogClose}>{this.dialog.btn}</Button>}>
                         {this.dialog.content}
                     </ErrorDialog>

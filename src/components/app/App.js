@@ -8,6 +8,7 @@ import {Helmet} from "react-helmet";
 import {} from '../../utils/axiosDefault'
 import {getLang} from "../../lang/t";
 import {CssBaseline} from "@material-ui/core";
+import ForgetPasswordCode from "../login/ForgetPasswordCode";
 
 export default class App extends React.Component {
 
@@ -23,6 +24,7 @@ export default class App extends React.Component {
                     <Route path="/login" component={Login}/>
                     <Route path="/signup" component={Signup}/>
                     <Route path="/forget-password" component={ForgetPassword}/>
+                    <Route path="/forget-password-code" component={ForgetPasswordCode}/>
                     <Route path="/" component={Main}/>
                 </Switch>
             </Router>

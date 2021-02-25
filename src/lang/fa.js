@@ -4,7 +4,7 @@ const fa =  {
     username: 'نام کاربری',
     password: 'گذرواژه',
     rememberMe: 'من را به خاطر بسپار',
-    forgetPassword: 'بازیابی رمز عبور',
+    forgetPassword: 'بازیابی کلمه عبور',
     login: 'ورود',
     signup: 'ساخت حساب',
     signupHeader: 'لطفا برای ساخت اکانت اطلاعات زیر را کامل فرمایید.',
@@ -82,7 +82,15 @@ const fa =  {
     identityConfirmationDialogTitle: 'تایید هویت',
     identityConfirmationDialogContent: 'شما می بایست یک عکس شفاف مانند عکس زیر وارد کنید:',
     address: 'آدرس',
-    date: 'تاریخ'
+    date: 'تاریخ',
+    forgetPasswordHeader: 'لطفا ایمیل خود را وارد کنید تا ما کدی که با آن کلمه عبور خود را تغییر دهید را برایتان ارسال کنیم.',
+    back: 'بازگشت',
+    passwordErrorTitle: 'خطا در کلمه عبور',
+    passwordErrorContent: 'لطفا یک کلمه عبور صحیح با شرایط زیر وارد کنید:',
+    changePassword: 'تغییر کلمه عبور',
+    forgetPasswordCodeHeader: 'ما برای شما ایمیلی حاوی یک کد برای تغییر کلمه عبورتان ارسال کرده ایم.',
+    passwordChangedSuccessfullyTitle: 'کلمه عبور با موفقیت تغییر کرد',
+    passwordChangedSuccessfullyContent: 'شما هم اکنون میتوانید با کلمه عبور جدید خود وارد شود.',
 }
 
 export default fa;

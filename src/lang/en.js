@@ -83,6 +83,14 @@ const en =  {
     identityConfirmationDialogContent: 'You must send an image like this:',
     address: 'address',
     date: 'date',
+    forgetPasswordHeader: 'Enter your email and we send you a code to reset your pass.',
+    back: 'back',
+    passwordErrorTitle: 'Password error',
+    passwordErrorContent: 'Please enter a valid password with the following conditions:',
+    changePassword: 'Change Password',
+    forgetPasswordCodeHeader: 'We sand an email with a code to reset your password.',
+    passwordChangedSuccessfullyTitle: 'Password changed successfully',
+    passwordChangedSuccessfullyContent: 'You can login now with your new password',
 }
 
 export default en;

@@ -91,6 +91,9 @@ const fa =  {
     forgetPasswordCodeHeader: 'ما برای شما ایمیلی حاوی یک کد برای تغییر کلمه عبورتان ارسال کرده ایم.',
     passwordChangedSuccessfullyTitle: 'کلمه عبور با موفقیت تغییر کرد',
     passwordChangedSuccessfullyContent: 'شما هم اکنون میتوانید با کلمه عبور جدید خود وارد شود.',
+    currentPassword: 'گذرواژه فعلی',
+    newPassword: 'گذرواژه جدید',
+    change: 'تغییر',
 }
 
 export default fa;

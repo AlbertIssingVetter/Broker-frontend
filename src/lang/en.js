@@ -91,6 +91,9 @@ const en =  {
     forgetPasswordCodeHeader: 'We sand an email with a code to reset your password.',
     passwordChangedSuccessfullyTitle: 'Password changed successfully',
     passwordChangedSuccessfullyContent: 'You can login now with your new password',
+    currentPassword: 'current password',
+    newPassword: 'New Password',
+    change: 'change',
 }
 
 export default en;

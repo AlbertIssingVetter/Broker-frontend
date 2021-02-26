@@ -5,12 +5,29 @@ import {
     Button,
     Card,
     CardActions,
-    CardContent, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl,
-    Grid, Hidden, IconButton, Input, InputAdornment, Snackbar,
-    Table, TableBody, TableCell,
+    CardContent,
+    CircularProgress,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    FormControl,
+    FormHelperText,
+    Grid,
+    Hidden,
+    IconButton,
+    Input,
+    InputAdornment,
+    InputLabel,
+    Snackbar,
+    Table,
+    TableBody,
+    TableCell,
     TableHead,
     TableRow,
-    TextField, Tooltip,
+    TextField,
+    Tooltip,
     Typography
 } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
@@ -22,6 +39,7 @@ import Upload from "../upload/Upload";
 import ErrorDialog from "../error-dialog/ErrorDialog";
 import {withTheme} from '@material-ui/core/styles';
 import identityConfirmationPicExample from './identity-confirmation-pic-example.jpg'
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 class Profile extends React.Component {
 
@@ -50,6 +68,8 @@ class Profile extends React.Component {
         this.txtLastName = React.createRef();
         this.txtNationalCode = React.createRef();
         this.txtMobile = React.createRef();
+        this.txtNewPassword = React.createRef();
+        this.txtCurrentPassword = React.createRef();
         this.txtAddress = React.createRef();
         this.txtZipCode = React.createRef();
         this.txtTelephone = React.createRef();
@@ -69,6 +89,12 @@ class Profile extends React.Component {
                 loading: false,
                 user: res.data
             })
+        })
+    }
+
+    handleShowPasswordClick = () => {
+        this.setState({
+            showPassword: !this.state.showPassword,
         })
     }
 
@@ -402,6 +428,48 @@ class Profile extends React.Component {
         })
     }
 
+    handleEditPasswordClick = () => {
+        this.setState({apiLoading: true})
+        axios({
+            method: 'post',
+            url: 'user/profile/edit/password',
+            data : {
+                oldPassword: this.txtCurrentPassword.current.value,
+                newPassword: this.txtNewPassword.current.value,
+            }
+        }).then((res) => {
+            const data = res.data;
+            if (data.status) {
+                this.snackbarMessage = t('passwordChangedSuccessfullyTitle')
+                this.setState({apiLoading: false, snackbarOpen: true});
+            } else {
+                this.errorDialog = {
+                    title: t('error', data.error.code),
+                    content: data.error.message,
+                    btn: t('ok'),
+                }
+                this.setState({errorDialog: true, apiLoading: false})
+            }
+        }).catch((e) => {
+            this.errorDialog = {
+                title: t('passwordErrorTitle'),
+                content: (
+                    <>
+                        <Typography>{t('passwordErrorContent')}</Typography>
+                        <ul>
+                            <li>{t('passwordValidationErrorLength')}</li>
+                            <li>{t('passwordValidationErrorLowercase')}</li>
+                            <li>{t('passwordValidationErrorUppercase')}</li>
+                            <li>{t('passwordValidationErrorNumber')}</li>
+                        </ul>
+                    </>
+                ),
+                btn: t('ok'),
+            }
+            this.setState({errorDialog: true, apiLoading: false})
+        })
+    }
+
     render() {
         return (
             <Grid container spacing={3} className='profile'>
@@ -656,6 +724,65 @@ class Profile extends React.Component {
                         <CardActions>
                             <Button variant='contained' onClick={this.handleSaveFurtherInformationClick}
                                     color='primary'>{t('save')}</Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+                <Grid style={{width: '100%'}} className='rtl-input' item sm={12}>
+                    <Card>
+                        <CardContent>
+                            <Typography className='header' variant="h4">{t('changePassword')}</Typography>
+                            <Grid container spacing={3}>
+                                <Grid className='row' item sm={12} md={6}>
+                                    <Grid container>
+                                        <Grid item xs={3} className='center-vertically'>{t('currentPassword')}</Grid>
+                                        <Grid item xs={9}>
+                                            {
+                                                this.state.loading ?
+                                                    <Skeleton animation='wave' height={32} width={'100%'}/> :
+                                                    <TextField type='password' inputRef={this.txtCurrentPassword}/>
+                                            }
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid className='row' item sm={12} md={6}>
+                                    <Grid container>
+                                        <Grid item xs={3} className='center-vertically'>{t('newPassword')}</Grid>
+                                        <Grid item xs={9}>
+                                            {
+                                                this.state.loading ?
+                                                    <Skeleton animation='wave' height={32} width={'100%'}/> :
+                                                    <FormControl>
+                                                        <Input
+                                                            type={this.state.showPassword ? 'text' : 'password'}
+                                                            error={this.state.passwordErr}
+                                                            onChange={this.handlePasswordChange}
+                                                            aria-describedby="password-error"
+                                                            inputRef={this.txtNewPassword}
+                                                            endAdornment={
+                                                                <InputAdornment position="end">
+                                                                    <IconButton
+                                                                        aria-label="toggle password visibility"
+                                                                        onMouseDown={this.handleShowPasswordClick}>
+                                                                        {this.state.showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                                    </IconButton>
+                                                                </InputAdornment>
+                                                            }/>
+                                                        {this.state.passwordErr ?
+                                                            <FormHelperText error id='password-error'>
+                                                                {this.passwordError}
+                                                            </FormHelperText>
+                                                            : ''}
+                                                    </FormControl>
+                                            }
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
+                        </CardContent>
+                        <CardActions>
+                            <Button variant='contained' onClick={this.handleEditPasswordClick}
+                                    color='primary'>{t('change')}</Button>
                         </CardActions>
                     </Card>
                 </Grid>

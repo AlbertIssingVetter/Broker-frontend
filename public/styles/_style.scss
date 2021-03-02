@@ -247,3 +247,13 @@ html, body, #root {
   display: table-cell;
   vertical-align: middle;
 }
+
+.identity-pic-name {
+  display: inline-block;
+  margin: 0 rem(16px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: relative;
+  top: rem(9px);
+  width: calc(100% - 11.4rem);
+}

@@ -19,7 +19,6 @@ import {
     IconButton,
     Input,
     InputAdornment,
-    InputLabel,
     Snackbar,
     Table,
     TableBody,
@@ -84,7 +83,6 @@ class Profile extends React.Component {
             url: '/user/profile',
             method: 'POST',
         }).then(res => {
-            console.log(res.data)
             this.setState({
                 loading: false,
                 user: res.data
@@ -715,8 +713,12 @@ class Profile extends React.Component {
                                                 (this.state.user.status ?
                                                     <Typography>{t('verified')}</Typography> :
                                                     <Typography>{t('waitingForVerification')}</Typography>) :
-                                                <Button onClick={this.handleUploadIdentityConfirmation}
-                                                        variant='contained'>{t('uploadIdentityPicture')}</Button>
+                                                <div>
+                                                    <Button onClick={this.handleUploadIdentityConfirmation}
+                                                             variant='contained'>{t('uploadIdentityPicture')}</Button>
+                                                    <Typography className='identity-pic-name'>{this.undertakingPic ? this.undertakingPic.name : ''}</Typography>
+                                                </div>
+
                                     }
                                 </Grid>
                             </Grid>

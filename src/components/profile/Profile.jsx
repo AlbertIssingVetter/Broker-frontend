@@ -741,7 +741,7 @@ class Profile extends React.Component {
                                             {
                                                 this.state.loading ?
                                                     <Skeleton animation='wave' height={32} width={'100%'}/> :
-                                                    <TextField type='password' inputRef={this.txtCurrentPassword}/>
+                                                    <TextField type='password' autoComplete='new-password' inputRef={this.txtCurrentPassword}/>
                                             }
                                         </Grid>
                                     </Grid>

@@ -1,7 +1,9 @@
 import fa from './fa'
 import en from './en'
+import de from './de'
 import iran from './icon/iran.png'
 import us from './icon/us.png'
+import germany from './icon/germany.png'
 // eslint-disable-next-line no-extend-native
 String.prototype.format = function() {
     let args = arguments;
@@ -22,6 +24,11 @@ export const langList = {
         obj: en,
         icon: us,
         name: 'en',
+    },
+    de: {
+        obj: de,
+        icon: germany,
+        name: 'de',
     }
 }
 export const defaultLang = 'fa'

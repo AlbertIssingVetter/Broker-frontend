@@ -94,6 +94,7 @@ const fa =  {
     currentPassword: 'گذرواژه فعلی',
     newPassword: 'گذرواژه جدید',
     change: 'تغییر',
+    toggleDarkModeTheme: 'تغییر وضعیت تم روشن/تیره',
 }
 
 export default fa;

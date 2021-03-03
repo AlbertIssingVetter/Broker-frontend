@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
         this.state = {
             coin: {
                 bitcoin: {
-                    price: -1000000,
+                    price: 12000,
                     percent: 2,
                 },
                 ethereum: {

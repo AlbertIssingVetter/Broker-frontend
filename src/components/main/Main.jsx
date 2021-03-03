@@ -56,7 +56,8 @@ class Main extends React.Component {
         return <div className='main'>
 
             <Sidebar handleDrawerClose={this.handleDrawerClose} drawerOpen={this.state.drawerOpen}
-                     handleDrawerToggle={this.handleDrawerToggle} />
+                     handleDrawerToggle={this.handleDrawerToggle} getDarkMode={this.props.getDarkMode}
+                     toggleDarkMode={this.props.toggleDarkMode} />
             <Switch>
                 <Route path="/profile">
                     <Container style={styles}>

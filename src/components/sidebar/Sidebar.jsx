@@ -8,7 +8,7 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
-    Toolbar,
+    Toolbar, Tooltip,
     Typography
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -18,6 +18,8 @@ import LanguageSelector from "../langauge-selector/LanguageSelector";
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import withWidth from '@material-ui/core/withWidth';
 import ProfileDropDown from "../main/ProfileDropDown";
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 
 class Sidebar extends React.Component {
 
@@ -38,6 +40,14 @@ class Sidebar extends React.Component {
                         <Typography variant="h6" noWrap>
                             {t('appName')}
                         </Typography>
+                        <Tooltip title={t('toggleDarkModeTheme')}>
+                            <IconButton
+                                aria-label="toggle theme change"
+                                onMouseDown={this.props.toggleDarkMode}
+                                className='MuiAppBar-colorPrimary dark-mode-selector'>
+                                {this.props.getDarkMode ? <Brightness4Icon/> : <Brightness7Icon/>}
+                            </IconButton>
+                        </Tooltip>
                         <LanguageSelector className="language-selector-header" />
                         <ProfileDropDown/>
                     </Toolbar>

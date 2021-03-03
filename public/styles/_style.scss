@@ -257,3 +257,9 @@ html, body, #root {
   top: rem(9px);
   width: calc(100% - 11.4rem);
 }
+
+.dark-mode-selector {
+  position: absolute;
+  @include positionEnd(175px);
+
+}

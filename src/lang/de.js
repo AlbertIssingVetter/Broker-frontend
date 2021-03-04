@@ -94,6 +94,7 @@ const de =  {
     currentPassword: 'Jetziges Passwort',
     newPassword: 'Neues Passwort',
     change: 'Veränderung',
+    toggleDarkModeTheme: 'toggle light/dark mode',
 }
 
 export default de;

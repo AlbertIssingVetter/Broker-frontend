@@ -263,3 +263,8 @@ html, body, #root {
   @include positionEnd(175px);
 
 }
+
+.identity-preview {
+  height: rem(96px);
+  @include marginStart(16px);
+}

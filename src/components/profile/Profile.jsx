@@ -713,10 +713,10 @@ class Profile extends React.Component {
                                                 (this.state.user.status ?
                                                     <Typography>{t('verified')}</Typography> :
                                                     <Typography>{t('waitingForVerification')}</Typography>) :
-                                                <div>
+                                                <div className='center-vertically'>
                                                     <Button onClick={this.handleUploadIdentityConfirmation}
                                                              variant='contained'>{t('uploadIdentityPicture')}</Button>
-                                                    <Typography className='identity-pic-name'>{this.undertakingPic ? this.undertakingPic.name : ''}</Typography>
+                                                    <img className='identity-preview' src={this.undertakingPic ? URL.createObjectURL(this.undertakingPic) : '#'} alt='' />
                                                 </div>
 
                                     }

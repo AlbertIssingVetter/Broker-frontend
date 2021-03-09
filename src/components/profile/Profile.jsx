@@ -15,7 +15,6 @@ import {
     FormControl,
     FormHelperText,
     Grid,
-    Hidden,
     IconButton,
     Input,
     InputAdornment,
@@ -31,7 +30,7 @@ import {
 } from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import t, {getLang} from "../../lang/t";
+import t from "../../lang/t";
 import {Alert, Skeleton} from "@material-ui/lab";
 import axios from "axios";
 import Upload from "../upload/Upload";
@@ -56,9 +55,10 @@ class Profile extends React.Component {
             dialogMailCode: false,
             snackbarOpen: false,
             errorDialog: false,
-            dialogAddCard: false,
             dialogTelephoneCode: false,
             dialogIdentityConfirmation: false,
+            dialogAddCardNumber: false,
+            dialogAddAccountNumber: false,
         }
         this.txtMobileCode = React.createRef();
         this.txtMailCode = React.createRef();
@@ -154,23 +154,24 @@ class Profile extends React.Component {
         this.setState({snackbarOpen: false})
     }
 
-    handleDialogAddCardClose = () => {
-        this.setState({dialogAddCard: false});
+    handleDialogAddCardNumberClose = () => {
+        this.setState({dialogAddCardNumber: false});
     }
 
-    handleAddCardClick = () => {
-        this.setState({dialogAddCard: true})
+    handleAddCardNumberClick = () => {
+        this.setState({dialogAddCardNumber: true})
     }
 
-    handleAddCard = () => {
+    handleAddCardNumber = () => {
         this.setState({apiLoading: true,});
-        this.handleDialogAddCardClose()
+        this.handleDialogAddCardNumberClose()
+        const cardNumber = this.txtCardNumber.current.value;
         axios({
             url: '/account/add',
             method: 'POST',
             data: {
-                accountNumber: this.txtAccountNumber.current.value,
-                cardNumber: this.txtCardNumber.current.value
+                type: 1,
+                cardNumber: cardNumber,
             }
         }).then(r => {
             if (r.data.status) {
@@ -180,10 +181,67 @@ class Profile extends React.Component {
                     snackbarOpen: true,
                     user: {
                         ...this.state.user,
-                        accounts: [
-                            ...this.state.user.accounts,
-                            r.data,
-                        ]
+                        accounts: {
+                            accountNumber: this.state.user.accounts.accountNumber,
+                            cardNumber: [
+                                ...this.state.user.accounts.cardNumber,
+                                {
+                                    cardNumber
+                                },
+                            ]
+                        }
+                    }
+                });
+            } else {
+                this.errorDialog = {
+                    title: t('error', r.data.error.code),
+                    content: r.data.error.message,
+                    btn: t('ok'),
+                }
+                this.setState({apiLoading: false, errorDialog: true})
+            }
+            console.log(r.data);
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+
+    handleDialogAddAccountNumberClose = () => {
+        this.setState({dialogAddAccountNumber: false});
+    }
+
+    handleAddAccountNumberClick = () => {
+        this.setState({dialogAddAccountNumber: true})
+    }
+
+    handleAddAccountNumber = () => {
+        this.setState({apiLoading: true,});
+        this.handleDialogAddAccountNumberClose();
+        const accountNumber = this.txtAccountNumber.current.value;
+        axios({
+            url: '/account/add',
+            method: 'POST',
+            data: {
+                type: 2,
+                accountNumber: this.txtAccountNumber.current.value,
+            }
+        }).then(r => {
+            if (r.data.status) {
+                this.snackbarMessage = t('cardAddedSuccessfully')
+                this.setState({
+                    apiLoading: false,
+                    snackbarOpen: true,
+                    user: {
+                        ...this.state.user,
+                        accounts: {
+                            cardNumber: this.state.user.accounts.cardNumber,
+                            accountNumber: [
+                                ...this.state.user.accounts.accountNumber,
+                                {
+                                    accountNumber
+                                },
+                            ]
+                        }
                     }
                 });
             } else {
@@ -792,54 +850,72 @@ class Profile extends React.Component {
                     <Card>
                         <CardContent>
                             <Typography className='header' variant="h4">{t('financialInformation')}</Typography>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell align='center'>{t('bank')}</TableCell>
-                                        <TableCell align='center'>{t('cardNumber')}</TableCell>
-                                        <TableCell align='center'>{t('accountNumber')}</TableCell>
-                                        <Hidden xsDown><TableCell align='center'>{t('status')}</TableCell></Hidden>
-                                        <Hidden smDown><TableCell align='center'>{t('date')}</TableCell></Hidden>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {this.state.user.accounts && this.state.user.accounts.length ? this.state.user.accounts.map(account => (
-                                        <TableRow>
-                                            <TableCell
-                                                align='center'>{account['accountBank' + getLang().toUpperCase()]}</TableCell>
-                                            <TableCell align='center'>{account.cardNumber}</TableCell>
-                                            <TableCell align='center'>{account.accountNumber}</TableCell>
-                                            <Hidden xsDown><TableCell
-                                                align='center'>{account.status === 1 ? t('verified') : t('notVerified')}</TableCell></Hidden>
-                                            <Hidden smDown>
-                                                <TableCell align='center'>
-                                                    {
-                                                        new Date(account.created_at).toLocaleDateString(getLang() === 'fa' ? "fa-IR" : "en-US")
-                                                    }
-                                                </TableCell>
-                                            </Hidden>
-                                        </TableRow>
-                                    )) : this.state.loading ?
-                                        <TableRow>
-                                            <TableCell align='center'><Skeleton animation='wave'/></TableCell>
-                                            <TableCell align='center'><Skeleton animation='wave'/></TableCell>
-                                            <TableCell align='center'><Skeleton animation='wave'/></TableCell>
-                                            <Hidden xsDown><TableCell align='center'><Skeleton
-                                                animation='wave'/></TableCell></Hidden>
-                                            <Hidden smDown><TableCell align='center'><Skeleton
-                                                animation='wave'/></TableCell></Hidden>
-                                        </TableRow>
-                                        :
-                                        (
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} md={6}>
+                                    <Typography variant="h6">{t('bankCards')}</Typography>
+                                    <Table>
+                                        <TableHead>
                                             <TableRow>
-                                                <TableCell className="no-item" colSpan={5}>{t('noItem')}</TableCell>
+                                                <TableCell align='center'>{t('cardNumber')}</TableCell>
                                             </TableRow>
-                                        )}
-                                </TableBody>
-                            </Table>
-                            <br/>
-                            <Button variant='contained' onClick={this.handleAddCardClick}
-                                    color='primary'>{t('add')}</Button>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.user.accounts
+                                                && this.state.user.accounts.cardNumber
+                                                && this.state.user.accounts.cardNumber.length
+                                                ? this.state.user.accounts.cardNumber.map(account => (
+                                                <TableRow key={account.cardNumber}>
+                                                    <TableCell align='center'>{account.cardNumber}</TableCell>
+                                                </TableRow>
+                                            )) : this.state.loading ?
+                                                <TableRow>
+                                                    <TableCell align='center'><Skeleton animation='wave'/></TableCell>
+                                                </TableRow>
+                                                :
+                                                (
+                                                    <TableRow>
+                                                        <TableCell className="no-item">{t('noItem')}</TableCell>
+                                                    </TableRow>
+                                                )}
+                                        </TableBody>
+                                    </Table>
+                                    <br/>
+                                    <Button variant='contained' onClick={this.handleAddCardNumberClick}
+                                            color='primary'>{t('add')}</Button>
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <Typography variant="h6">{t('bankShabas')}</Typography>
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell align='center'>{t('accountNumber')}</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.user.accounts
+                                                && this.state.user.accounts.accountNumber
+                                                && this.state.user.accounts.accountNumber.length
+                                                ? this.state.user.accounts.accountNumber.map(account => (
+                                                <TableRow key={account.accountNumber}>
+                                                    <TableCell align='center'>{account.accountNumber}</TableCell>
+                                                </TableRow>
+                                            )) : this.state.loading ?
+                                                <TableRow>
+                                                    <TableCell align='center'><Skeleton animation='wave'/></TableCell>
+                                                </TableRow>
+                                                :
+                                                (
+                                                    <TableRow>
+                                                        <TableCell className="no-item">{t('noItem')}</TableCell>
+                                                    </TableRow>
+                                                )}
+                                        </TableBody>
+                                    </Table>
+                                    <br/>
+                                    <Button variant='contained' onClick={this.handleAddAccountNumberClick}
+                                            color='primary'>{t('add')}</Button>
+                                </Grid>
+                            </Grid>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -994,24 +1070,42 @@ class Profile extends React.Component {
                 </Dialog>
 
                 <Dialog
-                    open={this.state.dialogAddCard}
-                    onClose={this.handleDialogAddCardClose}>
-                    <DialogTitle>{t('addCardDialogTitle')}</DialogTitle>
+                    open={this.state.dialogAddAccountNumber}
+                    onClose={this.handleDialogAddAccountNumberClose}>
+                    <DialogTitle>{t('addAccountNumberDialogTitle')}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            {t('addCardDialogContent')}
+                            {t('addAccountNumberDialogContent')}
                         </DialogContentText>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} md={6}>
-                                <TextField inputRef={this.txtCardNumber} label={t('cardNumber')}/>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextField inputRef={this.txtAccountNumber} label={t('accountNumber')}/>
+                            <Grid item xs={12}>
+                                <TextField className='width-100' inputRef={this.txtAccountNumber} defaultValue='IR' label={t('accountNumber')}/>
                             </Grid>
                         </Grid>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleAddCard} color="primary">
+                        <Button onClick={this.handleAddAccountNumber} color="primary">
+                            {t('add')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.dialogAddCardNumber}
+                    onClose={this.handleDialogAddCardNumberClose}>
+                    <DialogTitle>{t('addCardNumberDialogTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('addCardNumberDialogContent')}
+                        </DialogContentText>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField className='width-100' inputRef={this.txtCardNumber} label={t('cardNumber')}/>
+                            </Grid>
+                        </Grid>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleAddCardNumber} color="primary">
                             {t('add')}
                         </Button>
                     </DialogActions>

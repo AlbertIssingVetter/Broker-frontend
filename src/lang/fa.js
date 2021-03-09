@@ -95,6 +95,12 @@ const fa =  {
     newPassword: 'گذرواژه جدید',
     change: 'تغییر',
     toggleDarkModeTheme: 'تغییر وضعیت تم روشن/تیره',
+    addCardNumberDialogTitle: 'افزودن شماره کارت',
+    addCardNumberDialogContent: 'لطفا شماره ۱۶ رقمی کارت بانکی که به نام خود شما می باشد را وارد نمایید.',
+    bankCards: 'کارت های بانکی',
+    bankShabas: 'حساب های بانکی',
+    addAccountNumberDialogTitle: 'افزودن شبا',
+    addAccountNumberDialogContent: 'لطفا شبای حساب بانکی که به نام خود شما می باشد را وارد نمایید.',
 }
 
 export default fa;

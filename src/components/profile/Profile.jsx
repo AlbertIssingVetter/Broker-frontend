@@ -38,6 +38,7 @@ import ErrorDialog from "../error-dialog/ErrorDialog";
 import {withTheme} from '@material-ui/core/styles';
 import identityConfirmationPicExample from './identity-confirmation-pic-example.jpg'
 import {Visibility, VisibilityOff} from "@material-ui/icons";
+import InputMask from "react-input-mask";
 
 class Profile extends React.Component {
 
@@ -165,7 +166,7 @@ class Profile extends React.Component {
     handleAddCardNumber = () => {
         this.setState({apiLoading: true,});
         this.handleDialogAddCardNumberClose()
-        const cardNumber = this.txtCardNumber.current.value;
+        const cardNumber = this.txtCardNumber.current.value.replaceAll(' ', '');
         axios({
             url: '/account/add',
             method: 'POST',
@@ -217,13 +218,13 @@ class Profile extends React.Component {
     handleAddAccountNumber = () => {
         this.setState({apiLoading: true,});
         this.handleDialogAddAccountNumberClose();
-        const accountNumber = this.txtAccountNumber.current.value;
+        const accountNumber = this.txtAccountNumber.current.value.replaceAll(' ', '');
         axios({
             url: '/account/add',
             method: 'POST',
             data: {
                 type: 2,
-                accountNumber: this.txtAccountNumber.current.value,
+                accountNumber: accountNumber,
             }
         }).then(r => {
             if (r.data.status) {
@@ -865,7 +866,7 @@ class Profile extends React.Component {
                                                 && this.state.user.accounts.cardNumber.length
                                                 ? this.state.user.accounts.cardNumber.map(account => (
                                                 <TableRow key={account.cardNumber}>
-                                                    <TableCell align='center'>{account.cardNumber}</TableCell>
+                                                    <TableCell align='center'>{this.format(account.cardNumber, '#### #### #### ####')}</TableCell>
                                                 </TableRow>
                                             )) : this.state.loading ?
                                                 <TableRow>
@@ -897,7 +898,7 @@ class Profile extends React.Component {
                                                 && this.state.user.accounts.accountNumber.length
                                                 ? this.state.user.accounts.accountNumber.map(account => (
                                                 <TableRow key={account.accountNumber}>
-                                                    <TableCell align='center'>{account.accountNumber}</TableCell>
+                                                    <TableCell align='center'>{this.format(account.accountNumber, '#### #### #### #### #### #### ##')}</TableCell>
                                                 </TableRow>
                                             )) : this.state.loading ?
                                                 <TableRow>
@@ -1079,7 +1080,9 @@ class Profile extends React.Component {
                         </DialogContentText>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <TextField className='width-100' inputRef={this.txtAccountNumber} defaultValue='IR' label={t('accountNumber')}/>
+                                <InputMask mask="IR99 9999 9999 9999 9999 9999 99">
+                                    {() => <TextField className='width-100'  inputRef={this.txtAccountNumber} label={t('accountNumber')}/>}
+                                </InputMask>
                             </Grid>
                         </Grid>
                     </DialogContent>
@@ -1100,7 +1103,9 @@ class Profile extends React.Component {
                         </DialogContentText>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <TextField className='width-100' inputRef={this.txtCardNumber} label={t('cardNumber')}/>
+                                <InputMask mask="9999 9999 9999 9999">
+                                    {() => <TextField className='width-100' inputRef={this.txtCardNumber} label={t('cardNumber')}/>}
+                                </InputMask>
                             </Grid>
                         </Grid>
                     </DialogContent>
@@ -1127,6 +1132,12 @@ class Profile extends React.Component {
                 </ErrorDialog>
             </Grid>
         );
+    }
+
+    format = (value, pattern) => {
+        let i = 0,
+            v = value.toString();
+        return pattern.replace(/#/g, _ => v[i++]);
     }
 }
 

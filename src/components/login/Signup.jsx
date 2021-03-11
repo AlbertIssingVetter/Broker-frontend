@@ -174,6 +174,7 @@ class Signup extends React.Component {
                                     error={this.state.passwordErr}
                                     onChange={this.handlePasswordChange}
                                     aria-describedby="password-error"
+                                    autoComplete='new-password'
                                     endAdornment={
                                         <InputAdornment position="end">
                                             <IconButton

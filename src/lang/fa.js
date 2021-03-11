@@ -1,5 +1,5 @@
 const fa =  {
-    appName: 'تراست مارکت',
+    appName: 'Trust Market',
     loginWelcome: 'خوش آمدید، لطفا به حساب خود وارد شوید.',
     username: 'نام کاربری',
     password: 'گذرواژه',

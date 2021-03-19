@@ -6,6 +6,7 @@ import t from "../../lang/t";
 import BitcoinIcon from "../../svg-icon/BitcoinIcon";
 import TetherIcon from "../../svg-icon/TetherIcon";
 import EthereumIcon from "../../svg-icon/EthereumIcon";
+import LitecoinIcon from "../../svg-icon/LitecoinIcon";
 
 class Dashboard extends React.Component {
 
@@ -24,6 +25,10 @@ class Dashboard extends React.Component {
                 tether: {
                     price: 100,
                     percent: -10,
+                },
+                litecoin: {
+                    price: 15222,
+                    percent: -12,
                 },
             }
         }
@@ -45,8 +50,8 @@ class Dashboard extends React.Component {
                               icon={<TetherIcon className={'coin-card-icon'}/>} percent={this.state.coin.tether.percent}/>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
-                    <CoinCard name={t('ethereum')} price={this.state.coin.ethereum.price}
-                              icon={<EthereumIcon className={'coin-card-icon'}/>} percent={this.state.coin.ethereum.percent}/>
+                    <CoinCard name={t('litecoin')} price={this.state.coin.litecoin.price}
+                              icon={<LitecoinIcon className={'coin-card-icon'}/>} percent={this.state.coin.litecoin.percent}/>
                 </Grid>
             </Grid>
         );

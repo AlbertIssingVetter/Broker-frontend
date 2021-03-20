@@ -20,6 +20,7 @@ import withWidth from '@material-ui/core/withWidth';
 import ProfileDropDown from "../main/ProfileDropDown";
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
 class Sidebar extends React.Component {
 
@@ -55,7 +56,7 @@ class Sidebar extends React.Component {
                 <Drawer variant={this.props.width === 'xs' ? 'temporary' : 'persistent'}
                         anchor='left' open={this.props.drawerOpen} onClose={this.props.handleDrawerClose}>
                     <List>
-                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='sidebar-link' to='/'>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='no-link' to='/'>
                             <ListItem button>
                                 <ListItemIcon>
                                     <HomeIcon/>
@@ -65,12 +66,22 @@ class Sidebar extends React.Component {
                         </Link>
                     </List>
                     <List>
-                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='sidebar-link' to='/profile'>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='no-link' to='/profile'>
                             <ListItem button>
                                 <ListItemIcon>
                                     <AssignmentIndIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary={t('profile')}/>
+                            </ListItem>
+                        </Link>
+                    </List>
+                    <List>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='no-link' to='/wallet'>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <AccountBalanceWalletIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary={t('myWallet')}/>
                             </ListItem>
                         </Link>
                     </List>

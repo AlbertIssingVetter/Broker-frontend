@@ -6,6 +6,7 @@ import {Container} from "@material-ui/core";
 import Profile from "../profile/Profile";
 import {getLang} from "../../lang/t";
 import withWidth from "@material-ui/core/withWidth";
+import Wallet from "../wallet/Wallet";
 
 class Main extends React.Component {
 
@@ -62,6 +63,11 @@ class Main extends React.Component {
                 <Route path="/profile">
                     <Container style={styles}>
                         <Profile/>
+                    </Container>
+                </Route>
+                <Route path="/wallet">
+                    <Container style={styles}>
+                        <Wallet/>
                     </Container>
                 </Route>
                 <Route path="/">

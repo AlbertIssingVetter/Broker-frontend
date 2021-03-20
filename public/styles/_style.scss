@@ -79,7 +79,7 @@ html, body, #root {
   }
 }
 
-.sidebar-link {
+.no-link {
   text-decoration: none;
   color: inherit;
 }
@@ -229,6 +229,9 @@ html, body, #root {
     display: none;
   }
 }
+.center-parent {
+  position: relative;
+}
 
 .center {
   text-align: center;
@@ -240,6 +243,11 @@ html, body, #root {
 
 .width-100 {
   width: 100%;
+}
+
+.width-33 {
+  width: 33%;
+  display: inline-block;
 }
 
 .undertaking {
@@ -267,4 +275,45 @@ html, body, #root {
 .identity-preview {
   height: rem(96px);
   @include marginStart(16px);
+}
+
+.coin-wallet-button {
+  text-transform: none;
+  font-size: rem(13px);
+  width: rem(75px);
+  margin: 0 rem(5px);
+}
+
+.coin-wallet-actions {
+  text-align: left;
+  min-width: rem(255px);
+}
+
+.display-table {
+  display: table;
+}
+
+.coin-wallet-count{
+  width: 100% !important;
+  text-align: center;
+}
+
+.coin-wallet-name {
+  min-width: rem(100px);
+  text-align: center;
+}
+
+.coin-wallet-logo {
+  width: rem(40px);
+  height: rem(40px);
+}
+
+.display-table-cell {
+  display: table-cell;
+  width: auto;
+  vertical-align: middle;
+}
+
+.content-header {
+  margin-bottom: rem(12px);
 }

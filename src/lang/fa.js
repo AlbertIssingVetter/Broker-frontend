@@ -102,6 +102,11 @@ const fa =  {
     addAccountNumberDialogTitle: 'افزودن شبا',
     addAccountNumberDialogContent: 'لطفا شبای حساب بانکی که به نام خود شما می باشد را وارد نمایید.',
     litecoin: 'لایت کوین',
+    toman: 'تومان',
+    myWallet: 'کیف من',
+    deposit: 'برداشت',
+    withdraw: 'واریز',
+    update: 'بروز رسانی',
 }
 
 export default fa;

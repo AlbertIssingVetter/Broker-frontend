@@ -74,7 +74,7 @@ class Wallet extends React.Component {
                     {
                         this.state.wallets.map(wallet => (
                             <Grid id={wallet.id} item xs={12}>
-                                <Link className="no-link" to={`wallet/${wallet.id}`}>
+                                <Link className="no-link" to={`/wallet/${wallet.id}`}>
                                     <CoinWallet wallet={wallet}/>
                                 </Link>
                             </Grid>

@@ -28,7 +28,7 @@ class CoinWallet extends React.Component {
 
     market = (event) => {
         event.preventDefault();
-        console.log('market')
+        this.props.history.push("/market/" + this.props.wallet.id);
     }
 
     render() {

@@ -7,6 +7,7 @@ import Profile from "../profile/Profile";
 import {getLang} from "../../lang/t";
 import withWidth from "@material-ui/core/withWidth";
 import Wallet from "../wallet/Wallet";
+import Market from "../market/Market";
 
 class Main extends React.Component {
 
@@ -68,6 +69,11 @@ class Main extends React.Component {
                 <Route path="/wallet">
                     <Container style={styles}>
                         <Wallet/>
+                    </Container>
+                </Route>
+                <Route path="/market/:marketId">
+                    <Container style={styles}>
+                        <Market/>
                     </Container>
                 </Route>
                 <Route path="/">

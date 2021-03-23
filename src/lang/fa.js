@@ -107,6 +107,7 @@ const fa =  {
     deposit: 'برداشت',
     withdraw: 'واریز',
     update: 'بروز رسانی',
+    market: 'بازار',
 }
 
 export default fa;

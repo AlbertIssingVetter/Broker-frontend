@@ -7,22 +7,18 @@ import LitecoinIcon from "../svg-icon/LitecoinIcon";
 const coins = {
     btc: {
         name: t('bitcoin'),
-        id: 'btc',
         icon: <BitcoinIcon/>
     },
     eth: {
         name: t('ethereum'),
-        id: 'eth',
         icon: <EthereumIcon/>
     },
     usdt: {
         name: t('tether'),
-        id: 'usdt',
         icon: <TetherIcon/>
     },
     ltc: {
         name: t('litecoin'),
-        id: 'ltc',
         icon: <LitecoinIcon/>
     },
 }

@@ -21,6 +21,7 @@ import ProfileDropDown from "../main/ProfileDropDown";
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import MarketSidebar from "./MarketSidebar";
 
 class Sidebar extends React.Component {
 
@@ -85,6 +86,7 @@ class Sidebar extends React.Component {
                             </ListItem>
                         </Link>
                     </List>
+                    <MarketSidebar handleDrawerClose={this.props.handleDrawerClose} width={this.props.width}/>
                 </Drawer>
             </>
         );

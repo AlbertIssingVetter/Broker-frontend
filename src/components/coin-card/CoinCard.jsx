@@ -16,16 +16,16 @@ class CoinCard extends React.Component {
             <div className='coin-card'>
                 <Card >
                     <CardContent>
-                        {this.props.icon}
-                        <Typography className='coin-card-name'>{this.props.name}</Typography>
+                        <this.props.coin.icon.type className='coin-card-icon'/>
+                        <Typography className='coin-card-name'>{this.props.coin.name}</Typography>
                         <div className='coin-card-price-div'>
-                            {this.props.price === -1000000 ?
-                                <Skeleton animation='wave' width={100} height={25}/> :
-                                <Typography className='coin-card-price'>{t('price', this.props.price)}</Typography>
+                            {this.props.coin.price ?
+                                <Typography className='coin-card-price'>{t('price', this.props.coin.price)}</Typography> :
+                                <Skeleton animation='wave' width={100} height={25}/>
                             }
-                            {this.props.price === -1000000 ?
-                                <Skeleton animation='wave' width={100} height={48}/> :
-                                <Alert icon={false} severity={this.props.percent > 0 ? 'success' : 'error'} className='coin-card-percent'>{this.props.percent}%</Alert>
+                            {this.props.coin.price ?
+                                <Alert icon={false} severity={this.props.coin.percent > 0 ? 'success' : 'error'} className='coin-card-percent'>{this.props.coin.percent}%</Alert> :
+                                <Skeleton animation='wave' width={100} height={48}/>
                             }
 
                         </div>

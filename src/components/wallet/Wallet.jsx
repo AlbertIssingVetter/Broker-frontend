@@ -9,45 +9,32 @@ import BitcoinIcon from "../../svg-icon/BitcoinIcon";
 import EthereumIcon from "../../svg-icon/EthereumIcon";
 import TetherIcon from "../../svg-icon/TetherIcon";
 import LitecoinIcon from "../../svg-icon/LitecoinIcon";
+import coins from "../../utils/coins";
 
 class Wallet extends React.Component {
 
     constructor(props) {
         super(props);
+        // let wallets = [
+        //     {
+        //         name: t('toman'),
+        //         id: 'toman',
+        //         count: -1,
+        //         icon: <TomanIcon className='coin-wallet-logo'/>
+        //     }
+        // ]
+        // Object.keys(coins).forEach(coin =>{
+        //     wallets.push({count: -1, id: coin, ...coins[coin]})
+        // })
         this.state = {
-            loading: true,
-            wallets: [
-                {
+            coins: {
+                toman: {
                     name: t('toman'),
                     id: 'toman',
-                    count: -1,
-                    icon: <TomanIcon className='coin-wallet-logo'/>
+                    icon: <TomanIcon/>
                 },
-                {
-                    name: t('bitcoin'),
-                    id: 'btc',
-                    count: 120000,
-                    icon: <BitcoinIcon className='coin-wallet-logo'/>
-                },
-                {
-                    name: t('ethereum'),
-                    id: 'eth',
-                    count: 120000,
-                    icon: <EthereumIcon className='coin-wallet-logo'/>
-                },
-                {
-                    name: t('tether'),
-                    id: 'usdt',
-                    count: 120000,
-                    icon: <TetherIcon className='coin-wallet-logo'/>
-                },
-                {
-                    name: t('litecoin'),
-                    id: 'ltc',
-                    count: 120000,
-                    icon: <LitecoinIcon className='coin-wallet-logo'/>
-                },
-            ]
+                ...coins,
+            }
         }
     }
 
@@ -72,10 +59,10 @@ class Wallet extends React.Component {
                 <Typography variant="h4" className="content-header">{t('myWallet')}</Typography>
                 <Grid container spacing={3}>
                     {
-                        this.state.wallets.map(wallet => (
-                            <Grid id={wallet.id} item xs={12}>
-                                <Link className="no-link" to={`/wallet/${wallet.id}`}>
-                                    <CoinWallet wallet={wallet}/>
+                        Object.keys(this.state.coins).map(coin => (
+                            <Grid id={coin} item xs={12}>
+                                <Link className="no-link" to={`/wallet/${coin}`}>
+                                    <CoinWallet coin={this.state.coins[coin]} id={coin}/>
                                 </Link>
                             </Grid>
                         ))

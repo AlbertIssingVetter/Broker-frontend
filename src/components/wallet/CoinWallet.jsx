@@ -28,7 +28,7 @@ class CoinWallet extends React.Component {
 
     market = (event) => {
         event.preventDefault();
-        this.props.history.push("/market/" + this.props.wallet.id);
+        this.props.history.push("/market/" + this.props.id);
     }
 
     render() {
@@ -37,12 +37,12 @@ class CoinWallet extends React.Component {
                 <CardContent className="display-table">
                     <div className='display-table-cell coin-wallet-name'>
                         <div className='width-100'>
-                            {this.props.wallet.icon}
-                            <Typography className=''>{this.props.wallet.name}</Typography>
+                            <this.props.coin.icon.type className='coin-wallet-logo'/>
+                            <Typography className=''>{this.props.coin.name}</Typography>
                         </div>
                     </div>
                     <div className='display-table-cell coin-wallet-count'>
-                        {this.props.wallet.count === -1 ? <Skeleton animation='wave'/> : this.props.wallet.count}
+                        {this.props.coin.count ? this.props.coin.count : <Skeleton animation='wave'/>}
                     </div>
                     <Hidden smDown>
                         <div className='display-table-cell coin-wallet-actions'>

@@ -2,9 +2,9 @@ import React from "react";
 import {withRouter} from 'react-router-dom';
 import ProfileIcon from "../../svg-icon/ProfileIcon";
 import {Button, Card, CardContent, Popover} from "@material-ui/core";
-import AngleDownIcon from "../../svg-icon/AngleDownIcon";
 import Logout from "../login/Logout";
 import t from "../../lang/t";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 class ProfileDropDown extends React.Component {
 
@@ -32,7 +32,7 @@ class ProfileDropDown extends React.Component {
             <div className="profile-drop-down" >
                 <div onClick={this.handleDropDownOpen}>
                     <ProfileIcon className="profile-icon-drop-down"/>
-                    <AngleDownIcon className="profile-angle-drop-down"/>
+                    <ExpandMoreIcon className="profile-angle-drop-down"/>
                 </div>
                 <Popover
                     className='profile-drop-down-popover'

@@ -125,10 +125,7 @@ html, body, #root {
 }
 
 .profile-angle-drop-down {
-  width: rem(12px);
-  height: rem(8px);
-  @include marginStart(8px);
-  margin-bottom: rem(17px)
+  margin-bottom: rem(10px)
 }
 
 .profile-drop-down {

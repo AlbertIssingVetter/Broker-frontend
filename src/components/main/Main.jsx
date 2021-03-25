@@ -8,6 +8,7 @@ import {getLang} from "../../lang/t";
 import withWidth from "@material-ui/core/withWidth";
 import Wallet from "../wallet/Wallet";
 import Market from "../market/Market";
+import Withdraw from "../wallet/Withdraw";
 
 class Main extends React.Component {
 
@@ -64,6 +65,11 @@ class Main extends React.Component {
                 <Route path="/profile">
                     <Container style={styles}>
                         <Profile/>
+                    </Container>
+                </Route>
+                <Route path="/wallet/:coinId/withdraw">
+                    <Container style={styles}>
+                        <Withdraw/>
                     </Container>
                 </Route>
                 <Route path="/wallet">

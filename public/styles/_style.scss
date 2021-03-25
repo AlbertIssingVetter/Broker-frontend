@@ -314,3 +314,35 @@ html, body, #root {
 .content-header {
   margin-bottom: rem(12px);
 }
+
+.MuiButton-endIcon{
+  @include marginStart(8px);
+  @include marginEnd(-4px);
+}
+
+.withdraw {
+  margin-bottom: rem(20px);
+  .tutorial-video {
+    @include floatEnd;
+  }
+  .MuiTextField-root, .MuiFormControl-root {
+    width: 100%;
+  }
+  .MuiAlert-root {
+    display: inline-block;
+    @include marginEnd(10px);
+  }
+  .MuiAlert-message {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.MuiCardActions-spacing > :not(:first-child){
+  @include marginStart(8px);
+  @include marginEnd(0px);
+}

@@ -18,7 +18,7 @@ class CoinWallet extends React.Component {
 
     withdraw = (event) => {
         event.preventDefault();
-        console.log('withdraw')
+        this.props.history.push("/wallet/" + this.props.id + "/withdraw");
     }
 
     update = (event) => {

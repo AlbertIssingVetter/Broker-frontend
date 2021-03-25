@@ -44,5 +44,5 @@ export default function t(key, ...params) {
             return key;
         }
     }
-    return obj[key].format(params);
+    return obj[key].format(...params);
 }

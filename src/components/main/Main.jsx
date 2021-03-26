@@ -9,6 +9,7 @@ import withWidth from "@material-ui/core/withWidth";
 import Wallet from "../wallet/Wallet";
 import Market from "../market/Market";
 import Withdraw from "../wallet/Withdraw";
+import WalletDetails from "../wallet/WalletDetails";
 
 class Main extends React.Component {
 
@@ -70,6 +71,11 @@ class Main extends React.Component {
                 <Route path="/wallet/:coinId/withdraw">
                     <Container style={styles}>
                         <Withdraw/>
+                    </Container>
+                </Route>
+                <Route path="/wallet/:coinId">
+                    <Container style={styles}>
+                        <WalletDetails/>
                     </Container>
                 </Route>
                 <Route path="/wallet">

@@ -30,4 +30,8 @@
   text-align: right;
 }
 
+@mixin languageDirection {
+  direction: ltr;
+}
+
 @import "./styles/style";

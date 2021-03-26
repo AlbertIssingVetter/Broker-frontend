@@ -346,3 +346,26 @@ html, body, #root {
   @include marginStart(8px);
   @include marginEnd(0px);
 }
+
+.wallet-details {
+  .actions {
+    @include floatEnd;
+    button {
+      margin: 0 rem(10px);
+    }
+  }
+  .MuiCard-root {
+    margin-bottom: rem(12px);
+  }
+  .qr-code {
+    text-align: center;
+  }
+  .wallet-address {
+    text-align: center;
+    display: inherit;
+  }
+}
+
+.language-direction {
+  @include languageDirection;
+}

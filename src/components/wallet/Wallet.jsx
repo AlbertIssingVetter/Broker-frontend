@@ -15,17 +15,6 @@ class Wallet extends React.Component {
 
     constructor(props) {
         super(props);
-        // let wallets = [
-        //     {
-        //         name: t('toman'),
-        //         id: 'toman',
-        //         count: -1,
-        //         icon: <TomanIcon className='coin-wallet-logo'/>
-        //     }
-        // ]
-        // Object.keys(coins).forEach(coin =>{
-        //     wallets.push({count: -1, id: coin, ...coins[coin]})
-        // })
         this.state = {
             coins: {
                 toman: {

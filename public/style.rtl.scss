@@ -30,6 +30,10 @@
   text-align: left;
 }
 
+@mixin languageDirection {
+  direction: rtl;
+}
+
 body {
   direction: rtl;
 }

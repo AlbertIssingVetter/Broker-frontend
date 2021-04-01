@@ -9,7 +9,7 @@ import Alert from "@material-ui/lab/Alert";
 import ColorButton from "../color-button/ColorButton";
 
 class Withdraw extends React.Component {
-    
+
     render() {
         return (
             <Grid container className="withdraw rtl-input">
@@ -37,7 +37,7 @@ class Withdraw extends React.Component {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12} md={8}>
-                                    <TextField />
+                                    <TextField variant="outlined" />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Alert icon={false} severity='success'>
@@ -52,7 +52,7 @@ class Withdraw extends React.Component {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12} md={8}>
-                                    <TextField />
+                                    <TextField variant='outlined'/>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Alert icon={false} severity='warning'>
@@ -65,7 +65,7 @@ class Withdraw extends React.Component {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12} md={8}>
-                                    <TextField />
+                                    <TextField variant='outlined' disabled value={0.1}/>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Alert icon={false} severity='info'>

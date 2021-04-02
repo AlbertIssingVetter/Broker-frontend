@@ -32,7 +32,7 @@ export default class App extends React.Component {
             palette: {
                 type: this.state.darkMode ? 'dark' : 'light',
                 primary: {
-                    main: this.state.darkMode? '#113A8A' : '#226CFC',
+                    main: this.state.darkMode? '#1976d2' : '#2196f3',
                 },
                 secondary: {
                     main: '#0859FC',

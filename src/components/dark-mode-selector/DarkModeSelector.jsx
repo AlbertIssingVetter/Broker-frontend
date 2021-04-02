@@ -1,6 +1,6 @@
 import React from "react";
 import {IconButton, Tooltip} from "@material-ui/core";
-import t from "../lang/t";
+import t from "../../lang/t";
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 

@@ -20,7 +20,7 @@ import withWidth from '@material-ui/core/withWidth';
 import ProfileDropDown from "../main/ProfileDropDown";
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import MarketSidebar from "./MarketSidebar";
-import DarkModeSelector from "../DarkModeSelector";
+import DarkModeSelector from "../dark-mode-selector/DarkModeSelector";
 
 class Sidebar extends React.Component {
 

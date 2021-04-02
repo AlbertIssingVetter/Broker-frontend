@@ -2,11 +2,6 @@ import React from "react";
 import {withRouter} from 'react-router-dom';
 import {Grid} from "@material-ui/core";
 import CoinCard from "../coin-card/CoinCard";
-import t from "../../lang/t";
-import BitcoinIcon from "../../svg-icon/BitcoinIcon";
-import TetherIcon from "../../svg-icon/TetherIcon";
-import EthereumIcon from "../../svg-icon/EthereumIcon";
-import LitecoinIcon from "../../svg-icon/LitecoinIcon";
 import coins from "../../utils/coins";
 
 class Dashboard extends React.Component {

@@ -5,10 +5,6 @@ import t from "../../lang/t";
 import axios from "axios";
 import TomanIcon from "../../svg-icon/TomanIcon";
 import CoinWallet from "./CoinWallet";
-import BitcoinIcon from "../../svg-icon/BitcoinIcon";
-import EthereumIcon from "../../svg-icon/EthereumIcon";
-import TetherIcon from "../../svg-icon/TetherIcon";
-import LitecoinIcon from "../../svg-icon/LitecoinIcon";
 import coins from "../../utils/coins";
 
 class Wallet extends React.Component {

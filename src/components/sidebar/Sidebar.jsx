@@ -2,7 +2,7 @@ import React from "react";
 import {Link, withRouter} from 'react-router-dom';
 import {
     AppBar,
-    Drawer,
+    Drawer, Hidden,
     IconButton,
     List,
     ListItem,
@@ -41,9 +41,11 @@ class Sidebar extends React.Component {
                         <Typography variant="h6" noWrap>
                             {t('appName')}
                         </Typography>
-                        <DarkModeSelector getDarkMode={this.props.getDarkMode} toggleDarkMode={this.props.toggleDarkMode}/>
-                        <LanguageSelector className="language-selector-header" />
-                        <ProfileDropDown/>
+                        <Hidden xsDown>
+                            <DarkModeSelector getDarkMode={this.props.getDarkMode} toggleDarkMode={this.props.toggleDarkMode}/>
+                            <LanguageSelector className="language-selector-header" />
+                            <ProfileDropDown/>
+                        </Hidden>
                     </Toolbar>
                 </AppBar>
                 <Drawer variant={this.props.width === 'xs' ? 'temporary' : 'persistent'}

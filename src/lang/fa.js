@@ -128,6 +128,8 @@ const fa =  {
     withdrawHistory: 'تاریخچه برداشت ها',
     description: 'توضیحات',
     transactionVolume: 'حجم تراکنش',
+    setting: 'تنظیمات',
+    changeLanguage: 'تغییر زبان',
 }
 
 export default fa;

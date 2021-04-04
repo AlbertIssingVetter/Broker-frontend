@@ -369,3 +369,17 @@ html, body, #root {
 .language-direction {
   @include languageDirection;
 }
+
+.setting-label {
+  display: inline;
+}
+
+.setting-value {
+  @include marginStart(auto);
+  width: rem(70px);
+  text-align: center;
+}
+
+.setting-height {
+  height: rem(103px);
+}

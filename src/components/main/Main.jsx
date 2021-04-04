@@ -10,6 +10,7 @@ import Wallet from "../wallet/Wallet";
 import Market from "../market/Market";
 import Withdraw from "../wallet/Withdraw";
 import WalletDetails from "../wallet/WalletDetails";
+import Setting from "../setting/Setting";
 
 class Main extends React.Component {
 
@@ -86,6 +87,12 @@ class Main extends React.Component {
                 <Route path="/market/:marketId">
                     <Container style={styles}>
                         <Market/>
+                    </Container>
+                </Route>
+                <Route path="/setting">
+                    <Container style={styles}>
+                        <Setting getDarkMode={this.props.getDarkMode}
+                                 toggleDarkMode={this.props.toggleDarkMode}/>
                     </Container>
                 </Route>
                 <Route path="/">

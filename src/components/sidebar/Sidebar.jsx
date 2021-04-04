@@ -19,6 +19,7 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import withWidth from '@material-ui/core/withWidth';
 import ProfileDropDown from "../main/ProfileDropDown";
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import MarketSidebar from "./MarketSidebar";
 import DarkModeSelector from "../dark-mode-selector/DarkModeSelector";
 
@@ -42,7 +43,9 @@ class Sidebar extends React.Component {
                             {t('appName')}
                         </Typography>
                         <Hidden xsDown>
-                            <DarkModeSelector getDarkMode={this.props.getDarkMode} toggleDarkMode={this.props.toggleDarkMode}/>
+                            <DarkModeSelector className='MuiAppBar-colorPrimary dark-mode-selector'
+                                              getDarkMode={this.props.getDarkMode}
+                                              toggleDarkMode={this.props.toggleDarkMode}/>
                             <LanguageSelector className="language-selector-header" />
                             <ProfileDropDown/>
                         </Hidden>
@@ -81,6 +84,16 @@ class Sidebar extends React.Component {
                         </Link>
                     </List>
                     <MarketSidebar handleDrawerClose={this.props.handleDrawerClose} width={this.props.width}/>
+                    <List>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='no-link' to='/setting'>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <SettingsApplicationsIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary={t('setting')}/>
+                            </ListItem>
+                        </Link>
+                    </List>
                 </Drawer>
             </>
         );

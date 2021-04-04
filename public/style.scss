@@ -1,9 +1,17 @@
 @mixin marginEnd($size) {
-  margin-right: rem($size);
+  @if $size == 'auto' {
+    margin-right: $size;
+  } @else {
+    margin-right: rem($size);
+  }
 }
 
 @mixin marginStart($size) {
-  margin-left: rem($size);
+  @if $size == 'auto' {
+    margin-left: $size;
+  } @else {
+    margin-left: rem($size);
+  }
 }
 
 @mixin positionEnd($size) {

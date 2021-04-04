@@ -13,7 +13,7 @@ export default class DarkModeSelector extends React.Component {
                 <IconButton
                     aria-label="toggle theme change"
                     onMouseDown={this.props.toggleDarkMode}
-                    className='MuiAppBar-colorPrimary dark-mode-selector'>
+                    className={this.props.className}>
                     {this.props.getDarkMode ? <NightsStayIcon/> : <WbSunnyIcon/>}
                 </IconButton>
             </Tooltip>

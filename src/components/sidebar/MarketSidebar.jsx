@@ -34,7 +34,8 @@ class MarketSidebar extends React.Component {
                 <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                     {
                         Object.keys(coins).map(coin => (
-                            <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='no-link' to={`/market/${coin}`}>
+                            <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null}
+                                  key={coin} className='no-link' to={`/market/${coin}`}>
                                 <ListItem button>
                                     <ListItemIcon>
                                         {coins[coin].icon}

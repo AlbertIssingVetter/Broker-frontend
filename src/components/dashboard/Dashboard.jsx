@@ -17,7 +17,7 @@ class Dashboard extends React.Component {
         return (
             <Grid container spacing={3}>
                 {Object.keys(this.state.coins).map(coin => (
-                    <Grid item id={coin} xs={12} sm={6} lg={3}>
+                    <Grid key={coin} item id={coin} xs={12} sm={6} lg={3}>
                         <CoinCard coin={this.state.coins[coin]}/>
                     </Grid>
                 ))}

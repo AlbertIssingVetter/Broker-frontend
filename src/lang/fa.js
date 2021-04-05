@@ -133,6 +133,7 @@ const fa =  {
     retry: 'تلاش مجدد',
     networkErrorTitle: 'خطا در اتصال به سرور',
     networkErrorDescription: 'لطفا دسترسی خود به اینترنت را بررسی سپس دوباره تلاش کنید.',
+    changeTheme: 'تغییر تم',
 }
 
 export default fa;

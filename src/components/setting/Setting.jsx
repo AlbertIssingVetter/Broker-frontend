@@ -61,7 +61,7 @@ class Setting extends React.Component {
                         <Card>
                             <CardContent className='center-vertically setting-height'>
                                 <div className='setting-label'>
-                                    {t('changeLanguage')}
+                                    {t('changeTheme')}
                                 </div>
                                 <div className='setting-value'>
                                     <DarkModeSelector getDarkMode={this.props.getDarkMode}

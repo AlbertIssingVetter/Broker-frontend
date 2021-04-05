@@ -5,9 +5,17 @@ import Login from "../login/Login";
 import ForgetPassword from "../login/ForgetPassword";
 import Main from "../main/Main";
 import {Helmet} from "react-helmet";
-import {} from '../../utils/axiosDefault'
-import {getLang} from "../../lang/t";
-import {CssBaseline} from "@material-ui/core";
+import {setShowNetErrorDialog, setHideNetErrorDialog} from '../../utils/axiosDefault'
+import t, {getLang} from "../../lang/t";
+import {
+    Button,
+    CssBaseline,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle
+} from "@material-ui/core";
 import ForgetPasswordCode from "../login/ForgetPasswordCode";
 //findDOMNode is deprecated in StrictMode error can fixed with unstable_createMuiStrictModeTheme as createMuiTheme
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
@@ -18,7 +26,20 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             darkMode: localStorage.getItem('darkMode') === 'true',
+            netErrorDialog: false,
         }
+        setShowNetErrorDialog(this.showNetErrorDialog);
+        setHideNetErrorDialog(this.hideNetErrorDialog);
+    }
+
+    showNetErrorDialog = (handleRetryClick) => {
+        this.handleRetryClick = handleRetryClick;
+        this.setState({netErrorDialog: true})
+    }
+
+    hideNetErrorDialog = () => {
+        this.handleRetryClick = null;
+        this.setState({netErrorDialog: false})
     }
 
     toggleDarkMode = () => {
@@ -69,6 +90,19 @@ export default class App extends React.Component {
                         </Route>
                     </Switch>
                 </Router>
+                <Dialog open={this.state.netErrorDialog}>
+                    <DialogTitle id="net-error-dialog-title">{t('networkErrorTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="net-error-dialog-description">
+                            {t('networkErrorDescription')}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleRetryClick} color="primary">
+                            {t('retry')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </ThemeProvider>
         );
     }

@@ -130,6 +130,9 @@ const fa =  {
     transactionVolume: 'حجم تراکنش',
     setting: 'تنظیمات',
     changeLanguage: 'تغییر زبان',
+    retry: 'تلاش مجدد',
+    networkErrorTitle: 'خطا در اتصال به سرور',
+    networkErrorDescription: 'لطفا دسترسی خود به اینترنت را بررسی سپس دوباره تلاش کنید.',
 }
 
 export default fa;

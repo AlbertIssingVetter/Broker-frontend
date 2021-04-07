@@ -32,9 +32,22 @@ self.addEventListener('fetch', e => {
     e.respondWith(
         caches.match(e.request).then(response => {
             if (response) {
+                console.log('response found for ', e.request.url)
                 return response;
+            } else if (e.request.url.includes('/api/')) {
+                console.log('response not found for ', e.request.url)
+                return fetch(e.request);
+            } else {
+                return caches.match(new Request("/")).then(responseHomePage => {
+                    if (responseHomePage) {
+                        console.log('response not found and get homepage for', e.request.url)
+                        return responseHomePage;
+                    } else {
+                        console.log('response not found and home page not cached for', e.request.url)
+                        return fetch(e.request);
+                    }
+                });
             }
-            return fetch(e.request);
         })
     );
 })

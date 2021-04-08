@@ -2,6 +2,29 @@
   @return $size / 16px * 1rem;
 }
 
+@font-face {
+  font-family: Vazir;
+  src: url('/fonts/Vazir-Regular.eot');
+  src: url('/fonts/Vazir-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Vazir-Regular.woff2') format('woff2'),
+  url('/fonts/Vazir-Regular.woff') format('woff'),
+  url('/fonts/Vazir-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Vazir;
+  src: url('/fonts/Vazir-Bold.eot');
+  src: url('/fonts/Vazir-Bold.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Vazir-Bold.woff2') format('woff2'),
+  url('/fonts/Vazir-Bold.woff') format('woff'),
+  url('/fonts/Vazir-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 html, body, #root {
   margin: 0;
   height: 100%
@@ -9,18 +32,21 @@ html, body, #root {
 
 .login {
   height: 100%;
+
   .pattern {
     margin: 0;
     float: left;
     height: 100%;
     width: 50%;
     background-image: linear-gradient(to bottom left, #242348, #5A55AA);
+
     svg {
       position: absolute;
       width: 50%;
       bottom: 0;
     }
   }
+
   .form {
     width: 100%;
     position: absolute;
@@ -31,27 +57,33 @@ html, body, #root {
     @media only screen and (min-width: 600px) {
       width: 50%
     }
+
     .change-lang {
       position: absolute;
       top: rem(-100px);
       right: rem(100px);
     }
+
     .MuiFormControl-root, .forget-row, .change-lang {
       width: 60%;
       min-width: rem(250px);
       max-width: rem(450px);
     }
+
     .forget-row {
       margin: auto;
+
       a {
         @include floatEnd;
         margin: rem(12px) 0 0;
       }
+
       label {
         @include floatStart;
         margin: 0;
       }
     }
+
     .MuiButton-root {
       width: calc(60% - 6px);
       min-width: rem(119px);
@@ -65,14 +97,17 @@ html, body, #root {
     width: rem(66px);
   }
 }
+
 .MuiListItem-button {
   .language-selector-image {
     @include marginEnd(10px);
   }
 }
+
 .language-selector-image {
   width: rem(20px);
 }
+
 .MuiSelect-select {
   .language-selector-name {
     display: none;
@@ -138,6 +173,7 @@ html, body, #root {
 .profile-drop-down-popover {
   .MuiCardContent-root {
     padding: rem(2px);
+
     .MuiButtonBase-root {
       display: block;
     }
@@ -162,6 +198,7 @@ html, body, #root {
   @include floatEnd;
   text-align: center;
   margin-bottom: rem(16px);
+
   span:first-child {
     margin-bottom: rem(10px);
   }
@@ -199,15 +236,19 @@ html, body, #root {
   .row {
     margin-top: rem(16px);
   }
+
   .header {
     text-align: center;
   }
+
   .MuiTextField-root, .MuiFormControl-root {
     width: 100%;
   }
+
   .actions {
     padding: rem(16px);
   }
+
   .no-item {
     text-align: center;
   }
@@ -222,10 +263,12 @@ html, body, #root {
   padding: rem(10px);
   height: rem(96px);
   position: relative;
+
   input {
     display: none;
   }
 }
+
 .center-parent {
   position: relative;
 }
@@ -290,7 +333,7 @@ html, body, #root {
   display: table;
 }
 
-.coin-wallet-count{
+.coin-wallet-count {
   width: 100% !important;
   text-align: center;
 }
@@ -315,23 +358,27 @@ html, body, #root {
   margin-bottom: rem(12px);
 }
 
-.MuiButton-endIcon{
+.MuiButton-endIcon {
   @include marginStart(8px);
   @include marginEnd(-4px);
 }
 
 .withdraw {
   margin-bottom: rem(20px);
+
   .tutorial-video {
     @include floatEnd;
   }
+
   .MuiTextField-root, .MuiFormControl-root {
     width: 100%;
   }
+
   .MuiAlert-root {
     display: inline-block;
     @include marginEnd(10px);
   }
+
   .MuiAlert-message {
     display: flex;
     align-items: center;
@@ -342,7 +389,7 @@ html, body, #root {
   display: inline-block;
 }
 
-.MuiCardActions-spacing > :not(:first-child){
+.MuiCardActions-spacing > :not(:first-child) {
   @include marginStart(8px);
   @include marginEnd(0px);
 }
@@ -350,16 +397,20 @@ html, body, #root {
 .wallet-details {
   .actions {
     @include floatEnd;
+
     button {
       margin: 0 rem(10px);
     }
   }
+
   .MuiCard-root {
     margin-bottom: rem(12px);
   }
+
   .qr-code {
     text-align: center;
   }
+
   .wallet-address {
     text-align: center;
     display: inherit;

@@ -1,6 +1,5 @@
 const cacheFiles = [];
 const cacheVersion = '1.0.0';
-cacheFiles.push('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v27.2.1/dist/font-face.css');
 cacheFiles.push('./');
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('install', e => {

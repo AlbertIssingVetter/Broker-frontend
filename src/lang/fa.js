@@ -134,6 +134,13 @@ const fa =  {
     networkErrorTitle: 'خطا در اتصال به سرور',
     networkErrorDescription: 'لطفا دسترسی خود به اینترنت را بررسی سپس دوباره تلاش کنید.',
     changeTheme: 'تغییر تم',
+    installApp: 'نصب نرم افزار',
+    installAndroidTitle: 'نصب نرم افزار اندروید',
+    installAndroidDescription: 'برای نصب نرم افزار اندروید لطفا ابتدا نرم افزار را از یکی از روش های زیر دانلود فرمایید.',
+    iosInstallationGuide: 'آموزش نصب نرم افزار روی IOS',
+    iosInstallationGuideFirst: 'ابتدا در نوار پایین روی دکمه "share" کلیک کنید. (در ایپد بالا سمت راست)',
+    iosInstallationGuideSecond: 'منوی باز شده را به بالا بکشید و روی دکمه "Add to Home Screen" کلیک کنید. (در نسخه های قدیمی تر IOS به چپ)',
+    iosInstallationGuideThird: 'سپس در قسمت بالا روی "Add" کلیک کنید.',
 }
 
 export default fa;

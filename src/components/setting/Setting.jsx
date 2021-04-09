@@ -6,6 +6,10 @@ import LanguageSelector from "../langauge-selector/LanguageSelector";
 import DarkModeSelector from "../dark-mode-selector/DarkModeSelector";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import axios from "axios";
+import {isAndroid, isInStandaloneMode, isIos} from "../../utils/tools";
+import PlayStoreIcon from "../../svg-icon/PlayStoreIcon";
+import AppStoreIcon from "../../svg-icon/AppStoreIcon";
+import AndroidInstallationDialog from "../install/AndroidInstallationDialog";
 
 class Setting extends React.Component {
 
@@ -13,6 +17,7 @@ class Setting extends React.Component {
         super(props);
         this.state = {
             loading: false,
+            androidInstallationDialog: false,
         }
     }
 
@@ -38,6 +43,18 @@ class Setting extends React.Component {
                 console.log(err.response.data)
             }
         })
+    }
+
+    handleInstallClick = () => {
+        if (isAndroid()) {
+            this.setState({androidInstallationDialog: true})
+        } else if (isIos()) {
+            this.props.history.push('/ios-installation-guide')
+        }
+    }
+
+    handleAndroidInstallationDialogClose = () => {
+        this.setState({androidInstallationDialog: false});
     }
 
     render() {
@@ -70,6 +87,28 @@ class Setting extends React.Component {
                             </CardContent>
                         </Card>
                     </Grid>
+                    {
+                        (isAndroid() || isIos()) && !isInStandaloneMode() ? (
+                            <Grid item xs={12} md={6}>
+                                <Card>
+                                    <CardContent className='center-vertically setting-height'>
+                                        <div className='setting-label'>
+                                            {t('installApp')}
+                                        </div>
+                                        <div className='setting-value'>
+                                            <IconButton onClick={this.handleInstallClick}>
+                                                {
+                                                    isAndroid() ?
+                                                        <PlayStoreIcon/> :
+                                                        <AppStoreIcon/>
+                                                }
+                                            </IconButton>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ) : ""
+                    }
                     <Grid item xs={12} md={6}>
                         <Card>
                             <CardContent className='center-vertically setting-height'>
@@ -87,8 +126,10 @@ class Setting extends React.Component {
                 </Grid>
                 {/*TODO must show loading*/}
                 <Backdrop open={false}>
-                    <CircularProgress color="inherit" />
+                    <CircularProgress color="inherit"/>
                 </Backdrop>
+                <AndroidInstallationDialog open={this.state.androidInstallationDialog}
+                                           handleClose={this.handleAndroidInstallationDialogClose}/>
             </>
         );
     }

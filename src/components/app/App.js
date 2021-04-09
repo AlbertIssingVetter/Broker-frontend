@@ -8,7 +8,7 @@ import {Helmet} from "react-helmet";
 import {setShowNetErrorDialog, setHideNetErrorDialog} from '../../utils/axiosDefault'
 import t, {getLang} from "../../lang/t";
 import {
-    Button,
+    Button, Container,
     CssBaseline,
     Dialog,
     DialogActions,
@@ -19,6 +19,7 @@ import {
 import ForgetPasswordCode from "../login/ForgetPasswordCode";
 //findDOMNode is deprecated in StrictMode error can fixed with unstable_createMuiStrictModeTheme as createMuiTheme
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import IosInstallationGuide from "../install/IosInstallationGuide";
 
 export default class App extends React.Component {
 
@@ -85,6 +86,11 @@ export default class App extends React.Component {
                         <Route path="/signup" component={Signup}/>
                         <Route path="/forget-password" component={ForgetPassword}/>
                         <Route path="/forget-password-code" component={ForgetPasswordCode}/>
+                        <Route path="/ios-installation-guide">
+                            <Container>
+                                <IosInstallationGuide/>
+                            </Container>
+                        </Route>
                         <Route path="/">
                             <Main toggleDarkMode={this.toggleDarkMode} getDarkMode={this.state.darkMode}/>
                         </Route>

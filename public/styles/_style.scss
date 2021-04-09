@@ -434,3 +434,27 @@ html, body, #root {
 .setting-height {
   height: rem(103px);
 }
+
+.installation-badge {
+  text-align: center;
+  img {
+    width: rem(130px);
+  }
+}
+
+.text-center {
+  width: 100%;
+  text-align: center;
+}
+
+.ios-guide-image {
+  margin-top: rem(16px);
+  max-width: 100%;
+}
+
+.ios-guide {
+  margin-top: rem(20px);
+  .back-button {
+    @include floatEnd;
+  }
+}

@@ -31,37 +31,35 @@ html, body, #root {
 }
 
 .login {
-  height: 100%;
+  min-height: 100%;
+  position: relative;
+  background: #0f1b24;
 
   .pattern {
     margin: 0;
-    float: left;
-    height: 100%;
-    width: 50%;
-    background-image: linear-gradient(to bottom left, #242348, #5A55AA);
-
-    svg {
-      position: absolute;
-      width: 50%;
-      bottom: 0;
-    }
+    position: fixed;
+    right: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
   }
 
   .form {
     width: 100%;
+    max-width: rem(400px);
+    min-height: 100%;
     position: absolute;
-    right: rem(12px);
-    top: 50%;
-    transform: translate(0, -50%);
+    right: 50%;
+    transform: translateX(50%);
     text-align: center;
-    @media only screen and (min-width: 600px) {
-      width: 50%
-    }
+    background: rgba(34, 50, 64, .5);
+    color: #fff;
+    padding-top: rem(20px);
 
-    .change-lang {
-      position: absolute;
-      top: rem(-100px);
-      right: rem(100px);
+    @media only screen and (min-width: 600px) {
+      right: 0;
+      top: 0;
+      transform: translateX(0);
     }
 
     .MuiFormControl-root, .forget-row, .change-lang {
@@ -71,17 +69,32 @@ html, body, #root {
     }
 
     .forget-row {
-      margin: auto;
+      @include marginStart(48px);
 
-      a {
-        @include floatEnd;
-        margin: rem(12px) 0 0;
+      .MuiFormControlLabel-root {
+        margin-right: 0;
       }
+    }
 
-      label {
-        @include floatStart;
-        margin: 0;
-      }
+    a {
+      color: #2196f3;
+    }
+
+    .MuiFormLabel-root, .MuiInputBase-input, .MuiSvgIcon-root {
+      color: #ffffff;
+    }
+
+    .MuiButton-contained.Mui-disabled {
+      color: rgba(193, 193, 193, 0.26);
+    }
+
+    .MuiGrid-root {
+      position: relative;
+      z-index: 3;
+    }
+
+    .MuiInput-underline::before {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.42);
     }
 
     .MuiButton-root {
@@ -437,8 +450,9 @@ html, body, #root {
 
 .installation-badge {
   text-align: center;
+
   img {
-    width: rem(130px);
+    width: rem(120px);
   }
 }
 
@@ -454,7 +468,20 @@ html, body, #root {
 
 .ios-guide {
   margin-top: rem(20px);
+
   .back-button {
     @include floatEnd;
   }
+}
+
+.direct-download {
+  background: #000000;
+  color: #ffffff;
+  padding: 6.8px 8px;
+  font-size: 11px;
+  border: 1px solid #969798;
+}
+
+.direct-download:hover {
+  background: #000000;
 }

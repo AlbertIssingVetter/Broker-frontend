@@ -15,9 +15,15 @@ import {Link} from "react-router-dom";
 import {withRouter} from 'react-router-dom'
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 import LanguageSelector from "../langauge-selector/LanguageSelector";
-import t from "../../lang/t"
+import t, {getLang} from "../../lang/t"
 import axios from 'axios';
 import ErrorDialog from "../error-dialog/ErrorDialog";
+import cafebazaarBadge from "../install/cafebazaar-badge.png";
+import cafebazaarENBadge from "../install/cafebazaar-en-badge.png";
+import googlePlayBadge from "../install/google-play-badge.png";
+import appStoreBadge from "../install/app-store-badge.png";
+import {isInStandaloneMode, isIos} from "../../utils/tools";
+import DirectDownload from "../install/DirectDownload";
 
 class Login extends React.Component {
 
@@ -49,7 +55,7 @@ class Login extends React.Component {
         axios({
             method: 'post',
             url: '/login',
-            data : {
+            data: {
                 username: this.inputUser.current.value,
                 password: this.inputPass.current.value,
             }
@@ -77,8 +83,21 @@ class Login extends React.Component {
     }
 
     handleKeyDown = (e) => {
-        if(e.keyCode === 13) {
+        if (e.keyCode === 13) {
             this.handleLoginBtnClick();
+        }
+    }
+
+    handleIOSGideClick = () => {
+        if (isIos()) {
+            this.props.history.push('/ios-installation-guide');
+        } else {
+            this.dialog = {
+                title: t('error', 1),
+                content: t('notIOSDevice'),
+                btn: t('ok'),
+            }
+            this.setState({errorDialog: true, loading: false})
         }
     }
 
@@ -118,11 +137,15 @@ class Login extends React.Component {
                             </FormControl>
 
                         </Grid>
-                        <Grid item xs={12}>
-                            <div className='forget-row'>
-                                <FormControlLabel control={<Checkbox/>} label={t('rememberMe')}/>
-                                <Link to='/forget-password'><Typography>{t('forgetPassword')}</Typography></Link>
-                            </div>
+                        <Grid className='forget-row' item xs={12}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}>
+                                    <FormControlLabel control={<Checkbox/>} label={t('rememberMe')}/>
+                                </Grid>
+                                <Grid className='center-vertically' item xs={6}>
+                                    <Link to='/forget-password'><Typography>{t('forgetPassword')}</Typography></Link>
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Grid item xs={6}>
                             <Button className='float-end' onClick={this.handleLoginBtnClick} variant='contained'
@@ -133,14 +156,40 @@ class Login extends React.Component {
                             <Button className='float-start' onClick={this.handleSignupClick} variant='outlined'
                                     color='primary'>{t('signup')}</Button>
                         </Grid>
+
+                        {
+                            isInStandaloneMode() ? "" : (
+                                <>
+                                    <Grid className='installation-badge' item xs={6}>
+                                        <img className='float-end'
+                                             src={getLang() === 'fa' ? cafebazaarBadge : cafebazaarENBadge} alt=""/>
+                                    </Grid>
+
+                                    <Grid className='installation-badge' item xs={6}>
+                                        <img className='float-start' src={googlePlayBadge} alt=""/>
+                                    </Grid>
+
+                                    <Grid className='installation-badge' item xs={6}>
+                                        <Link onClick={this.handleIOSGideClick}>
+                                            <img className='float-end' src={appStoreBadge} alt=""/>
+                                        </Link>
+                                    </Grid>
+
+                                    <Grid className='installation-badge' item xs={6}>
+                                        <DirectDownload className='float-start'/>
+                                    </Grid>
+                                </>
+                            )
+                        }
                     </Grid>
-                    <ErrorDialog title={this.dialog.title} open={this.state.errorDialog} onClose={this.handleBtnDialogClose}
+                    <ErrorDialog title={this.dialog.title} open={this.state.errorDialog}
+                                 onClose={this.handleBtnDialogClose}
                                  btns={<Button onClick={this.handleBtnDialogClose}>{this.dialog.btn}</Button>}>
                         {this.dialog.content}
                     </ErrorDialog>
                 </div>
                 <Backdrop style={{zIndex: 10}} open={this.state.loading}>
-                    <CircularProgress color='primary' />
+                    <CircularProgress color='primary'/>
                 </Backdrop>
             </div>
         )

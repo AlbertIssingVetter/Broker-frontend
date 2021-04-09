@@ -141,6 +141,8 @@ const fa =  {
     iosInstallationGuideFirst: 'ابتدا در نوار پایین روی دکمه "share" کلیک کنید. (در ایپد بالا سمت راست)',
     iosInstallationGuideSecond: 'منوی باز شده را به بالا بکشید و روی دکمه "Add to Home Screen" کلیک کنید. (در نسخه های قدیمی تر IOS به چپ)',
     iosInstallationGuideThird: 'سپس در قسمت بالا روی "Add" کلیک کنید.',
+    directDownload: 'دانلود مستقیم',
+    notIOSDevice: 'میبایست با سیستم عامل IOS وارد شوید.',
 }
 
 export default fa;

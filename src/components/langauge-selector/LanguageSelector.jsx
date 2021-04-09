@@ -11,7 +11,7 @@ export default class LanguageSelector extends React.Component {
 
     render() {
         return (
-            <div className={'language-selector ' + this.props.className}>
+            <div className={'language-selector ' + (this.props.className? this.props.className : '')}>
                 <FormControl variant="outlined">
                     <Select
                         onChange={this.handleOnChangeLang}

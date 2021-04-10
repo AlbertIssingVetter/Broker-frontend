@@ -107,7 +107,7 @@ class Login extends React.Component {
                 <Pattern/>
                 <div className='form'>
                     <LanguageSelector/>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={3} className='form__content'>
                         <Grid item xs={12}>
                             <Typography variant='h3'>{t('appName')}</Typography>
                         </Grid>
@@ -138,47 +138,47 @@ class Login extends React.Component {
 
                         </Grid>
                         <Grid className='forget-row' item xs={12}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6}>
+                            <Grid container spacing={2} className='forget'>
+                                <Grid item className='forget__remember mobile-one-row'>{/*xs={6}*/}
                                     <FormControlLabel control={<Checkbox/>} label={t('rememberMe')}/>
                                 </Grid>
-                                <Grid className='center-vertically' item xs={6}>
+                                <Grid className='center-vertically forget__link mobile-one-row' item>{/*xs={6}*/}
                                     <Link to='/forget-password'><Typography>{t('forgetPassword')}</Typography></Link>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} className='mobile-one-row login-btn'>
                             <Button className='float-end' onClick={this.handleLoginBtnClick} variant='contained'
                                     color='primary'>{t('login')}</Button>
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={6} className='mobile-one-row register-btn'>
                             <Button className='float-start' onClick={this.handleSignupClick} variant='outlined'
                                     color='primary'>{t('signup')}</Button>
                         </Grid>
 
                         {
                             isInStandaloneMode() ? "" : (
-                                <>
-                                    <Grid className='installation-badge' item xs={6}>
+                                <Grid container spacing={3}>
+                                    <Grid className='installation-badge mobile-one-row' item xs={6}>
                                         <img className='float-end'
                                              src={getLang() === 'fa' ? cafebazaarBadge : cafebazaarENBadge} alt=""/>
                                     </Grid>
 
-                                    <Grid className='installation-badge' item xs={6}>
+                                    <Grid className='installation-badge mobile-one-row' item xs={6}>
                                         <img className='float-start' src={googlePlayBadge} alt=""/>
                                     </Grid>
 
-                                    <Grid className='installation-badge' item xs={6}>
+                                    <Grid className='installation-badge mobile-one-row' item xs={6}>
                                         <Link onClick={this.handleIOSGideClick}>
                                             <img className='float-end' src={appStoreBadge} alt=""/>
                                         </Link>
                                     </Grid>
 
-                                    <Grid className='installation-badge' item xs={6}>
+                                    <Grid className='installation-badge mobile-one-row' item xs={6}>
                                         <DirectDownload className='float-start'/>
                                     </Grid>
-                                </>
+                                </Grid>
                             )
                         }
                     </Grid>

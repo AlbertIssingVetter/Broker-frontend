@@ -1,3 +1,6 @@
+$dir: 'rtl';
+$startAlign: right;
+
 @mixin marginEnd($size) {
   @if $size == 'auto' {
     margin-left: $size;
@@ -11,6 +14,22 @@
     margin-right: $size;
   } @else {
     margin-right: rem($size);
+  }
+}
+
+@mixin paddingEnd($size) {
+  @if $size == 'auto' {
+    padding-left: $size !important;
+  } @else {
+    padding-left: rem($size) !important;
+  }
+}
+
+@mixin paddingStart($size) {
+  @if $size == 'auto' {
+    padding-right: $size !important;
+  } @else {
+    padding-right: rem($size) !important;
   }
 }
 

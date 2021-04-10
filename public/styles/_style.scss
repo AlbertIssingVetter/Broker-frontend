@@ -2,6 +2,12 @@
   @return $size / 16px * 1rem;
 }
 
+@mixin flexRowReverse() {
+  @if $dir == 'ltr' {
+    flex-direction: row-reverse;
+  }
+}
+
 @font-face {
   font-family: Vazir;
   src: url('/fonts/Vazir-Regular.eot');
@@ -34,6 +40,8 @@ html, body, #root {
   min-height: 100%;
   position: relative;
   background: #0f1b24;
+  display: flex;
+  @include flexRowReverse();
 
   .pattern {
     margin: 0;
@@ -47,14 +55,38 @@ html, body, #root {
   .form {
     width: 100%;
     max-width: rem(400px);
-    min-height: 100%;
-    position: absolute;
-    right: 50%;
-    transform: translateX(50%);
+    height: 100%;
     text-align: center;
     background: rgba(34, 50, 64, .5);
     color: #fff;
     padding-top: rem(20px);
+    min-height: 100vh;
+
+    .MuiGrid-spacing-xs-3, .MuiGrid-spacing-xs-2 {
+      width: 100%;
+      margin: 0;
+    }
+
+    .language-selector {
+      padding-left: 2.7em;
+    }
+
+    transform: translateX(0);
+
+    &__content {
+      padding: 0 2.7em;
+    }
+
+    .MuiFormControl-root {
+      width: 100%;
+    }
+    .MuiCheckbox-root {
+      padding-right: 0;
+    }
+
+    .login-btn, .register-btn {
+      max-width: 100%;
+    }
 
     @media only screen and (min-width: 600px) {
       right: 0;
@@ -62,14 +94,7 @@ html, body, #root {
       transform: translateX(0);
     }
 
-    .MuiFormControl-root, .forget-row, .change-lang {
-      width: 60%;
-      min-width: rem(250px);
-      max-width: rem(450px);
-    }
-
     .forget-row {
-      @include marginStart(48px);
 
       .MuiFormControlLabel-root {
         margin-right: 0;
@@ -98,10 +123,40 @@ html, body, #root {
     }
 
     .MuiButton-root {
-      width: calc(60% - 6px);
-      min-width: rem(119px);
+      width: 100%;
+      height: 100%;
+      //width: calc(60% - 6px);
+      //min-width: rem(119px);
       max-width: rem(219px);
+      @media (max-width: 380px) {
+        float: inherit;
+      }
     }
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-one-row {
+    flex: 0 0 100% !important;
+    max-width: 74%;
+    margin: auto;
+  }
+}
+
+.forget {
+
+  &__remember {
+    flex: 1;
+    text-align: $startAlign;
+    text-align: start;
+    margin: 0;
+    max-width: 100%;
+    @include paddingStart(0px);
+  }
+  &__link {
+    margin: 0;
+    max-width: 100%;
+    @include paddingEnd(0px);
   }
 }
 
@@ -452,7 +507,7 @@ html, body, #root {
   text-align: center;
 
   img {
-    width: rem(120px);
+    width: 100%;
   }
 }
 
@@ -480,6 +535,9 @@ html, body, #root {
   padding: 6.8px 8px;
   font-size: 11px;
   border: 1px solid #969798;
+  @media (max-width: 380px) {
+    min-height: 45px;
+  }
 }
 
 .direct-download:hover {

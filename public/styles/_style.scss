@@ -488,6 +488,12 @@ html, body, #root {
 
   .qr-code {
     text-align: center;
+    position: relative;
+    .MuiSkeleton-root {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   .wallet-address {

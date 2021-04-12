@@ -143,6 +143,8 @@ const fa =  {
     iosInstallationGuideThird: 'سپس در قسمت بالا روی "Add" کلیک کنید.',
     directDownload: 'دانلود مستقیم',
     notIOSDevice: 'میبایست با سیستم عامل IOS وارد شوید.',
+    createWalletDescription: ' برای واریز کوین به کیف خود، با زدن دکمه‌ی زیر یک آدرس والت برای خود ایجاد نمایید: ',
+    createWallet: 'ایجاد آدرس والت',
 }
 
 export default fa;

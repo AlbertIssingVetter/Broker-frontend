@@ -1,6 +1,6 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
-import {Card, CardContent, Grid, Tab, Tabs, Typography} from "@material-ui/core";
+import {Button, Card, CardContent, Grid, Tab, Tabs, Typography} from "@material-ui/core";
 import t from "../../lang/t";
 import coins from "../../utils/coins";
 import ColorButton from "../color-button/ColorButton";
@@ -8,20 +8,35 @@ import QRCode from "qrcode.react";
 import Alert from "@material-ui/lab/Alert";
 import SwipeableViews from "react-swipeable-views";
 import TransactionTableHistory from "./TransactionTableHistory";
+import {Skeleton} from "@material-ui/lab";
+import axios from "axios";
 
 class WalletDetails extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            balance: 12000,
-            walletAddress: '0x453FaB1A25Abc34C06a36F67335309c40f9EB9e2',
+            wallet: null,
             selectedTab: 0,
             transactions: {
                 deposit: [],
                 withdraw: [],
             }
         }
+    }
+
+    componentDidMount() {
+        axios({
+            url: '/wallet/get',
+            method: 'POST',
+            data: {
+                wallet: this.props.match.params.coinId
+            }
+        }).then(res => {
+            this.setState({wallet: res.data.wallet})
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     handleWithdrawClick = () => {
@@ -34,6 +49,20 @@ class WalletDetails extends React.Component {
 
     handleSwipeChange = index => {
         this.setState({selectedTab: index});
+    }
+
+    handleCreateWalletClick = () => {
+        axios({
+            url: '/wallet/add',
+            method: 'POST',
+            data: {
+                wallet: this.props.match.params.coinId
+            }
+        }).then(res => {
+            console.log(res.data)
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     render() {
@@ -54,24 +83,43 @@ class WalletDetails extends React.Component {
                                 t('toman') : coins[this.props.match.params.coinId].name)}
                         </Typography>
                         <Typography>
-                            {t('yourBalance', this.state.balance, (this.props.match.params.coinId === "irr" ?
-                                t('toman') : coins[this.props.match.params.coinId].name))}
+                            {this.state.wallet !== null ? t('yourBalance', this.state.wallet.balance, (this.props.match.params.coinId === "irr" ?
+                                t('toman') : coins[this.props.match.params.coinId].name)) : <Skeleton animation='wave'/>}
                         </Typography>
                     </CardContent>
                 </Card>
                 <Card>
                     <CardContent>
                         <Grid container spacing={3}>
-                            <Grid item xs={12} md={9}>
-                                <Typography variant="h4" component='h2' gutterBottom>{t('deposit')}</Typography>
-                                <Typography gutterBottom>{t('depositDescription')}</Typography>
-                                <Alert className='wallet-address' icon={false} severity='success'>
-                                    {this.state.walletAddress}
-                                </Alert>
-                            </Grid>
-                            <Grid className='qr-code' item xs={12} md={3}>
-                                <QRCode value={this.state.walletAddress} />
-                            </Grid>
+                            {
+                                this.state.wallet !== null && this.state.wallet.walletAddress === null ? (
+                                    <Grid item xs={12}>
+                                        <Typography variant="h4" component='h2' gutterBottom>{t('deposit')}</Typography>
+                                        <Typography gutterBottom>{t('createWalletDescription')}</Typography>
+                                        <div className='text-center'>
+                                            <Button variant='outlined' onClick={this.handleCreateWalletClick}
+                                                    color='primary'>{t('createWallet')}</Button>
+                                        </div>
+                                    </Grid>
+                                ) : (
+                                    <>
+                                        <Grid item xs={12} md={9}>
+                                            <Typography variant="h4" component='h2' gutterBottom>{t('deposit')}</Typography>
+                                            <Typography gutterBottom>{t('depositDescription')}</Typography>
+                                            {
+                                                this.state.wallet === null ? <Skeleton height={48} animation='wave'/> :
+                                                    <Alert className='wallet-address' icon={false} severity='success'>
+                                                        {this.state.wallet.walletAddress}
+                                                    </Alert>
+                                            }
+                                        </Grid>
+                                        <Grid className='qr-code' item xs={12} md={3}>
+                                            {this.state.wallet === null ? <Skeleton width={128} height={128} animation='wave'/> :
+                                                <QRCode value={this.state.wallet.walletAddress} />}
+                                        </Grid>
+                                    </>
+                                )
+                            }
                         </Grid>
                     </CardContent>
                 </Card>

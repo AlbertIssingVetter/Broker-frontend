@@ -13,7 +13,7 @@ class Wallet extends React.Component {
         super(props);
         this.state = {
             coins: {
-                toman: {
+                irr: {
                     name: t('toman'),
                     id: 'toman',
                     icon: <TomanIcon/>
@@ -26,12 +26,20 @@ class Wallet extends React.Component {
 
     componentDidMount() {
         axios({
-            url: '/user/wallet',
+            url: '/wallet',
             method: 'POST',
         }).then(res => {
+            let coins = this.state.coins;
+            console.log(res.data);
+            res.data.forEach(wallet => {
+                if (wallet.coin in coins) {
+                    let coin = coins[wallet.coin];
+                    coin.wallet = wallet.wallet;
+                    coin.balance = wallet.balance;
+                }
+            })
             this.setState({
-                loading: false,
-                wallets: res.data.data
+                coins: coins
             })
         }).catch(err => {
             console.log(err);
@@ -45,7 +53,7 @@ class Wallet extends React.Component {
                 <Grid container spacing={3}>
                     {
                         Object.keys(this.state.coins).map(coin => (
-                            <Grid id={coin} item xs={12}>
+                            <Grid key={coin} id={coin} item xs={12}>
                                 <Link className="no-link" to={`/wallet/${coin}`}>
                                     <CoinWallet coin={this.state.coins[coin]} id={coin}/>
                                 </Link>

@@ -4,12 +4,10 @@ import {Card, CardContent, Hidden, Typography} from "@material-ui/core";
 import t from "../../lang/t";
 import {Skeleton} from "@material-ui/lab";
 import ColorButton from "../color-button/ColorButton";
+import {numberWithCommas} from "../../utils/tools";
 
 class CoinWallet extends React.Component {
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return nextProps.price !== this.props.price || nextProps.percent !== this.props.percent;
-    }
 
     deposit = (event) => {
         event.preventDefault();
@@ -42,16 +40,19 @@ class CoinWallet extends React.Component {
                         </div>
                     </div>
                     <div className='display-table-cell coin-wallet-count'>
-                        {this.props.coin.count ? this.props.coin.count : <Skeleton animation='wave'/>}
+                        {this.props.coin.balance !== undefined ? numberWithCommas(this.props.coin.balance) : <Skeleton animation='wave'/>}
                     </div>
+                    <Hidden xsDown>
+                        <div className='display-table-cell coin-wallet-address'>
+                            {this.props.coin.balance !== undefined ? this.props.coin.wallet : <Skeleton animation='wave'/>}
+                        </div>
+                    </Hidden>
                     <Hidden smDown>
                         <div className='display-table-cell coin-wallet-actions'>
                             <ColorButton color='error' className='coin-wallet-button' onClick={this.withdraw}
                                          variant='contained'>{t('withdraw')}</ColorButton>
                             <ColorButton color='success' className='coin-wallet-button' onClick={this.deposit}
                                          vvariant='contained'>{t('deposit')}</ColorButton>
-                            <ColorButton color='warning' className='coin-wallet-button' onClick={this.update}
-                                         vvariant='contained'>{t('update')}</ColorButton>
                             <ColorButton color='secondary' className='coin-wallet-button' onClick={this.market}
                                          vvariant='contained'>{t('market')}</ColorButton>
                         </div>

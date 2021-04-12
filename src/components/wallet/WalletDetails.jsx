@@ -50,11 +50,11 @@ class WalletDetails extends React.Component {
                             </ColorButton>
                         </div>
                         <Typography variant="h4" component='h2' gutterBottom>
-                            {t('walletOf', this.props.match.params.coinId === "toman" ?
+                            {t('walletOf', this.props.match.params.coinId === "irr" ?
                                 t('toman') : coins[this.props.match.params.coinId].name)}
                         </Typography>
                         <Typography>
-                            {t('yourBalance', this.state.balance, (this.props.match.params.coinId === "toman" ?
+                            {t('yourBalance', this.state.balance, (this.props.match.params.coinId === "irr" ?
                                 t('toman') : coins[this.props.match.params.coinId].name))}
                         </Typography>
                     </CardContent>

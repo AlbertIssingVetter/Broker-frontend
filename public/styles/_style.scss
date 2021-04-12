@@ -394,7 +394,7 @@ html, body, #root {
 
 .coin-wallet-actions {
   text-align: left;
-  min-width: rem(350px);
+  min-width: rem(260px);
 }
 
 .display-table {
@@ -402,8 +402,19 @@ html, body, #root {
 }
 
 .coin-wallet-count {
+  min-width: rem(100px);
+  text-align: center;
+
+  @media (max-width: 600px) {
+    min-width: 100% !important;
+    @include textAlignEnd();
+  }
+}
+
+.coin-wallet-address {
   width: 100% !important;
   text-align: center;
+  padding: 0 15px;
 }
 
 .coin-wallet-name {

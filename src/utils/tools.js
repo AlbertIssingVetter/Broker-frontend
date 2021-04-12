@@ -14,3 +14,8 @@ export const isInStandaloneMode = () => {
     }
     return ('standalone' in window.navigator) && (window.navigator.standalone);
 }
+
+export const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+

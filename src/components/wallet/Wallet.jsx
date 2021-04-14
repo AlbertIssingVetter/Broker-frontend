@@ -29,14 +29,12 @@ class Wallet extends React.Component {
             url: '/wallet',
             method: 'POST',
         }).then(res => {
+            let wallets = res.data.data;
             let coins = this.state.coins;
-            console.log(res.data);
-            res.data.forEach(wallet => {
-                if (wallet.coin in coins) {
-                    let coin = coins[wallet.coin];
-                    coin.wallet = wallet.wallet;
-                    coin.balance = wallet.balance;
-                }
+            Object.keys(coins).forEach(coinKey => {
+                console.log(coinKey);
+                coins[coinKey].address = wallets[coinKey].address;
+                coins[coinKey].balance = wallets[coinKey].balance;
             })
             this.setState({
                 coins: coins

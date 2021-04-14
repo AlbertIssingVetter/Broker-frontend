@@ -44,7 +44,7 @@ class CoinWallet extends React.Component {
                     </div>
                     <Hidden xsDown>
                         <div className='display-table-cell coin-wallet-address'>
-                            {this.props.coin.balance !== undefined ? this.props.coin.wallet : <Skeleton animation='wave'/>}
+                            {this.props.coin.balance !== undefined ? this.props.coin.address : <Skeleton animation='wave'/>}
                         </div>
                     </Hidden>
                     <Hidden smDown>

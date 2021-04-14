@@ -33,7 +33,7 @@ class WalletDetails extends React.Component {
                 wallet: this.props.match.params.coinId
             }
         }).then(res => {
-            this.setState({wallet: res.data.wallet})
+            this.setState({wallet: res.data.data.wallet})
         }).catch(err => {
             console.log(err);
         })
@@ -92,7 +92,7 @@ class WalletDetails extends React.Component {
                     <CardContent>
                         <Grid container spacing={3}>
                             {
-                                this.state.wallet !== null && this.state.wallet.walletAddress === null ? (
+                                this.state.wallet !== null && this.state.wallet.address === null ? (
                                     <Grid item xs={12}>
                                         <Typography variant="h4" component='h2' gutterBottom>{t('deposit')}</Typography>
                                         <Typography gutterBottom>{t('createWalletDescription')}</Typography>
@@ -109,13 +109,13 @@ class WalletDetails extends React.Component {
                                             {
                                                 this.state.wallet === null ? <Skeleton height={48} animation='wave'/> :
                                                     <Alert className='wallet-address' icon={false} severity='success'>
-                                                        {this.state.wallet.walletAddress}
+                                                        {this.state.wallet.address}
                                                     </Alert>
                                             }
                                         </Grid>
                                         <Grid className='qr-code' item xs={12} md={3}>
                                             {this.state.wallet === null ? <Skeleton width={128} height={128} animation='wave'/> :
-                                                <QRCode value={this.state.wallet.walletAddress} />}
+                                                <QRCode value={this.state.wallet.address} />}
                                         </Grid>
                                     </>
                                 )

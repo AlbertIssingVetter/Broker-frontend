@@ -98,7 +98,7 @@ const coins = {
         name: t('engineCoin'),
         icon: <EngineCoinIcon/>
     },
-    xrm: {
+    xmr: {
         name: t('monero'),
         icon: <MoneroIcon/>
     },

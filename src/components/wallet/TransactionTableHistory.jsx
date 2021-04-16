@@ -1,7 +1,7 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
-import t from "../../lang/t";
+import t, {getLang} from "../../lang/t";
 
 class TransactionTableHistory extends React.Component {
 
@@ -20,10 +20,13 @@ class TransactionTableHistory extends React.Component {
                     <TableBody>
                         {this.props.transactions.map((transaction) => (
                             <TableRow key={transaction.name}>
-                                <TableCell align="center" component="th" scope="row">{transaction.date}</TableCell>
+                                <TableCell align="center" component="th" scope="row">
+                                    {new Date(transaction.date * 1000)
+                                        .toLocaleString(getLang() === 'fa'? 'fa': 'en-US')}
+                                </TableCell>
                                 <TableCell align="center">{transaction.address}</TableCell>
-                                <TableCell align="center">{transaction.volume}</TableCell>
-                                <TableCell align="center">{transaction.description}</TableCell>
+                                <TableCell align="center">{transaction.amount}</TableCell>
+                                <TableCell align="center">{transaction.status}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

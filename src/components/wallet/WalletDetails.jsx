@@ -47,7 +47,13 @@ class WalletDetails extends React.Component {
                 wallet: this.props.match.params.coinId
             }
         }).then(res => {
-            this.setState({wallet: res.data.data.wallet})
+            this.setState({
+                wallet: res.data.data.wallet,
+                transactions: {
+                    deposit: res.data.data.deposit,
+                    withdraw: res.data.data.withdraw,
+                }
+            })
         }).catch(err => {
             console.log(err);
         })

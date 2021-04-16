@@ -163,6 +163,7 @@ const fa =  {
     monero: 'مونرو',
     webmoney: 'وب مانی',
     sushi: 'سوشی',
+    unknownError: 'خطای ناشناخته ای رخ داده است لطفا مجدد تلاش کنید.',
 }
 
 export default fa;

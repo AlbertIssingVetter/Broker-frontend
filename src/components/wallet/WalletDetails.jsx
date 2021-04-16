@@ -1,6 +1,17 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
-import {Button, Card, CardContent, Grid, Tab, Tabs, Typography} from "@material-ui/core";
+import {
+    Backdrop,
+    Button,
+    Card,
+    CardContent,
+    CircularProgress,
+    Grid,
+    Snackbar,
+    Tab,
+    Tabs,
+    Typography
+} from "@material-ui/core";
 import t from "../../lang/t";
 import coins from "../../utils/coins";
 import ColorButton from "../color-button/ColorButton";
@@ -10,12 +21,15 @@ import SwipeableViews from "react-swipeable-views";
 import TransactionTableHistory from "./TransactionTableHistory";
 import {Skeleton} from "@material-ui/lab";
 import axios from "axios";
+import {numberWithCommas} from "../../utils/tools";
 
 class WalletDetails extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            snackbarOpen: false,
+            loading: false,
             wallet: null,
             selectedTab: 0,
             transactions: {
@@ -52,6 +66,7 @@ class WalletDetails extends React.Component {
     }
 
     handleCreateWalletClick = () => {
+        this.setState({loading: true});
         axios({
             url: '/wallet/add',
             method: 'POST',
@@ -59,10 +74,33 @@ class WalletDetails extends React.Component {
                 wallet: this.props.match.params.coinId
             }
         }).then(res => {
-            console.log(res.data)
+            if (res.data.status) {
+                this.setState({
+                    loading: false,
+                    wallet: {
+                        ...this.state.wallet,
+                        address: res.data.wallet,
+                    }
+                });
+            } else {
+                this.snackbarMessage = res.data.error.message;
+                this.setState({
+                    loading: false,
+                    snackbarOpen: true,
+                });
+            }
         }).catch(err => {
+            this.snackbarMessage = t('unknownError');
+            this.setState({
+                loading: false,
+                snackbarOpen: true,
+            });
             console.log(err);
         })
+    }
+
+    handleSnackbarClose = () => {
+        this.setState({snackbarOpen: false});
     }
 
     render() {
@@ -83,8 +121,9 @@ class WalletDetails extends React.Component {
                                 t('toman') : coins[this.props.match.params.coinId].name)}
                         </Typography>
                         <Typography>
-                            {this.state.wallet !== null ? t('yourBalance', this.state.wallet.balance, (this.props.match.params.coinId === "irr" ?
-                                t('toman') : coins[this.props.match.params.coinId].name)) : <Skeleton animation='wave'/>}
+                            {this.state.wallet !== null ? t('yourBalance', numberWithCommas(this.state.wallet.balance), (this.props.match.params.coinId === "irr" ?
+                                t('toman') : coins[this.props.match.params.coinId].name)) :
+                                <Skeleton animation='wave'/>}
                         </Typography>
                     </CardContent>
                 </Card>
@@ -104,7 +143,8 @@ class WalletDetails extends React.Component {
                                 ) : (
                                     <>
                                         <Grid item xs={12} md={9}>
-                                            <Typography variant="h4" component='h2' gutterBottom>{t('deposit')}</Typography>
+                                            <Typography variant="h4" component='h2'
+                                                        gutterBottom>{t('deposit')}</Typography>
                                             <Typography gutterBottom>{t('depositDescription')}</Typography>
                                             {
                                                 this.state.wallet === null ? <Skeleton height={48} animation='wave'/> :
@@ -114,8 +154,9 @@ class WalletDetails extends React.Component {
                                             }
                                         </Grid>
                                         <Grid className='qr-code' item xs={12} md={3}>
-                                            {this.state.wallet === null ? <Skeleton width={128} height={128} animation='wave'/> :
-                                                <QRCode value={this.state.wallet.address} />}
+                                            {this.state.wallet === null ?
+                                                <Skeleton width={128} height={128} animation='wave'/> :
+                                                <QRCode value={this.state.wallet.address}/>}
                                         </Grid>
                                     </>
                                 )
@@ -129,8 +170,8 @@ class WalletDetails extends React.Component {
                             style={{direction: 'ltr'}}
                             value={this.state.selectedTab} variant='fullWidth'
                             indicatorColor="primary" textColor="primary" onChange={this.handleTabChange}>
-                            <Tab label={t('depositHistory')} />
-                            <Tab label={t('withdrawHistory')} />
+                            <Tab label={t('depositHistory')}/>
+                            <Tab label={t('withdrawHistory')}/>
                         </Tabs>
                         <SwipeableViews index={this.state.selectedTab} onChangeIndex={this.handleSwipeChange}
                                         enableMouseEvents>
@@ -139,6 +180,14 @@ class WalletDetails extends React.Component {
                         </SwipeableViews>
                     </CardContent>
                 </Card>
+                <Backdrop style={{zIndex: 1100}} open={this.state.loading}>
+                    <CircularProgress color="primary"/>
+                </Backdrop>
+                <Snackbar open={this.state.snackbarOpen} autoHideDuration={5000} onClose={this.handleSnackbarClose}>
+                    <Alert onClose={this.handleSnackbarClose} severity="error">
+                        {this.snackbarMessage}
+                    </Alert>
+                </Snackbar>
             </div>
         );
     }

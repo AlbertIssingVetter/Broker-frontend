@@ -52,9 +52,12 @@ class CoinWallet extends React.Component {
                             <ColorButton color='error' className='coin-wallet-button' onClick={this.withdraw}
                                          variant='contained'>{t('withdraw')}</ColorButton>
                             <ColorButton color='success' className='coin-wallet-button' onClick={this.deposit}
-                                         vvariant='contained'>{t('deposit')}</ColorButton>
-                            <ColorButton color='secondary' className='coin-wallet-button' onClick={this.market}
-                                         vvariant='contained'>{t('market')}</ColorButton>
+                                         variant='contained'>{t('deposit')}</ColorButton>
+                            {
+                                this.props.id !== 'irr' &&
+                                <ColorButton color='secondary' className='coin-wallet-button' onClick={this.market}
+                                             variant='contained'>{t('market')}</ColorButton>
+                            }
                         </div>
                     </Hidden>
                 </CardContent>

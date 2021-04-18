@@ -11,6 +11,7 @@ import Market from "../market/Market";
 import Withdraw from "../wallet/Withdraw";
 import WalletDetails from "../wallet/WalletDetails";
 import Setting from "../setting/Setting";
+import IRRWallet from "../wallet/IRRWallet";
 
 class Main extends React.Component {
 
@@ -72,6 +73,11 @@ class Main extends React.Component {
                 <Route path="/wallet/:coinId/withdraw">
                     <Container style={styles}>
                         <Withdraw/>
+                    </Container>
+                </Route>
+                <Route path="/wallet/irr">
+                    <Container style={styles}>
+                        <IRRWallet/>
                     </Container>
                 </Route>
                 <Route path="/wallet/:coinId">

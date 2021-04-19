@@ -33,7 +33,7 @@ self.addEventListener('fetch', e => {
             if (response) {
                 console.log('response found for ', e.request.url)
                 return response;
-            } else if (e.request.url.includes('/api/')) {
+            } else if (e.request.url.includes('/api/') || e.request.url.includes('sw.js')) {
                 console.log('response not found for ', e.request.url)
                 return fetch(e.request);
             } else {

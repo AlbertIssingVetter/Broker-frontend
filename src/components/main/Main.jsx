@@ -12,6 +12,8 @@ import Withdraw from "../wallet/Withdraw";
 import WalletDetails from "../wallet/WalletDetails";
 import Setting from "../setting/Setting";
 import IRRWallet from "../wallet/IRRWallet";
+import IRRDeposit from "../wallet/IRRDeposit";
+import IRRWithdraw from "../wallet/IRRWithdraw";
 
 class Main extends React.Component {
 
@@ -68,6 +70,16 @@ class Main extends React.Component {
                 <Route path="/profile">
                     <Container style={styles}>
                         <Profile/>
+                    </Container>
+                </Route>
+                <Route path="/wallet/irr/deposit">
+                    <Container style={styles}>
+                        <IRRDeposit/>
+                    </Container>
+                </Route>
+                <Route path="/wallet/irr/withdraw">
+                    <Container style={styles}>
+                        <IRRWithdraw/>
                     </Container>
                 </Route>
                 <Route path="/wallet/:coinId/withdraw">

@@ -44,5 +44,9 @@ export default function t(key, ...params) {
             return key;
         }
     }
-    return obj[key].format(...params);
+    try {
+        return obj[key].format(...params);
+    } catch (ignored) {
+        return obj[key];
+    }
 }

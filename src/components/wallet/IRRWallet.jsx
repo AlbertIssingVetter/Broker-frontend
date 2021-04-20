@@ -59,6 +59,10 @@ class IRRWallet extends React.Component {
         this.props.history.push(`/wallet/irr/withdraw`);
     }
 
+    handleDepositClick = () => {
+        this.props.history.push(`/wallet/irr/deposit`);
+    }
+
     handleTabChange = (event, index) => {
         this.setState({selectedTab: index});
     }
@@ -79,6 +83,9 @@ class IRRWallet extends React.Component {
                         <div className='actions'>
                             <ColorButton variant="contained" color="primary" onClick={this.props.history.goBack}>
                                 {t('back')}
+                            </ColorButton>
+                            <ColorButton variant="contained" color="error" onClick={this.handleDepositClick}>
+                                {t('deposit')}
                             </ColorButton>
                             <ColorButton variant="contained" color="success" onClick={this.handleWithdrawClick}>
                                 {t('withdraw')}

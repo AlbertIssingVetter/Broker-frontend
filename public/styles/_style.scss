@@ -575,3 +575,24 @@ html, body, #root {
 .direct-download:hover {
   background: #000000;
 }
+
+.irr-deposit {
+  margin-bottom: rem(12px);
+
+  .bank-card-selector {
+    width: 100%;
+    max-width: rem(250px);
+  }
+
+  .btn-add-card-number {
+    margin: rem(12px);
+  }
+
+  .actions {
+    margin-top: rem(12px);
+
+    button {
+      margin: 0 rem(10px) ;
+    }
+  }
+}

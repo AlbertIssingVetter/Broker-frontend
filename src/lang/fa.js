@@ -1,4 +1,4 @@
-import {CardContent, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import React from "react";
 
 const fa =  {
@@ -191,6 +191,24 @@ const fa =  {
     minIRRDeposit: 'مبلغ وارد شده شما کمتر از {0} تومان که حداقل میزان واریز ریالی می باشد، است.',
     maxIRRDeposit: 'مبلغ وارد شده شما بیش از {0} تومان که حداکثر میزان واریز ریالی می باشد، است.',
     alive: 'alive',
+    irrTransactionsStatus1: 'پرداخت انجام نشده است',
+    irrTransactionsStatus2: 'پرداخت ناموفق بوده است',
+    irrTransactionsStatus3: 'خطا رخ داده است',
+    irrTransactionsStatus4: 'بلوکه شده',
+    irrTransactionsStatus5: 'برگشت به پرداخت کننده',
+    irrTransactionsStatus6: 'برگشت خورده سیستمی',
+    irrTransactionsStatus7: 'انصراف از پرداخت',
+    irrTransactionsStatus8: 'به درگاه پرداخت منتقل شد',
+    irrTransactionsStatus10: 'در انتظار تایید پرداخت',
+    irrTransactionsStatus100: 'پرداخت تایید شده است',
+    irrTransactionsStatus101: 'پرداخت قبلا تایید شده است',
+    irrTransactionsStatus200: 'به دریافت کننده واریز شد',
+    acceptAndBack: 'تایید و بازگشت',
+    yourTrackCode: 'کد پیگیری شما {0}',
+    irrDepositSuccessDescription: 'پرداخت شما با موفقیت انجام شد برای تایید نهایی و بازگشت روی دکمه زیر کلیک کنید.',
+    paymentWaiting: 'درانتظار تایید',
+    paymentError: 'تراکنش ناموفق',
+    paymentSuccess: 'تایید شده',
 }
 
 export default fa;

@@ -20,6 +20,7 @@ import ForgetPasswordCode from "../login/ForgetPasswordCode";
 //findDOMNode is deprecated in StrictMode error can fixed with unstable_createMuiStrictModeTheme as createMuiTheme
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import IosInstallationGuide from "../install/IosInstallationGuide";
+import Callback from "../callback/Callback";
 
 export default class App extends React.Component {
 
@@ -84,6 +85,7 @@ export default class App extends React.Component {
                     <Switch>
                         <Route path="/login" component={Login}/>
                         <Route path="/signup" component={Signup}/>
+                        <Route path="/callback" component={Callback}/>
                         <Route path="/forget-password" component={ForgetPassword}/>
                         <Route path="/forget-password-code" component={ForgetPasswordCode}/>
                         <Route path="/ios-installation-guide">

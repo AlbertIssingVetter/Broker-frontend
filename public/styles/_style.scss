@@ -596,3 +596,14 @@ html, body, #root {
     }
   }
 }
+
+.callback {
+  margin-top: rem(12px);
+  .track-code {
+    margin: rem(10px);
+  }
+}
+
+.transaction-table-alert {
+  display: inline-block;
+}

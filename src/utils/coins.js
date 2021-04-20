@@ -20,6 +20,7 @@ import EngineCoinIcon from "../svg-icon/EngineCoinIcon";
 import MoneroIcon from "../svg-icon/MoneroIcon";
 import WebMoneyIcon from "../svg-icon/WebMoneyIcon";
 import SushiIcon from "../svg-icon/SushiIcon";
+import AliveIcon from "../svg-icon/AliveIcon";
 
 const coins = {
     btc: {
@@ -109,6 +110,10 @@ const coins = {
     sushi: {
         name: t('sushi'),
         icon: <SushiIcon/>
+    },
+    ali: {
+        name: t('alive'),
+        icon: <AliveIcon/>
     }
 }
 

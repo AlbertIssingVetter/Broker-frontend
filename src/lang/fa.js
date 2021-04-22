@@ -209,6 +209,11 @@ const fa =  {
     paymentWaiting: 'درانتظار تایید',
     paymentError: 'تراکنش ناموفق',
     paymentSuccess: 'تایید شده',
+    lastPrice: 'آخرین قیمت',
+    minPrice: 'حداقل قیمت',
+    maxPrice: 'حداکثر قیمت',
+    turnover: 'حجم روزانه',
+    compareToYesterday: 'نسبت به دیروز %{0}',
 }
 
 export default fa;

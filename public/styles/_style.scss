@@ -607,3 +607,14 @@ html, body, #root {
 .transaction-table-alert {
   display: inline-block;
 }
+
+.market {
+  .market-price {
+    display: inline-block;
+    margin: rem(10px);
+  }
+  .select-reference {
+    @include floatEnd;
+    direction: ltr;
+  }
+}

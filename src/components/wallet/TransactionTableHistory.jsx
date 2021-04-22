@@ -30,11 +30,13 @@ class TransactionTableHistory extends React.Component {
                                 <TableCell align="center">{numberWithCommas(transaction.amount)}</TableCell>
                                 <TableCell align="center">
                                     {
-                                        (transaction.status === 0 || transaction.status > 1) && (<Alert severity='warning'>{t('paymentWaiting')}</Alert>)
+                                        ((transaction.status === 0 || transaction.status > 1) && Date.now() - 240 * 60 < transaction.date)
+                                        && (<Alert severity='warning'>{t('paymentWaiting')}</Alert>)
                                     }
 
                                     {
-                                        transaction.status === -1 && (<Alert severity='error'>{t('paymentError')}</Alert>)
+                                        (transaction.status < 0 || ((transaction.status === 0 || transaction.status > 1) && Date.now() - 240 * 60 >= transaction.date))
+                                        && (<Alert severity='error'>{t('paymentError')}</Alert>)
                                     }
 
                                     {

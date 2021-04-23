@@ -604,5 +604,8 @@ html, body, #root {
   }
   .select-reference {
     @include floatEnd;
+    .MuiButtonBase-root {
+      width: rem(80px);
+    }
   }
 }

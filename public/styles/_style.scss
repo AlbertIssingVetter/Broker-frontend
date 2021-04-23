@@ -68,7 +68,7 @@ html, body, #root {
     }
 
     .language-selector {
-      padding-left: 2.7em;
+      @include paddingStart(40px);
     }
 
     transform: translateX(0);
@@ -219,17 +219,6 @@ html, body, #root {
 
 .float-end {
   @include floatEnd;
-}
-
-
-.MuiFormControl-root {
-  direction: ltr;
-}
-
-.rtl-input {
-  .MuiFormControl-root {
-    direction: inherit;
-  }
 }
 
 .profile-icon-drop-down {
@@ -615,6 +604,5 @@ html, body, #root {
   }
   .select-reference {
     @include floatEnd;
-    direction: ltr;
   }
 }

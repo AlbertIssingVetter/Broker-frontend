@@ -21,6 +21,7 @@ import ForgetPasswordCode from "../login/ForgetPasswordCode";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import IosInstallationGuide from "../install/IosInstallationGuide";
 import Callback from "../callback/Callback";
+import RTL from "../../RTL";
 
 export default class App extends React.Component {
 
@@ -76,28 +77,30 @@ export default class App extends React.Component {
         });
         return (
             <ThemeProvider theme={theme}>
-                <Router>
-                    <CssBaseline/>
-                    <Helmet>
-                        <link rel="stylesheet"
-                              href={getLang() === 'fa' ? '/style.rtl.css' : '/style.css'}/>
-                    </Helmet>
-                    <Switch>
-                        <Route path="/login" component={Login}/>
-                        <Route path="/signup" component={Signup}/>
-                        <Route path="/callback" component={Callback}/>
-                        <Route path="/forget-password" component={ForgetPassword}/>
-                        <Route path="/forget-password-code" component={ForgetPasswordCode}/>
-                        <Route path="/ios-installation-guide">
-                            <Container>
-                                <IosInstallationGuide/>
-                            </Container>
-                        </Route>
-                        <Route path="/">
-                            <Main toggleDarkMode={this.toggleDarkMode} getDarkMode={this.state.darkMode}/>
-                        </Route>
-                    </Switch>
-                </Router>
+                <RTL>
+                    <Router>
+                        <CssBaseline/>
+                        <Helmet>
+                            <link rel="stylesheet"
+                                  href={getLang() === 'fa' ? '/style.rtl.css' : '/style.css'}/>
+                        </Helmet>
+                        <Switch>
+                            <Route path="/login" component={Login}/>
+                            <Route path="/signup" component={Signup}/>
+                            <Route path="/callback" component={Callback}/>
+                            <Route path="/forget-password" component={ForgetPassword}/>
+                            <Route path="/forget-password-code" component={ForgetPasswordCode}/>
+                            <Route path="/ios-installation-guide">
+                                <Container>
+                                    <IosInstallationGuide/>
+                                </Container>
+                            </Route>
+                            <Route path="/">
+                                <Main toggleDarkMode={this.toggleDarkMode} getDarkMode={this.state.darkMode}/>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </RTL>
                 <Dialog open={this.state.netErrorDialog}>
                     <DialogTitle id="net-error-dialog-title">{t('networkErrorTitle')}</DialogTitle>
                     <DialogContent>

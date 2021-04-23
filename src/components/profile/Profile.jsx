@@ -530,7 +530,7 @@ class Profile extends React.Component {
     render() {
         return (
             <Grid container spacing={3} className='profile'>
-                <Grid style={{width: '100%'}} className='rtl-input' item sm={12} md={6}>
+                <Grid style={{width: '100%'}} item sm={12} md={6}>
                     <Card>
                         <CardContent>
                             <Typography className='header' variant="h4">{t('profile')}</Typography>
@@ -705,7 +705,7 @@ class Profile extends React.Component {
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid style={{width: '100%'}} className='rtl-input' item sm={12} md={6}>
+                <Grid style={{width: '100%'}} item sm={12} md={6}>
                     <Card>
                         <CardContent>
                             <Typography className='header' variant="h4">{t('furtherInformation')}</Typography>
@@ -788,7 +788,7 @@ class Profile extends React.Component {
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid style={{width: '100%'}} className='rtl-input' item sm={12}>
+                <Grid style={{width: '100%'}} item sm={12}>
                     <Card>
                         <CardContent>
                             <Typography className='header' variant="h4">{t('changePassword')}</Typography>

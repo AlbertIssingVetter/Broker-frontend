@@ -96,7 +96,7 @@ class Withdraw extends React.Component {
 
     render() {
         return (
-            <Grid container className="withdraw rtl-input">
+            <Grid container className="withdraw">
                 <Hidden smDown>
                     <Grid item md={2}/>
                 </Hidden>

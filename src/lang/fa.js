@@ -214,6 +214,8 @@ const fa =  {
     maxPrice: 'حداکثر قیمت',
     turnover: 'حجم روزانه',
     compareToYesterday: 'نسبت به دیروز %{0}',
+    sell: 'فروش',
+    buy: 'خرید',
 }
 
 export default fa;

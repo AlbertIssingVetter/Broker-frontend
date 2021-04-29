@@ -8,6 +8,7 @@ import axios from "axios";
 import t from "../../lang/t";
 import Alert from "@material-ui/lab/Alert";
 import Offers from "./Offers";
+import Trades from "./Trades";
 
 class Market extends React.Component {
 
@@ -168,6 +169,9 @@ class Market extends React.Component {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Offers offers={this.state.data.offers ? this.state.data.offers.sell : null} sell/>
+                </Grid>
+                <Grid item xs={12}>
+                    <Trades trades={this.state.data.trades}/>
                 </Grid>
                 <Snackbar open={this.state.snackbarOpen} autoHideDuration={5000} onClose={this.handleSnackbarClose}>
                     <Alert onClose={this.handleSnackbarClose} severity={this.snackbarType}>

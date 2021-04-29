@@ -228,6 +228,7 @@ const fa =  {
     addOfferSuccessfully: 'پیشنهاد شما با موفقیت ثبت شد.',
     yourReceipt: 'دریافتی شما:  {0} {1}',
     moreThanYourBalance: 'مقدار وارد شده بیشتر از موجودی شما می باشد.',
+    time: 'ساعت',
 }
 
 export default fa;

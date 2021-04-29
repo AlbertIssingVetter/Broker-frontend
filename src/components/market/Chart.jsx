@@ -4,6 +4,7 @@ import {createChart} from "lightweight-charts";
 import t from "../../lang/t";
 import {numberWithCommas} from "../../utils/tools";
 import {Alert, ToggleButton, ToggleButtonGroup} from "@material-ui/lab";
+import DepthContrast from "./DepthContrast";
 
 
 class Chart extends React.Component {
@@ -31,37 +32,46 @@ class Chart extends React.Component {
 
     render() {
         return (
-            <Card className='market'>
+            <Card className='chart'>
                 <CardContent>
-                    <ToggleButtonGroup onChange={this.props.handleChangeReference} exclusive
-                                       value={this.props.reference} className='select-reference'>
-                        <ToggleButton value="irr">
-                            {t('toman')}
-                        </ToggleButton>
-                        <ToggleButton value="usdt">
-                            {t('tether')}
-                        </ToggleButton>
-                    </ToggleButtonGroup>
-                    <div className='market-price'>
-                        <Alert icon={false} severity={this.props.price.percent < 0 ? 'error' : 'success'}>
-                            {t('compareToYesterday', this.props.price.percent)}
-                        </Alert>
-                    </div>
-                    <div className='market-price'>
-                        {t('lastPrice') + ' ' + numberWithCommas(this.props.price.last)}
-                    </div>
-                    <div className='market-price'>
-                        {t('minPrice') + ' '}
-                        <span style={{color: this.props.theme.palette.error.main}}>{numberWithCommas(this.props.price.min)}</span>
-                    </div>
-                    <div className='market-price'>
-                        {t('maxPrice') + ' '}
-                        <span style={{color: this.props.theme.palette.success.main}}>{numberWithCommas(this.props.price.max)}</span>
-                    </div>
-                    <div className='market-price'>
-                        {t('turnover') + ' ' + numberWithCommas(this.props.price.turnover)}
-                    </div>
+                    {
+                        this.props.price? (
+                            <>
+                                <ToggleButtonGroup onChange={this.props.handleChangeReference} exclusive
+                                                   value={this.props.reference} className='select-reference'>
+                                    <ToggleButton value="irr">
+                                        {t('toman')}
+                                    </ToggleButton>
+                                    <ToggleButton value="usdt">
+                                        {t('tether')}
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                                <div className='market-price'>
+                                    <Alert icon={false} severity={this.props.price ? (this.props.price.percent < 0 ? 'error' : 'success') : ''}>
+                                        {t('compareToYesterday', this.props.price? this.props.price.percent : 0)}
+                                    </Alert>
+                                </div>
+                                <div className='market-price'>
+                                    {t('lastPrice') + ' ' + numberWithCommas(this.props.price.last)}
+                                </div>
+                                <div className='market-price'>
+                                    {t('minPrice') + ' '}
+                                    <span style={{color: this.props.theme.palette.error.main}}>{numberWithCommas(this.props.price.min)}</span>
+                                </div>
+                                <div className='market-price'>
+                                    {t('maxPrice') + ' '}
+                                    <span style={{color: this.props.theme.palette.success.main}}>{numberWithCommas(this.props.price.max)}</span>
+                                </div>
+                                <div className='market-price'>
+                                    {t('turnover') + ' ' + numberWithCommas(this.props.price.turnover)}
+                                </div>
+                            </>
+                        ) : ''
+                    }
                     <div style={{direction: 'ltr'}} ref={this.chartRef}/>
+                    {
+                        this.props.depthContrast ? <DepthContrast depthContrast={this.props.depthContrast}/> : ''
+                    }
                 </CardContent>
             </Card>
         );

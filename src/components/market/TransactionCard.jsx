@@ -1,10 +1,10 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
-import TransactionTableHistory from "../wallet/TransactionTableHistory";
 import SwipeableViews from "react-swipeable-views";
 import {Card, CardContent, Tab, Tabs} from "@material-ui/core";
 import t from "../../lang/t";
 import TransactionForm from "./TransactionForm";
+import coins from "../../utils/coins";
 
 class TransactionCard extends React.Component {
 
@@ -28,16 +28,20 @@ class TransactionCard extends React.Component {
             <Card>
                 <CardContent>
                     <Tabs
-                        style={{direction: 'ltr'}}
                         value={this.state.selectedTab} variant='fullWidth'
                         indicatorColor="primary" textColor="primary" onChange={this.handleTabChange}>
                         <Tab label={t('sell')}/>
                         <Tab label={t('buy')}/>
                     </Tabs>
-                    <SwipeableViews index={this.state.selectedTab} onChangeIndex={this.handleSwipeChange}
-                                    enableMouseEvents>
-                        <TransactionForm/>
-                        <TransactionForm/>
+                    <SwipeableViews index={this.state.selectedTab} onChangeIndex={this.handleSwipeChange}>
+                        <TransactionForm sell name={coins[this.props.coin].name} coin={this.props.coin}
+                                         reference={this.props.reference === 'irr'? t('toman') : coins[this.props.reference].name}
+                                         data={this.props.transaction? this.props.transaction.coin : null}
+                                         handleTransactionResponse={this.props.handleTransactionResponse}/>
+                        <TransactionForm buy name={this.props.reference === 'irr'? t('toman') : coins[this.props.reference].name}
+                                         coin={this.props.coin} reference={coins[this.props.coin].name}
+                                         data={this.props.transaction? this.props.transaction.reference: null}
+                                         handleTransactionResponse={this.props.handleTransactionResponse}/>
                     </SwipeableViews>
                 </CardContent>
             </Card>

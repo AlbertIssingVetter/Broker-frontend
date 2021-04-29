@@ -1,8 +1,12 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
 import Chart from "./Chart";
-import {Grid} from "@material-ui/core";
+import {Grid, Snackbar} from "@material-ui/core";
 import TransactionCard from "./TransactionCard";
+import OpenOffer from "./OpenOffer";
+import axios from "axios";
+import t from "../../lang/t";
+import Alert from "@material-ui/lab/Alert";
 
 class Market extends React.Component {
 
@@ -10,28 +14,132 @@ class Market extends React.Component {
         super(props);
         this.state = {
             reference: localStorage.getItem('reference') ? localStorage.getItem('reference') : 'irr',
+            data: {},
+            loading: true,
         }
+        this.snackbarType='';
     }
+
+    handleDeleteOffer = id => {
+        let myOffers = this.state.data.myOffers.map(offer => {
+            if (offer.id === id) {
+                offer.deleting = true
+            }
+            return offer;
+        });
+        this.setState({
+            data: {
+                ...this.state.data,
+                myOffers,
+            }
+        })
+        axios({
+            url: '/offer/delete',
+            method: 'POST',
+            data: {
+                offerID: id,
+            }
+        }).then(res => {
+            if (res.data.status) {
+                let myOffers = this.state.data.myOffers.filter(offer => offer.id !== id);
+                this.snackbarMessage = t('openOfferSuccessfullyDelete');
+                this.snackbarType = 'success';
+                this.setState({
+                    data: {
+                        ...this.state.data,
+                        myOffers,
+                    },
+                    snackbarOpen: true
+                })
+            } else {
+                this.snackbarMessage = res.data.error.message;
+                this.handleDeleteOfferError(id);
+            }
+        }).catch(err => {
+            this.snackbarMessage = t('unknownError');
+            this.handleDeleteOfferError(id);
+        })
+    }
+
+    handleDeleteOfferError = id => {
+        this.snackbarType = 'error';
+        let myOffers = this.state.data.myOffers.map(offer => {
+            if (offer.id === id) {
+                offer.deleting = false
+            }
+            return offer;
+        });
+        this.setState({
+            data: {
+                ...this.state.data,
+                myOffers,
+            },
+            snackbarOpen: true
+        });
+    }
+
+    handleSnackbarClose = () => {
+        this.setState({snackbarOpen: false});
+    }
+
+    componentDidMount() {
+        this.setState({loading: true});
+        this.getMarketDate();
+        this.getMarketDataInterval = setInterval(this.getMarketDate, 5000);
+    }
+
+
+
+    componentWillUnmount() {
+        clearInterval(this.getMarketDataInterval);
+    }
+
+    getMarketDate = () => {
+        axios({
+            url: '/market',
+            method: 'POST',
+            data: {
+                coin: this.props.match.params.marketId,
+                reference: this.state.reference,
+            }
+        }).then(res => {
+            this.setState({loading: false});
+            if (res.data.status) {
+                this.setState({
+                    data: res.data.data
+                })
+            } else {
+                console.log('error')
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    handleTransactionResponse = (title, type) => {
+        this.snackbarMessage = title;
+        this.snackbarType = type;
+        this.setState({
+            snackbarOpen: true
+        });
+        this.getMarketDate();
+    }
+
 
     handleChangeReference = (event, reference) => {
         if (reference) {
-            this.setState({reference})
+            this.setState({reference,loading: true});
             localStorage.setItem('reference', reference);
+            this.getMarketDate();
         }
     }
 
     render() {
         return (
-            <Grid container spacing={3}>
+            <Grid container className={this.state.loading ? 'market-loading' : ''} spacing={3}>
                 <Grid item xs={12}>
-                    {this.props.match.params.marketId}
-                    <Chart handleChangeReference={this.handleChangeReference} reference={this.state.reference} price={{
-                        percent: 10,
-                        last: 20,
-                        min: 17,
-                        max: 23,
-                        turnover: 10000,
-                    }} chartData={[
+                    <Chart handleChangeReference={this.handleChangeReference} reference={this.state.reference}
+                           depthContrast={this.state.data.depthContrast} price={this.state.data.price} chartData={[
                         {time: '2018-12-19', open: 141.77, high: 170.39, low: 120.25, close: 145.72},
                         {time: '2018-12-20', open: 145.72, high: 147.99, low: 100.11, close: 108.19},
                         {time: '2018-12-21', open: 108.19, high: 118.43, low: 74.22, close: 75.16},
@@ -48,8 +156,17 @@ class Market extends React.Component {
                     ]}/>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <TransactionCard/>
+                    <TransactionCard coin={this.props.match.params.marketId} handleTransactionResponse={this.handleTransactionResponse}
+                                     reference={this.state.reference} transaction={this.state.data.transaction}/>
                 </Grid>
+                <Grid item xs={12} md={6}>
+                    <OpenOffer handleDeleteOffer={this.handleDeleteOffer} myOffers={this.state.data.myOffers}/>
+                </Grid>
+                <Snackbar open={this.state.snackbarOpen} autoHideDuration={5000} onClose={this.handleSnackbarClose}>
+                    <Alert onClose={this.handleSnackbarClose} severity={this.snackbarType}>
+                        {this.snackbarMessage}
+                    </Alert>
+                </Snackbar>
             </Grid>
         );
     }

@@ -216,6 +216,18 @@ const fa =  {
     compareToYesterday: 'نسبت به دیروز %{0}',
     sell: 'فروش',
     buy: 'خرید',
+    bestOffer: 'بهترین پیشنهاد: {0} {1}',
+    openOffer: 'سفارشات باز',
+    totalPrice: 'مبلغ کل',
+    coinAmount: 'مقدار ارز',
+    unitPrice: 'قیمت واحد',
+    coin: 'ارز',
+    actions: 'اقدامات',
+    filled: 'پر شده',
+    openOfferSuccessfullyDelete: 'پیشنهاد شما با موفقیت حذف شد',
+    addOfferSuccessfully: 'پیشنهاد شما با موفقیت ثبت شد.',
+    yourReceipt: 'دریافتی شما:  {0} {1}',
+    moreThanYourBalance: 'مقدار وارد شده بیشتر از موجودی شما می باشد.',
 }
 
 export default fa;

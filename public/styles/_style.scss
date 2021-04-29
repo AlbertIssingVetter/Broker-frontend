@@ -597,7 +597,7 @@ html, body, #root {
   display: inline-block;
 }
 
-.market {
+.chart {
   .market-price {
     display: inline-block;
     margin: rem(10px);
@@ -607,5 +607,36 @@ html, body, #root {
     .MuiButtonBase-root {
       width: rem(80px);
     }
+  }
+}
+
+.market-loading {
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+}
+
+.transaction-form {
+  .grid {
+    margin: rem(16px) 0;
+    .MuiFormControl-root {
+      width: 100%;
+    }
+  }
+  .your-balance {
+    margin: rem(16px) rem(23px);
+  }
+  .btn-select {
+    margin: 0 rem(16px) ;
+  }
+  .receivedAmount {
+    font-size: rem(11px);
+  }
+}
+
+.open-offer {
+  height: rem(515.75px);
+  .deleting {
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
   }
 }

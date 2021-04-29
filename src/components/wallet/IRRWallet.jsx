@@ -103,7 +103,6 @@ class IRRWallet extends React.Component {
                 <Card>
                     <CardContent>
                         <Tabs
-                            style={{direction: 'ltr'}}
                             value={this.state.selectedTab} variant='fullWidth'
                             indicatorColor="primary" textColor="primary" onChange={this.handleTabChange}>
                             <Tab label={t('depositHistory')}/>

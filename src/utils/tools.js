@@ -17,6 +17,8 @@ export const isInStandaloneMode = () => {
 
 export const numberWithCommas = (x) => {
     x = Number(x);
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const a = x.toString().split('.');
+    a[0] = a[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return a.join('.')
 }
 

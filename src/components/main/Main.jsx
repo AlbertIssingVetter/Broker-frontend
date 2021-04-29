@@ -104,7 +104,7 @@ class Main extends React.Component {
                 </Route>
                 <Route path="/market/:marketId">
                     <Container style={styles}>
-                        <Market/>
+                        <Market getDarkMode={this.props.getDarkMode}/>
                     </Container>
                 </Route>
                 <Route path="/setting">

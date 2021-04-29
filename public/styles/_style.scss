@@ -598,6 +598,9 @@ html, body, #root {
 }
 
 .chart {
+  .MuiCardContent-root {
+    height: 400px;
+  }
   .market-price {
     display: inline-block;
     margin: rem(10px);

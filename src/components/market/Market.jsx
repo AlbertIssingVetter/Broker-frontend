@@ -141,6 +141,7 @@ class Market extends React.Component {
             <Grid container className={this.state.loading ? 'market-loading' : ''} spacing={3}>
                 <Grid item xs={12}>
                     <Chart handleChangeReference={this.handleChangeReference} reference={this.state.reference}
+                           getDarkMode={this.props.getDarkMode} coin={this.props.match.params.marketId}
                            depthContrast={this.state.data.depthContrast} price={this.state.data.price} chartData={[
                         {time: '2018-12-19', open: 141.77, high: 170.39, low: 120.25, close: 145.72},
                         {time: '2018-12-20', open: 145.72, high: 147.99, low: 100.11, close: 108.19},

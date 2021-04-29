@@ -32,7 +32,6 @@ class Wallet extends React.Component {
             let wallets = res.data.data;
             let coins = this.state.coins;
             Object.keys(coins).forEach(coinKey => {
-                console.log(coinKey);
                 coins[coinKey].address = wallets[coinKey].address;
                 coins[coinKey].balance = wallets[coinKey].balance;
             })

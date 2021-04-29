@@ -10,7 +10,7 @@ class DepthContrast extends React.Component {
         const sellWidth = this.props.depthContrast.sell * 100 / total;
         const buyWidth = this.props.depthContrast.buy * 100 / total;
         return (
-            <div style={{margin: '10px 10px 10px 0'}}>
+            <div style={{margin: '10px 0'}}>
                 <div >
                     <div style={{
                         height: '7px',

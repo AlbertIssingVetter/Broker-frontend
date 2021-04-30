@@ -33,7 +33,7 @@ self.addEventListener('fetch', e => {
             if (response) {
                 console.log('response found for ', e.request.url)
                 return response;
-            } else if (e.request.url.includes('/api/') || e.request.url.includes('sw.js') || e.request.url.includes('tradingview.com') || e.request.url.includes('/admin')) {
+            } else if (e.request.url.includes('/api/') || e.request.url.includes('/dark-style') || e.request.url.includes('sw.js') || e.request.url.includes('tradingview.com') || e.request.url.includes('/admin')) {
                 console.log('response not found for ', e.request.url)
                 return fetch(e.request);
             } else {

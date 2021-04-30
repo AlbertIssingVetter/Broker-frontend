@@ -14,6 +14,7 @@ import Setting from "../setting/Setting";
 import IRRWallet from "../wallet/IRRWallet";
 import IRRDeposit from "../wallet/IRRDeposit";
 import IRRWithdraw from "../wallet/IRRWithdraw";
+import History from "../history/History";
 
 class Main extends React.Component {
 
@@ -105,6 +106,11 @@ class Main extends React.Component {
                 <Route path="/market/:marketId">
                     <Container style={styles}>
                         <Market getDarkMode={this.props.getDarkMode}/>
+                    </Container>
+                </Route>
+                <Route path="/history">
+                    <Container style={styles}>
+                        <History/>
                     </Container>
                 </Route>
                 <Route path="/setting">

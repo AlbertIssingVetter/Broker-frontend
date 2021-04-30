@@ -643,3 +643,13 @@ html, body, #root {
     -webkit-filter: blur(3px);
   }
 }
+
+.history-filter {
+  @include floatEnd;
+  .select-reference {
+    margin: 0 10px 0 0;
+    .MuiButtonBase-root {
+      width: rem(80px);
+    }
+  }
+}

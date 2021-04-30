@@ -22,6 +22,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import MarketSidebar from "./MarketSidebar";
 import DarkModeSelector from "../dark-mode-selector/DarkModeSelector";
+import HistoryIcon from '@material-ui/icons/History';
 
 class Sidebar extends React.Component {
 
@@ -84,6 +85,16 @@ class Sidebar extends React.Component {
                         </Link>
                     </List>
                     <MarketSidebar handleDrawerClose={this.props.handleDrawerClose} width={this.props.width}/>
+                    <List>
+                        <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='no-link' to='/history'>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <HistoryIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary={t('history')}/>
+                            </ListItem>
+                        </Link>
+                    </List>
                     <List>
                         <Link onClick={this.props.width === 'xs' ? this.props.handleDrawerClose : null} className='no-link' to='/setting'>
                             <ListItem button>

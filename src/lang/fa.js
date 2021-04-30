@@ -229,6 +229,17 @@ const fa =  {
     yourReceipt: 'دریافتی شما:  {0} {1}',
     moreThanYourBalance: 'مقدار وارد شده بیشتر از موجودی شما می باشد.',
     time: 'ساعت',
+    history: 'تاریخچه',
+    averagePrice: 'میانگین قیمت تمام شده',
+    amount: 'مقدار',
+    fee: 'کارمزد',
+    type: 'نوع',
+    cancelled: 'کنسل شده',
+    waiting: 'در حال معامله',
+    finished: 'تمام شده',
+    rowsPerPage: 'تعداد رکورد در صفحه',
+    labelDisplayedRows: '{0}-{1} از {2}',
+    all: 'همه',
 }
 
 export default fa;

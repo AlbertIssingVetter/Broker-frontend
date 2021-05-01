@@ -240,6 +240,8 @@ const fa =  {
     rowsPerPage: 'تعداد رکورد در صفحه',
     labelDisplayedRows: '{0}-{1} از {2}',
     all: 'همه',
+    moreThanMax: 'بیشتر از ماکسیمم مقدار معامله',
+    lessThanMin: 'کمتر از مینیمم مقدار معامله',
 }
 
 export default fa;

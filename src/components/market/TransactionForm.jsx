@@ -129,28 +129,27 @@ class TransactionForm extends React.Component {
 
     handleBoundary = (price) => {
         if (!price) return false;
-        if (price > this.props.data.balance) {
-            this.props.handleTransactionResponse(t('moreThanYourBalance'), 'error');
-            return false;
-        } else if (price > this.props.data.max) {
+         if (price > this.props.data.max) {
             this.props.handleTransactionResponse(t('moreThanMax'), 'error');
             return false;
         } else if (price < this.props.data.min) {
             this.props.handleTransactionResponse(t('lessThanMin'), 'error');
             return false;
-        }
+        } else {
+             if (this.props.sell && price > this.props.data.balance) {
+                 this.props.handleTransactionResponse(t('moreThanYourBalance'), 'error');
+                 return false;
+             } else if (this.props.buy && this.state.totalPrice > this.props.data.balance) {
+                 this.props.handleTransactionResponse(t('moreThanYourBalance'), 'error');
+                 return false;
+             }
+         }
         return true;
     }
 
     handleAddOffer = type => {
-        if (this.props.buy) {
-            if(!this.handleBoundary(this.state.totalPrice)) {
-                return;
-            }
-        } else {
-            if(!this.handleBoundary(this.state.amount)) {
-                return;
-            }
+        if (!this.handleBoundary(this.state.amount)) {
+            return;
         }
         axios({
             url: '/offer/add',

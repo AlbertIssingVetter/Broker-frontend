@@ -21,7 +21,7 @@ class Trades extends React.Component {
                     <TableBody>
                         {this.props.trades && this.props.trades.map((row) => (
                             <TableRow key={row.price}>
-                                <TableCell align='center'>{numberWithCommas(row.date)}</TableCell>
+                                <TableCell align='center'>{new Date(row.date).getHours() + ':' + new Date(row.date).getMinutes()}</TableCell>
                                 <TableCell align='center'>{numberWithCommas(row.price)}</TableCell>
                                 <TableCell align='center'>{numberWithCommas(row.volume)}</TableCell>
                                 <TableCell align='center'>{numberWithCommas(row.price * row.volume)}</TableCell>

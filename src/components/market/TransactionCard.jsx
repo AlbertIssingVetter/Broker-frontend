@@ -34,12 +34,12 @@ class TransactionCard extends React.Component {
                         <Tab label={t('buy')}/>
                     </Tabs>
                     <SwipeableViews index={this.state.selectedTab} onChangeIndex={this.handleSwipeChange}>
-                        <TransactionForm sell name={coins[this.props.coin].name} coin={this.props.coin}
-                                         reference={this.props.reference === 'irr'? t('toman') : coins[this.props.reference].name}
+                        <TransactionForm sell name={coins[this.props.coin].name} coin={this.props.coin} reference={this.props.reference}
+                                         referenceName={this.props.reference === 'irr'? t('toman') : coins[this.props.reference].name}
                                          data={this.props.transaction? this.props.transaction.coin : null}
                                          handleTransactionResponse={this.props.handleTransactionResponse}/>
                         <TransactionForm buy name={this.props.reference === 'irr'? t('toman') : coins[this.props.reference].name}
-                                         coin={this.props.coin} reference={coins[this.props.coin].name}
+                                         coin={this.props.coin} referenceName={coins[this.props.coin].name} reference={this.props.reference}
                                          data={this.props.transaction? this.props.transaction.reference: null}
                                          handleTransactionResponse={this.props.handleTransactionResponse}/>
                     </SwipeableViews>

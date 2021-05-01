@@ -219,9 +219,9 @@ class TransactionForm extends React.Component {
                     <Typography color='textSecondary' className='receivedAmount'>
                         {this.props.buy ?
                             t('yourReceipt', this.state.amount ?
-                                (this.state.amount - (this.state.amount * Number(this.props.data.fee))) : 0, this.props.reference) :
+                                (this.state.amount - (this.state.amount * Number(this.props.data.fee))) : 0, this.props.referenceName) :
                             t('yourReceipt', this.state.totalPrice ?
-                                (this.state.totalPrice - (this.state.totalPrice * Number(this.props.data.fee))) : 0, this.props.reference)
+                                (this.state.totalPrice - (this.state.totalPrice * Number(this.props.data.fee))) : 0, this.props.referenceName)
                         }
                     </Typography>
                 </Grid>

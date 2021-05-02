@@ -38,18 +38,9 @@ class Chart extends React.Component {
                     {
                         this.props.price? (
                             <>
-                                <ToggleButtonGroup onChange={this.props.handleChangeReference} exclusive
-                                                   value={this.props.reference} className='select-reference'>
-                                    <ToggleButton value="irr">
-                                        {t('toman')}
-                                    </ToggleButton>
-                                    <ToggleButton value="usdt">
-                                        {t('tether')}
-                                    </ToggleButton>
-                                </ToggleButtonGroup>
                                 <div className='market-price'>
                                     <Alert icon={false} severity={this.props.price ? (this.props.price.percent < 0 ? 'error' : 'success') : ''}>
-                                        {t('compareToYesterday', this.props.price? this.props.price.percent : 0)}
+                                        {t('compareToYesterday', this.props.price? Math.round(this.props.price.percent*100)/100 : 0)}
                                     </Alert>
                                 </div>
                                 <div className='market-price'>

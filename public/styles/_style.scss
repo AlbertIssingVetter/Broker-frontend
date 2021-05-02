@@ -609,6 +609,9 @@ html, body, #root {
     display: inline-block;
     margin: rem(10px);
   }
+}
+
+.market {
   .select-reference {
     @include floatEnd;
     .MuiButtonBase-root {

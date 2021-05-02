@@ -58,7 +58,7 @@ class ColorButton extends React.Component {
 
     render() {
         return (
-            <Button variant={this.props.variant} onClick={this.props.onClick}
+            <Button disabled={this.props.disabled} variant={this.props.variant} onClick={this.props.onClick}
                     className={`${this.props.classes[this.props.color]} ${this.props.className}`}>
                 {this.props.children}
             </Button>

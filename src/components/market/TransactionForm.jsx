@@ -16,6 +16,7 @@ class TransactionForm extends React.Component {
             unitPrice: '',
             amount: '',
             snackbarOpen: true,
+            loading: false,
         }
         this.snackbarType = 'error';
     }
@@ -151,6 +152,7 @@ class TransactionForm extends React.Component {
         if (!this.handleBoundary(this.state.amount)) {
             return;
         }
+        this.setState({loading: true})
         axios({
             url: '/offer/add',
             method: 'POST',
@@ -168,11 +170,18 @@ class TransactionForm extends React.Component {
                     unitPrice: '',
                     totalPrice: '',
                     amount: '',
+                    loading: false,
                 })
             } else {
+                this.setState({
+                    loading: false,
+                })
                 this.props.handleTransactionResponse(res.data.error.message, 'error');
             }
         }).catch(err => {
+            this.setState({
+                loading: false,
+            })
             this.props.handleTransactionResponse(t('unknownError'), 'error');
         })
     }
@@ -229,9 +238,9 @@ class TransactionForm extends React.Component {
                 <Grid className='grid your-balance' item xs={12}>
                     {
                         this.props.buy ?
-                            (<ColorButton onClick={this.handleBuyClick} className='float-end'
+                            (<ColorButton disabled={this.state.loading} onClick={this.handleBuyClick} className='float-end'
                                           color='success'>{t('buy')}</ColorButton>) :
-                            (<ColorButton onClick={this.handleSellClick} className='float-end'
+                            (<ColorButton disabled={this.state.loading} onClick={this.handleSellClick} className='float-end'
                                           color='error'>{t('sell')}</ColorButton>)
                     }
                 </Grid>

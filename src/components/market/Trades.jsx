@@ -1,7 +1,7 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
 import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
-import t from "../../lang/t";
+import t, {getLang} from "../../lang/t";
 import {numberWithCommas} from "../../utils/tools";
 
 class Trades extends React.Component {
@@ -21,7 +21,7 @@ class Trades extends React.Component {
                     <TableBody>
                         {this.props.trades && this.props.trades.map((row) => (
                             <TableRow key={row.price}>
-                                <TableCell align='center'>{new Date(row.date).getHours() + ':' + new Date(row.date).getMinutes()}</TableCell>
+                                <TableCell align='center'>{new Date(row.time).getHours() + ':' + new Date(row.time).getMinutes()}</TableCell>
                                 <TableCell align='center'>{numberWithCommas(row.price)}</TableCell>
                                 <TableCell align='center'>{numberWithCommas(row.volume)}</TableCell>
                                 <TableCell align='center'>{numberWithCommas(row.price * row.volume)}</TableCell>

@@ -547,8 +547,8 @@ class Profile extends React.Component {
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
-                                                                onClick={this.state.user.mailVerify ? null : this.handleMailVerificationClick}>
-                                                                {this.state.user.mailVerify ?
+                                                                onClick={Number(this.state.user.mailVerify) ? null : this.handleMailVerificationClick}>
+                                                                {Number(this.state.user.mailVerify) ?
                                                                     <Tooltip title={t('verified')}>
                                                                         <CheckCircleIcon
                                                                             style={{color: this.props.theme.palette.success.main}}/>
@@ -682,8 +682,8 @@ class Profile extends React.Component {
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
-                                                                onClick={this.state.user.mobVerify ? null : this.handleMobileVerificationClick}>
-                                                                {this.state.user.mobVerify ?
+                                                                onClick={Number(this.state.user.mobVerify) ? null : this.handleMobileVerificationClick}>
+                                                                {Number(this.state.user.mobVerify) ?
                                                                     <Tooltip title={t('verified')}>
                                                                         <CheckCircleIcon
                                                                             style={{color: this.props.theme.palette.success.main}}/>
@@ -746,8 +746,8 @@ class Profile extends React.Component {
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
-                                                                onClick={this.state.user.telVerify ? null : this.handleTelephoneVerificationClick}>
-                                                                {this.state.user.telVerify ?
+                                                                onClick={Number(this.state.user.telVerify) ? null : this.handleTelephoneVerificationClick}>
+                                                                {Number(this.state.user.telVerify) ?
                                                                     <Tooltip title={t('verified')}>
                                                                         <CheckCircleIcon
                                                                             style={{color: this.props.theme.palette.success.main}}/>

@@ -77,30 +77,32 @@ export default class App extends React.Component {
         });
         return (
             <ThemeProvider theme={theme}>
-                <RTL>
-                    <Router>
-                        <CssBaseline/>
-                        <Helmet>
-                            <link rel="stylesheet"
-                                  href={getLang() === 'fa' ? '/style.rtl.css' : '/style.css'}/>
-                        </Helmet>
-                        <Switch>
-                            <Route path="/login" component={Login}/>
-                            <Route path="/signup" component={Signup}/>
-                            <Route path="/callback" component={Callback}/>
-                            <Route path="/forget-password" component={ForgetPassword}/>
-                            <Route path="/forget-password-code" component={ForgetPasswordCode}/>
-                            <Route path="/ios-installation-guide">
-                                <Container>
-                                    <IosInstallationGuide/>
-                                </Container>
-                            </Route>
-                            <Route path="/">
-                                <Main toggleDarkMode={this.toggleDarkMode} getDarkMode={this.state.darkMode}/>
-                            </Route>
-                        </Switch>
-                    </Router>
-                </RTL>
+                <div  style={this.state.darkMode ? {"scrollbar-color": '#424242 #303030'}: {}}>
+                    <RTL>
+                        <Router>
+                            <CssBaseline/>
+                            <Helmet>
+                                <link rel="stylesheet"
+                                      href={getLang() === 'fa' ? '/style.rtl.css' : '/style.css'}/>
+                            </Helmet>
+                            <Switch>
+                                <Route path="/login" component={Login}/>
+                                <Route path="/signup" component={Signup}/>
+                                <Route path="/callback" component={Callback}/>
+                                <Route path="/forget-password" component={ForgetPassword}/>
+                                <Route path="/forget-password-code" component={ForgetPasswordCode}/>
+                                <Route path="/ios-installation-guide">
+                                    <Container>
+                                        <IosInstallationGuide/>
+                                    </Container>
+                                </Route>
+                                <Route path="/">
+                                    <Main toggleDarkMode={this.toggleDarkMode} getDarkMode={this.state.darkMode}/>
+                                </Route>
+                            </Switch>
+                        </Router>
+                    </RTL>
+                </div>
                 <Dialog open={this.state.netErrorDialog}>
                     <DialogTitle id="net-error-dialog-title">{t('networkErrorTitle')}</DialogTitle>
                     <DialogContent>

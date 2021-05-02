@@ -1,6 +1,6 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
-import {Card, CardContent, Typography} from "@material-ui/core";
+import {ButtonBase, Card, CardContent, Typography} from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
 import t from "../../lang/t";
 import {Skeleton} from "@material-ui/lab";
@@ -11,9 +11,13 @@ class CoinCard extends React.Component {
         return nextProps.price !== this.props.price || nextProps.percent !== this.props.percent;
     }
 
+    handleClick = () => {
+        this.props.history.push('/market/' + this.props.coinSymbol);
+    }
+
     render() {
         return (
-            <div className='coin-card'>
+            <ButtonBase onClick={this.handleClick} className='coin-card'>
                 <Card >
                     <CardContent>
                         <this.props.coin.icon.type className='coin-card-icon'/>
@@ -31,7 +35,7 @@ class CoinCard extends React.Component {
                         </div>
                     </CardContent>
                 </Card>
-            </div>
+            </ButtonBase>
         );
     }
 }

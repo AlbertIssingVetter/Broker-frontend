@@ -1,26 +1,32 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
 import {Grid} from "@material-ui/core";
-import CoinCard from "../coin-card/CoinCard";
 import coins from "../../utils/coins";
+import YourWallet from "./YourWallet";
+import AccountStatus from "./AccountStatus";
+import DashboardCoins from "./DashboardCoins";
 
 class Dashboard extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            coins
+            coins,
+            selected: 'btc'
         }
     }
 
     render() {
         return (
             <Grid container spacing={3}>
-                {Object.keys(this.state.coins).map(coin => (
-                    <Grid key={coin} item id={coin} xs={12} sm={6} lg={3}>
-                        <CoinCard coin={this.state.coins[coin]}/>
-                    </Grid>
-                ))}
+                <DashboardCoins/>
+                <Grid item xs={12} md={6}>
+                    <YourWallet/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <AccountStatus/>
+                </Grid>
+
             </Grid>
         );
     }

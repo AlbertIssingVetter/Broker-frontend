@@ -242,6 +242,14 @@ const fa =  {
     all: 'همه',
     moreThanMax: 'بیشتر از ماکسیمم مقدار معامله',
     lessThanMin: 'کمتر از مینیمم مقدار معامله',
+    yourWallet: 'کیف شما',
+    accountStatus: 'وضعیت حساب کاربری',
+    accountLevel: 'سطح کاربری',
+    dailyIRRWithdraw: 'برداشت روزانه ریال',
+    dailyCoinWithdraw: 'برداشت روزانه رمزارز',
+    dailyTotalWithdraw: 'مجموع برداشت روزانه',
+    monthWithdraw: 'مجموع برداشت ماهانه',
+    xFromMaxWithdraw: '{0} از {1} تومان'
 }
 
 export default fa;

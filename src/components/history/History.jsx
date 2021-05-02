@@ -67,6 +67,7 @@ class History extends React.Component {
                     const history = {
                         ...offer[0],
                         fee: 0,
+                        totalPrice: 0,
                     }
                     delete history.coinVolume;
                     delete history.referenceVolume;
@@ -74,9 +75,12 @@ class History extends React.Component {
                     delete history.referenceFee;
                     delete history.transactionsPrice;
                     offer.forEach(transaction => {
-                        history.fee += history.type === "0" ?  transaction.referenceFee : transaction.coinFee;
-                        history.totalPrice += (transaction.coinVolume * transaction.transactionPrice);
+                        history.fee += history.type === "0" ?
+                            Number(transaction.referenceFee) * Number(transaction.referenceVolume) :
+                            Number(transaction.coinFee) * Number(transaction.coinVolume);
+                        history.totalPrice += (Number(transaction.coinVolume) * Number(transaction.transactionsPrice));
                     })
+                    console.log(history)
                     histories.push(history);
                 })
                 this.setState({

@@ -203,7 +203,8 @@ class TransactionForm extends React.Component {
                     </Typography>
                     <Slider marks valueLabelDisplay="auto" step={10}
                             value={this.props.data ? (
-                                this.props.buy ? this.state.totalPrice * 100 / this.props.data.balance : this.state.amount * 100 / this.props.data.balance
+                                this.props.buy ? Math.round(this.state.totalPrice * 100 / this.props.data.balance) :
+                                    Math.round(this.state.amount * 100 / this.props.data.balance)
                             ) : 0}
                             onChange={this.handleTotalPriceSliderChange}/>
                 </Grid>

@@ -62,7 +62,7 @@ class Chart extends React.Component {
                     }
                     <div style={{direction: 'ltr'}} ref={this.chartRef}/>
                     <TradingViewWidget
-                        symbol={`BINANCE:${this.props.coin}USDT`}
+                        symbol={`BINANCE:${this.props.coin === 'ali' ? 'ETH' : this.props.coin}USDT`}
                         theme={this.props.getDarkMode ? Themes.DARK : Themes.LIGHT}
                         locale="fa_IR"
                         autosize

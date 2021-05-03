@@ -100,6 +100,9 @@ class Market extends React.Component {
     }
 
     getMarketDate = () => {
+        if (this.props.match.params.marketId === this.state.reference) {
+            this.handleChangeReference(null, 'irr');
+        }
         axios({
             url: '/market',
             method: 'POST',
@@ -147,7 +150,7 @@ class Market extends React.Component {
                     <ToggleButton value="irr">
                         {t('toman')}
                     </ToggleButton>
-                    <ToggleButton value="usdt">
+                    <ToggleButton disabled={this.props.match.params.marketId === 'usdt'} value="usdt">
                         {t('tether')}
                     </ToggleButton>
                 </ToggleButtonGroup>

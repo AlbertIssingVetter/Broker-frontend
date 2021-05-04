@@ -653,6 +653,7 @@ html, body, #root {
 
 .history-filter {
   @include floatEnd;
+  margin-bottom: rem(10px);
   .select-reference {
     margin: 0 10px 0 0;
     .MuiButtonBase-root {

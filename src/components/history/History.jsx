@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import t, {getLang} from "../../lang/t";
 import {
     Backdrop,
-    Card, CircularProgress, FormControl, InputLabel, MenuItem, Select,
+    Card, CircularProgress, FormControl, Hidden, InputLabel, MenuItem, Select,
     Table,
     TableBody,
     TableCell,
@@ -122,7 +122,7 @@ class History extends React.Component {
                                 <em>{t('all')}</em>
                             </MenuItem>
                             {
-                                Object.keys(coins).map((coin)=>
+                                Object.keys(coins).map((coin) =>
                                     <MenuItem key={coin} value={coin}>{coins[coin].name}</MenuItem>
                                 )
                             }
@@ -138,7 +138,7 @@ class History extends React.Component {
                         </ToggleButton>
                     </ToggleButtonGroup>
                 </div>
-                <Typography variant="h3" gutterBottom>{t('history')}</Typography>
+                <Typography style={{ marginTop: '10px'}} variant="h5">{t('history')}</Typography>
                 <TableContainer component={Card}>
                     <Table>
                         <TableHead>
@@ -146,12 +146,18 @@ class History extends React.Component {
                                 <TableCell align='center'>{t('filled')}</TableCell>
                                 <TableCell align='center'>{t('date')}</TableCell>
                                 <TableCell align='center'>{t('market')}</TableCell>
-                                <TableCell align='center'>{t('type')}</TableCell>
+                                <Hidden xsDown>
+                                    <TableCell align='center'>{t('type')}</TableCell>
+                                </Hidden>
                                 <TableCell align='center'>{t('unitPrice')}</TableCell>
-                                <TableCell align='center'>{t('averagePrice')}</TableCell>
+                                <Hidden xsDown>
+                                    <TableCell align='center'>{t('averagePrice')}</TableCell>
+                                </Hidden>
                                 <TableCell align='center'>{t('amount')}</TableCell>
                                 <TableCell align='center'>{t('totalPrice')}</TableCell>
-                                <TableCell align='center'>{t('fee')}</TableCell>
+                                <Hidden xsDown>
+                                    <TableCell align='center'>{t('fee')}</TableCell>
+                                </Hidden>
                                 <TableCell align='center'>{t('status')}</TableCell>
                             </TableRow>
                         </TableHead>
@@ -168,17 +174,28 @@ class History extends React.Component {
                                             .toLocaleString(getLang() === 'fa' ? 'fa' : 'en-US')}</TableCell>
                                         <TableCell
                                             align='center'>{history.coin + ' - ' + history.reference}</TableCell>
-                                        <TableCell
-                                            align='center'>{history.type === "1" ? t('buy') : t('sell')}</TableCell>
+                                        <Hidden xsDown>
+                                            <TableCell align='center'>
+                                                {history.type === "1" ? t('buy') : t('sell')}
+                                            </TableCell>
+                                        </Hidden>
                                         <TableCell align='center'>{numberWithCommas(history.price)}</TableCell>
-                                        <TableCell align='center'>
-                                            {
-                                                Number(history.used) === 0 ? '-' : numberWithCommas(history.totalPrice / history.used)
-                                            }
-                                        </TableCell>
+                                        <Hidden xsDown>
+                                            <TableCell align='center'>
+                                                {
+                                                    Number(history.used) === 0 ? '-' : numberWithCommas(history.totalPrice / history.used)
+                                                }
+                                            </TableCell>
+                                        </Hidden>
                                         <TableCell align='center'>{numberWithCommas(history.volume)}</TableCell>
-                                        <TableCell align='center'>{Number(history.used) === 0 ? '-' : numberWithCommas(history.totalPrice)}</TableCell>
-                                        <TableCell align='center'>{Number(history.used) === 0 ? '-' : numberWithCommas(history.fee)}</TableCell>
+                                        <TableCell align='center'>
+                                            {Number(history.used) === 0 ? '-' : numberWithCommas(history.totalPrice)}
+                                        </TableCell>
+                                        <Hidden xsDown>
+                                            <TableCell align='center'>
+                                                {Number(history.used) === 0 ? '-' : numberWithCommas(history.fee)}
+                                            </TableCell>
+                                        </Hidden>
                                         <TableCell align='center' style={{
                                             color: history.status === "0" ?
                                                 this.props.theme.palette.warning.main :

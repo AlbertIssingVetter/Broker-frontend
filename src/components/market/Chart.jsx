@@ -1,9 +1,8 @@
 import React from "react";
-import {Card, CardContent, withTheme} from "@material-ui/core";
-import {createChart} from "lightweight-charts";
+import {Card, CardContent, Hidden, withTheme} from "@material-ui/core";
 import t from "../../lang/t";
 import {numberWithCommas} from "../../utils/tools";
-import {Alert, ToggleButton, ToggleButtonGroup} from "@material-ui/lab";
+import {Alert} from "@material-ui/lab";
 import DepthContrast from "./DepthContrast";
 import TradingViewWidget, { Themes } from 'react-tradingview-widget';
 
@@ -43,20 +42,22 @@ class Chart extends React.Component {
                                         {t('compareToYesterday', this.props.price? Math.round(this.props.price.percent*100)/100 : 0)}
                                     </Alert>
                                 </div>
-                                <div className='market-price'>
-                                    {t('lastPrice') + ' ' + numberWithCommas(this.props.price.last)}
-                                </div>
-                                <div className='market-price'>
-                                    {t('minPrice') + ' '}
-                                    <span style={{color: this.props.theme.palette.error.main}}>{numberWithCommas(this.props.price.min)}</span>
-                                </div>
-                                <div className='market-price'>
-                                    {t('maxPrice') + ' '}
-                                    <span style={{color: this.props.theme.palette.success.main}}>{numberWithCommas(this.props.price.max)}</span>
-                                </div>
-                                <div className='market-price'>
-                                    {t('turnover') + ' ' + numberWithCommas(this.props.price.turnover)}
-                                </div>
+                                <Hidden xsDown>
+                                    <div className='market-price'>
+                                        {t('lastPrice') + ' ' + numberWithCommas(this.props.price.last)}
+                                    </div>
+                                    <div className='market-price'>
+                                        {t('minPrice') + ' '}
+                                        <span style={{color: this.props.theme.palette.error.main}}>{numberWithCommas(this.props.price.min)}</span>
+                                    </div>
+                                    <div className='market-price'>
+                                        {t('maxPrice') + ' '}
+                                        <span style={{color: this.props.theme.palette.success.main}}>{numberWithCommas(this.props.price.max)}</span>
+                                    </div>
+                                    <div className='market-price'>
+                                        {t('turnover') + ' ' + numberWithCommas(this.props.price.turnover)}
+                                    </div>
+                                </Hidden>
                             </>
                         ) : ''
                     }

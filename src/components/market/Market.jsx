@@ -1,7 +1,7 @@
 import React from "react";
 import {withRouter} from 'react-router-dom';
 import Chart from "./Chart";
-import {Grid, Snackbar} from "@material-ui/core";
+import {Grid, Hidden, Snackbar} from "@material-ui/core";
 import TransactionCard from "./TransactionCard";
 import OpenOffer from "./OpenOffer";
 import axios from "axios";
@@ -179,9 +179,11 @@ class Market extends React.Component {
                         <TransactionCard coin={this.props.match.params.marketId} handleTransactionResponse={this.handleTransactionResponse}
                                          reference={this.state.reference} transaction={this.state.data.transaction}/>
                     </Grid>
-                    <Grid item xs={12} md={6}>
-                        <OpenOffer handleDeleteOffer={this.handleDeleteOffer} myOffers={this.state.data.myOffers}/>
-                    </Grid>
+                    <Hidden xsDown>
+                        <Grid item xs={12} md={6}>
+                            <OpenOffer handleDeleteOffer={this.handleDeleteOffer} myOffers={this.state.data.myOffers}/>
+                        </Grid>
+                    </Hidden>
                     <Grid item xs={12} md={6}>
                         <Offers offers={this.state.data.offers ? this.state.data.offers.sell : null} sell/>
                     </Grid>

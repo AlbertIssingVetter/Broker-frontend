@@ -62,7 +62,8 @@ class History extends React.Component {
             this.setState({loading: false})
             if (res.data.status) {
                 const histories = []
-                Object.keys(res.data.data.history).forEach(key => {
+                let keys = Object.keys(res.data.data.history).sort((a, b) => b - a);
+                keys.forEach(key => {
                     const offer = res.data.data.history[key];
                     const history = {
                         ...offer[0],
@@ -80,7 +81,6 @@ class History extends React.Component {
                             Number(transaction.coinFee) * Number(transaction.coinVolume);
                         history.totalPrice += (Number(transaction.coinVolume) * Number(transaction.transactionsPrice));
                     })
-                    console.log(history)
                     histories.push(history);
                 })
                 this.setState({

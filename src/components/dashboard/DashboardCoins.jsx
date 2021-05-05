@@ -18,8 +18,8 @@ class DashboardCoins extends React.Component {
                     transform: 'translateZ(0)',
                 }} cols={2.5}>
                     {Object.keys(coins).map(coin => (
-                        <GridListTile style={{height: '125px', width: '25%', minWidth: '300px'}} key={coin}>
-                            <CoinCard coin={coins[coin]} coinSymbol={coin}/>
+                        <GridListTile style={{height: '125px', width: '25%', minWidth: '350px'}} key={coin}>
+                            <CoinCard coin={coins[coin]} coinSymbol={coin} price={this.props.prices ? this.props.prices[coin] : null}/>
                         </GridListTile>
                     ))}
                 </GridList>

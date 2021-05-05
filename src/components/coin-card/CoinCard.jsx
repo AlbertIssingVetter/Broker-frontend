@@ -4,6 +4,7 @@ import {ButtonBase, Card, CardContent, Typography} from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
 import t from "../../lang/t";
 import {Skeleton} from "@material-ui/lab";
+import {numberWithCommas} from "../../utils/tools";
 
 class CoinCard extends React.Component {
 
@@ -18,18 +19,23 @@ class CoinCard extends React.Component {
     render() {
         return (
             <ButtonBase onClick={this.handleClick} className='coin-card'>
-                <Card >
+                <Card>
                     <CardContent>
                         <this.props.coin.icon.type className='coin-card-icon'/>
                         <Typography className='coin-card-name'>{this.props.coin.name}</Typography>
                         <div className='coin-card-price-div'>
-                            {this.props.coin.price ?
-                                <Typography className='coin-card-price'>{t('price', this.props.coin.price)}</Typography> :
-                                <Skeleton animation='wave' width={100} height={25}/>
-                            }
-                            {this.props.coin.price ?
-                                <Alert icon={false} severity={this.props.coin.percent > 0 ? 'success' : 'error'} className='coin-card-percent'>{this.props.coin.percent}%</Alert> :
-                                <Skeleton animation='wave' width={100} height={48}/>
+                            {this.props.price ?
+                                <>
+                                    <Typography className='coin-card-price'>
+                                        {t('price', numberWithCommas(this.props.price.last))}
+                                    </Typography>
+                                    <Alert icon={false} severity={this.props.price.percent >= 0 ? 'success' : 'error'}
+                                           className='coin-card-percent'>{this.props.price.percent}%</Alert>
+                                </> :
+                                <>
+                                    <Skeleton animation='wave' width={154} height={25}/>
+                                    <Skeleton animation='wave' width={154} height={48}/>
+                                </>
                             }
 
                         </div>

@@ -46,7 +46,7 @@ class Dashboard extends React.Component {
     render() {
         return (
             <Grid container spacing={3}>
-                <DashboardCoins/>
+                <DashboardCoins prices={this.state.data.prices}/>
                 <Grid item xs={12} md={6}>
                     <YourWallet/>
                 </Grid>

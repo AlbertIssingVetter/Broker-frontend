@@ -221,7 +221,7 @@ class TransactionForm extends React.Component {
                         {t('yourBalance', this.props.data ? numberWithCommas(this.props.data.balance) : '0', this.props.name)}
                     </Typography>
                     <Slider marks valueLabelDisplay="auto" step={10}
-                            value={this.props.data ? (
+                            value={this.props.data && this.props.data.balance > 0 ? (
                                 this.props.buy ? Math.round(this.state.totalPrice * 100 / this.props.data.balance) :
                                     Math.round(this.state.amount * 100 / this.props.data.balance)
                             ) : 0}

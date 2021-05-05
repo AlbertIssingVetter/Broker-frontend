@@ -19,7 +19,7 @@ class Trades extends React.Component {
                     </TableHead>
                     <TableBody>
                         {this.props.trades && this.props.trades.map((row) => (
-                            <TableRow key={row.price} style={{color: row.color}}>
+                            <TableRow key={row.time} style={{color: row.color}}>
                                 <TableCell style={{color: this.props.theme.palette[row.color].main}}
                                     align='center'>{new Date(row.time).getHours() + ':' + new Date(row.time).getMinutes()}</TableCell>
                                 <TableCell align='center' style={{color: this.props.theme.palette[row.color].main}}>{numberWithCommas(row.price)}</TableCell>

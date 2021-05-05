@@ -93,7 +93,12 @@ class Market extends React.Component {
         this.getMarketDataInterval = setInterval(this.getMarketDate, 5000);
     }
 
-
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.match.params.marketId !== prevProps.match.params.marketId) {
+            this.setState({loading: true});
+            this.getMarketDate();
+        }
+    }
 
     componentWillUnmount() {
         clearInterval(this.getMarketDataInterval);

@@ -1,10 +1,12 @@
 import React from "react";
-import {withRouter} from 'react-router-dom';
-import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
-import t, {getLang} from "../../lang/t";
+import {Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, withTheme} from "@material-ui/core";
+import t from "../../lang/t";
 import {numberWithCommas} from "../../utils/tools";
 
 class Trades extends React.Component {
+
+    lastPrice = 0;
+    lastColor = null;
 
     render() {
         return (
@@ -19,12 +21,26 @@ class Trades extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.trades && this.props.trades.map((row) => (
-                            <TableRow key={row.price}>
-                                <TableCell align='center'>{new Date(row.time).getHours() + ':' + new Date(row.time).getMinutes()}</TableCell>
-                                <TableCell align='center'>{numberWithCommas(row.price)}</TableCell>
-                                <TableCell align='center'>{numberWithCommas(row.volume)}</TableCell>
-                                <TableCell align='center'>{numberWithCommas(row.price * row.volume)}</TableCell>
+                        {this.props.trades && this.props.trades.reverse().map(row => {
+                            if (this.lastPrice === 0) {
+                                this.lastColor = this.props.theme.palette.success.main;
+                            } else {
+                                if (row.price > this.lastPrice) {
+                                    this.lastColor = this.props.theme.palette.success.main;
+                                } else if (row.price < this.lastPrice) {
+                                    this.lastColor = this.props.theme.palette.error.main;
+                                }
+                            }
+                            row.color = this.lastColor;
+                            this.lastPrice = row.price;
+                            return row;
+                        }).reverse().map((row) => (
+                            <TableRow key={row.price} style={{color: row.color}}>
+                                <TableCell style={{color: row.color}}
+                                    align='center'>{new Date(row.time).getHours() + ':' + new Date(row.time).getMinutes()}</TableCell>
+                                <TableCell align='center' style={{color: row.color}}>{numberWithCommas(row.price)}</TableCell>
+                                <TableCell align='center' style={{color: row.color}}>{numberWithCommas(row.volume)}</TableCell>
+                                <TableCell align='center' style={{color: row.color}}>{numberWithCommas(row.price * row.volume)}</TableCell>
                             </TableRow>
                         ))}
 
@@ -35,4 +51,4 @@ class Trades extends React.Component {
     }
 }
 
-export default withRouter(Trades);
+export default withTheme(Trades);

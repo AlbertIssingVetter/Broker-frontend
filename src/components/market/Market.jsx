@@ -120,6 +120,7 @@ class Market extends React.Component {
                 console.log('error')
             }
         }).catch(err => {
+            this.setState({loading: false});
             console.log(err);
         });
     }

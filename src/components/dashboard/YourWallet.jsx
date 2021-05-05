@@ -71,7 +71,7 @@ class YourWallet extends React.Component {
                                     <TableBody>
                                         {
                                             this.props.wallets && Object.keys(this.props.wallets).map(wallet => (
-                                                <TableRow>
+                                                <TableRow key={wallet}>
                                                     <TableCell>{wallet === 'irr' ? t('toman') : coins[wallet].name}</TableCell>
                                                     <TableCell>{numberWithCommas(this.props.wallets[wallet].balance)}</TableCell>
                                                 </TableRow>

@@ -124,6 +124,16 @@ class TransactionForm extends React.Component {
         this.handleAddOffer(1)
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.match.params.marketId !== prevProps.match.params.marketId) {
+            this.setState({
+                totalPrice: '',
+                unitPrice: '',
+                amount: '',
+            });
+        }
+    }
+
     handleSellClick = () => {
         this.handleAddOffer(0);
     }

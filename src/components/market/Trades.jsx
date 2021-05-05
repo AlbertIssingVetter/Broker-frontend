@@ -5,9 +5,6 @@ import {numberWithCommas} from "../../utils/tools";
 
 class Trades extends React.Component {
 
-    lastPrice = 0;
-    lastColor = null;
-
     render() {
         return (
             <TableContainer component={Card}>
@@ -21,26 +18,13 @@ class Trades extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.trades && this.props.trades.reverse().map(row => {
-                            if (this.lastPrice === 0) {
-                                this.lastColor = this.props.theme.palette.success.main;
-                            } else {
-                                if (row.price > this.lastPrice) {
-                                    this.lastColor = this.props.theme.palette.success.main;
-                                } else if (row.price < this.lastPrice) {
-                                    this.lastColor = this.props.theme.palette.error.main;
-                                }
-                            }
-                            row.color = this.lastColor;
-                            this.lastPrice = row.price;
-                            return row;
-                        }).reverse().map((row) => (
+                        {this.props.trades && this.props.trades.map((row) => (
                             <TableRow key={row.price} style={{color: row.color}}>
-                                <TableCell style={{color: row.color}}
+                                <TableCell style={{color: this.props.theme.palette[row.color].main}}
                                     align='center'>{new Date(row.time).getHours() + ':' + new Date(row.time).getMinutes()}</TableCell>
-                                <TableCell align='center' style={{color: row.color}}>{numberWithCommas(row.price)}</TableCell>
-                                <TableCell align='center' style={{color: row.color}}>{numberWithCommas(row.volume)}</TableCell>
-                                <TableCell align='center' style={{color: row.color}}>{numberWithCommas(row.price * row.volume)}</TableCell>
+                                <TableCell align='center' style={{color: this.props.theme.palette[row.color].main}}>{numberWithCommas(row.price)}</TableCell>
+                                <TableCell align='center' style={{color: this.props.theme.palette[row.color].main}}>{numberWithCommas(row.volume)}</TableCell>
+                                <TableCell align='center' style={{color: this.props.theme.palette[row.color].main}}>{numberWithCommas(row.price * row.volume)}</TableCell>
                             </TableRow>
                         ))}
 

@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
             <Grid container spacing={3}>
                 <DashboardCoins prices={this.state.data.prices}/>
                 <Grid item xs={12} md={6}>
-                    <YourWallet/>
+                    <YourWallet wallets={this.state.data.userWallets}/>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <AccountStatus/>

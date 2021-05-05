@@ -249,7 +249,8 @@ const fa =  {
     dailyCoinWithdraw: 'برداشت روزانه رمزارز',
     dailyTotalWithdraw: 'مجموع برداشت روزانه',
     monthWithdraw: 'مجموع برداشت ماهانه',
-    xFromMaxWithdraw: '{0} از {1} تومان'
+    xFromMaxWithdraw: '{0} از {1} تومان',
+    yourEstimateAsset: 'تخمین دارایی شما: {0}',
 }
 
 export default fa;

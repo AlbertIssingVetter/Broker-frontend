@@ -8,7 +8,6 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead,
     TableRow
 } from "@material-ui/core";
 import {Doughnut} from "react-chartjs-2";
@@ -20,6 +19,12 @@ import {numberWithCommas} from "../../utils/tools";
 class YourWallet extends React.Component {
 
     render() {
+        let total = 0;
+        if (this.props.wallets) {
+            Object.keys(this.props.wallets).forEach(wallet => {
+                total += this.props.wallets[wallet].irrAsset;
+            });
+        }
         return (
             <Card style={{height: '100%'}}>
                 <CardContent>
@@ -29,9 +34,9 @@ class YourWallet extends React.Component {
                     <Grid container spacing={3}>
                         <Grid item xs={6}>
                             <Doughnut type='doughnut' data={{
-                                labels: ['btc', 'eth', 'bnb', 'ali', 'doge', 'irr'],
+                                labels: this.props.wallets ? Object.keys(this.props.wallets).map(wallet => wallet).splice(0, 6) : [],
                                 datasets: [{
-                                    data: [120000, 19000, 13000, 25000, 11100, 123000],
+                                    data: this.props.wallets ? Object.keys(this.props.wallets).map(wallet => this.props.wallets[wallet].irrAsset).splice(0, 6) : [],
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 0.4)',
                                         'rgba(54, 162, 235, 0.4)',
@@ -61,41 +66,23 @@ class YourWallet extends React.Component {
                             }/>
                         </Grid>
                         <Grid item xs={6}>
-                            <TableContainer>
+                            <TableContainer style={{height: '260px'}}>
                                 <Table size='small'>
                                     <TableBody>
-                                        <TableRow>
-                                            <TableCell>{coins.btc.name}</TableCell>
-                                            <TableCell>{numberWithCommas(0.0002107)}</TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell>{coins.eth.name}</TableCell>
-                                            <TableCell>{numberWithCommas(0.1)}</TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell>{coins.bnb.name}</TableCell>
-                                            <TableCell>{numberWithCommas(1.23)}</TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell>{coins.ali.name}</TableCell>
-                                            <TableCell>{numberWithCommas(1238564.21)}</TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell>{coins.doge.name}</TableCell>
-                                            <TableCell>{numberWithCommas(125678)}</TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell>{t('toman')}</TableCell>
-                                            <TableCell>{numberWithCommas(123856400)}</TableCell>
-                                        </TableRow>
+                                        {
+                                            this.props.wallets && Object.keys(this.props.wallets).map(wallet => (
+                                                <TableRow>
+                                                    <TableCell>{wallet === 'irr' ? t('toman') : coins[wallet].name}</TableCell>
+                                                    <TableCell>{numberWithCommas(this.props.wallets[wallet].balance)}</TableCell>
+                                                </TableRow>
+                                            ))
+                                        }
                                     </TableBody>
                                 </Table>
                             </TableContainer>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant='h6'>{t('yourEstimateAsset', numberWithCommas(total))}</Typography>
                         </Grid>
                     </Grid>
                 </CardContent>

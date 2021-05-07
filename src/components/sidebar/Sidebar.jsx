@@ -44,11 +44,13 @@ class Sidebar extends React.Component {
                             {t('appName')}
                         </Typography>
                         <Hidden xsDown>
-                            <DarkModeSelector className='MuiAppBar-colorPrimary dark-mode-selector'
-                                              getDarkMode={this.props.getDarkMode}
-                                              toggleDarkMode={this.props.toggleDarkMode}/>
-                            <LanguageSelector className="language-selector-header" />
-                            <ProfileDropDown/>
+                            <div className="header-options">
+                                <DarkModeSelector className='MuiAppBar-colorPrimary dark-mode-selector'
+                                                  getDarkMode={this.props.getDarkMode}
+                                                  toggleDarkMode={this.props.toggleDarkMode}/>
+                                <LanguageSelector className="language-selector-header" />
+                                <ProfileDropDown/>
+                            </div>
                         </Hidden>
                     </Toolbar>
                 </AppBar>

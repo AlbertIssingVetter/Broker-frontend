@@ -5,6 +5,7 @@ import {Button, Card, CardContent, Popover} from "@material-ui/core";
 import Logout from "../login/Logout";
 import t from "../../lang/t";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import axios from "axios";
 
 class ProfileDropDown extends React.Component {
 
@@ -12,6 +13,24 @@ class ProfileDropDown extends React.Component {
         super(props)
         this.state = {
             anchorEl: null,
+            name: localStorage.getItem('name'),
+        }
+    }
+
+    componentDidMount() {
+        if (!this.state.name) {
+            axios({
+                url: '/user/profile',
+                method: 'POST',
+            }).then(res => {
+                if (res.data.name && res.data.family) {
+                    const name = res.data.name + ' ' + res.data.family;
+                    localStorage.setItem('name', name);
+                    this.setState({
+                        name: name,
+                    })
+                }
+            })
         }
     }
 
@@ -29,9 +48,10 @@ class ProfileDropDown extends React.Component {
 
     render() {
         return (
-            <div className="profile-drop-down" >
+            <div className="profile-drop-down display-inline-block" >
                 <div onClick={this.handleDropDownOpen}>
                     <ProfileIcon className="profile-icon-drop-down"/>
+                    <div className="name">{this.state.name}</div>
                     <ExpandMoreIcon className="profile-angle-drop-down"/>
                 </div>
                 <Popover

@@ -2,7 +2,6 @@ import React from "react";
 import {withRouter} from 'react-router-dom';
 import {Button, Card, CardContent, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 import t from "../../lang/t";
-import ColorButton from "../color-button/ColorButton";
 import Typography from "@material-ui/core/Typography";
 import {numberWithCommas} from "../../utils/tools";
 

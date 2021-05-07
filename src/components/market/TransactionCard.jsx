@@ -1,10 +1,10 @@
 import React from "react";
-import {withRouter} from 'react-router-dom';
 import SwipeableViews from "react-swipeable-views";
 import {Card, CardContent, Tab, Tabs} from "@material-ui/core";
 import t from "../../lang/t";
 import TransactionForm from "./TransactionForm";
 import coins from "../../utils/coins";
+import {withTheme} from "@material-ui/core/styles";
 
 class TransactionCard extends React.Component {
 
@@ -30,8 +30,8 @@ class TransactionCard extends React.Component {
                     <Tabs
                         value={this.state.selectedTab} variant='fullWidth'
                         indicatorColor="primary" textColor="primary" onChange={this.handleTabChange}>
-                        <Tab label={t('sell')}/>
-                        <Tab label={t('buy')}/>
+                        <Tab style={{color: this.props.theme.palette.error.main}} label={t('sell')}/>
+                        <Tab style={{color: this.props.theme.palette.success.main}} label={t('buy')}/>
                     </Tabs>
                     <SwipeableViews index={this.state.selectedTab} onChangeIndex={this.handleSwipeChange}>
                         <TransactionForm sell name={coins[this.props.coin].name} coin={this.props.coin} reference={this.props.reference}
@@ -49,4 +49,4 @@ class TransactionCard extends React.Component {
     }
 }
 
-export default withRouter(TransactionCard);
+export default withTheme(TransactionCard);

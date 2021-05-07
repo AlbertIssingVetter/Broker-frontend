@@ -62,13 +62,15 @@ export default class App extends React.Component {
                     main: '#0859FC',
                 },
                 error: {
-                    main: '#FC3A95',
+                    main: '#f86c6b',
+                    contrastText: '#ffffff'
                 },
                 warnings: {
-                    main: '#FCB108',
+                    main: '#ffc107',
                 },
                 success: {
-                    main: '#14FC19',
+                    main: '#63d697',
+                    contrastText: '#ffffff'
                 },
             },
             typography: {
@@ -77,7 +79,7 @@ export default class App extends React.Component {
         });
         return (
             <ThemeProvider theme={theme}>
-                <div  style={this.state.darkMode ? {"scrollbar-color": '#424242 #303030'}: {}}>
+                <div  style={this.state.darkMode ? {scrollbarColor: '#424242 #303030'}: {}}>
                     <RTL>
                         <Router>
                             <CssBaseline/>

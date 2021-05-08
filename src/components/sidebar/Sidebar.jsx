@@ -43,6 +43,7 @@ class Sidebar extends React.Component {
                         <Typography variant="h6" noWrap>
                             {t('appName')}
                         </Typography>
+                        <img src='/logo192.png' style={{height: '64px'}} />
                         <Hidden xsDown>
                             <div className="header-options">
                                 <DarkModeSelector className='MuiAppBar-colorPrimary dark-mode-selector'

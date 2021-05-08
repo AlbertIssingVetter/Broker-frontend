@@ -18,31 +18,52 @@ class AccountStatus extends React.Component {
                                 <TableRow>
                                     <TableCell>{t('accountLevel')}</TableCell>
                                     <TableCell>
-                                        {t('notVerified')}
-                                        <Button onClick={() => {this.props.history.push('/profile')}}
-                                                style={{margin: '0 10px'}} variant='outlined'
-                                                color='primary'>{t('verify')}</Button>
+                                        {this.props.accountStatus ?
+                                           (this.props.accountStatus.status === 0 ? t('notVerified') :
+                                                t('verified')) : ''}
+                                        {
+                                            this.props.accountStatus && this.props.accountStatus.status &&
+                                            <Button onClick={() => {this.props.history.push('/profile')}}
+                                                    style={{margin: '0 10px'}} variant='outlined'
+                                                    color='primary'>{t('verify')}</Button>
+                                        }
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>{t('dailyIRRWithdraw')}</TableCell>
-                                    <TableCell>{t('xFromMaxWithdraw', 0, numberWithCommas(300000000))}</TableCell>
+                                    <TableCell>
+                                        {t('xFromMaxWithdraw',
+                                        this.props.accountStatus?
+                                            this.props.accountStatus.daily_irr_withdraw : 0, numberWithCommas(300000000))}
+                                    </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>{t('dailyCoinWithdraw')}</TableCell>
-                                    <TableCell>{t('xFromMaxWithdraw', 0, numberWithCommas(200000000))}</TableCell>
+                                    <TableCell>
+                                        {t('xFromMaxWithdraw',
+                                            this.props.accountStatus?
+                                                this.props.accountStatus.daily_coin_withdraw : 0, numberWithCommas(300000000))}
+                                    </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>{t('dailyTotalWithdraw')}</TableCell>
-                                    <TableCell>{t('xFromMaxWithdraw', 0, numberWithCommas(500000000))}</TableCell>
+                                    <TableCell>
+                                        {t('xFromMaxWithdraw',
+                                            this.props.accountStatus?
+                                                this.props.accountStatus.daily_total_withdraw : 0, numberWithCommas(300000000))}
+                                    </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>{t('monthWithdraw')}</TableCell>
-                                    <TableCell>{t('xFromMaxWithdraw', 0, numberWithCommas(3000000000))}</TableCell>
+                                    <TableCell>
+                                        {t('xFromMaxWithdraw',
+                                            this.props.accountStatus?
+                                                this.props.accountStatus.month_withdraw : 0, numberWithCommas(3000000000))}
+                                    </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>{t('fee')}</TableCell>
-                                    <TableCell>0.035</TableCell>
+                                    <TableCell>{this.props.accountStatus ? this.props.accountStatus.fee : 0}</TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>

@@ -51,7 +51,7 @@ class Dashboard extends React.Component {
                     <YourWallet wallets={this.state.data.userWallets}/>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <AccountStatus/>
+                    <AccountStatus accountStatus={this.state.data.status}/>
                 </Grid>
 
             </Grid>

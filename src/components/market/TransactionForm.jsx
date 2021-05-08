@@ -235,13 +235,21 @@ class TransactionForm extends React.Component {
                     <Button className='btn-select' color='primary'
                             onClick={this.handleBtnSelectBestOffer}>{t('select')}</Button>
                 </Grid>
-                <Grid className='grid your-balance' item xs={12}>
-                    <Typography color='textSecondary' className='receivedAmount'>
+                <Grid className='grid your-balance' item xs={12} style={{display: 'flex'}}>
+                    <Typography color='textSecondary' className='receivedAmount' style={{flex: '1'}}>
                         {this.props.buy ?
                             t('yourReceipt', this.state.amount ?
                                 (this.state.amount - (this.state.amount * Number(this.props.data.fee))) : 0, this.props.referenceName) :
                             t('yourReceipt', this.state.totalPrice ?
                                 (this.state.totalPrice - (this.state.totalPrice * Number(this.props.data.fee))) : 0, this.props.referenceName)
+                        }
+                    </Typography>
+                    <Typography color='textSecondary' className='receivedAmount' style={{flex: '1'}}>
+                        {this.props.buy ?
+                            t('calculatedFee', this.state.amount ?
+                                this.state.amount * Number(this.props.data.fee) : 0, this.props.referenceName) :
+                            t('calculatedFee', this.state.totalPrice ?
+                                this.state.totalPrice * Number(this.props.data.fee) : 0, this.props.referenceName)
                         }
                     </Typography>
                 </Grid>

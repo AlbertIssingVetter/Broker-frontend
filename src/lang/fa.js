@@ -251,6 +251,7 @@ const fa =  {
     monthWithdraw: 'مجموع برداشت ماهانه',
     xFromMaxWithdraw: '{0} از {1} تومان',
     yourEstimateAsset: 'تخمین دارایی شما: {0}',
+    calculatedFee: 'کارمزد: {0} {1}',
 }
 
 export default fa;

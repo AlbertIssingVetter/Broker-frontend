@@ -29,6 +29,7 @@ class OpenOffer extends React.Component {
                                             </ListItemIcon>
                                             <ListItemText primary={t('unitPrice')} secondary={numberWithCommas(offer.price)}/>
                                             <ListItemText primary={t('coinAmount')} secondary={numberWithCommas(offer.volume)}/>
+                                            {this.props.dashboard && <ListItemText primary={t('coin')} secondary={offer.coin}/>}
                                             <ListItemSecondaryAction>
                                                 <IconButton disabled={offer.deleting} onClick={() => {this.props.handleDeleteOffer(offer.id)}} edge="end">
                                                     <DeleteIcon color='error'/>

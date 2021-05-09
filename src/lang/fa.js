@@ -252,6 +252,8 @@ const fa =  {
     xFromMaxWithdraw: '{0} از {1} تومان',
     yourEstimateAsset: 'تخمین دارایی شما: {0}',
     calculatedFee: 'کارمزد: {0} {1}',
+    yourLastTransactions: 'معاملات اخیر شما',
+    volume: 'حجم',
 }
 
 export default fa;

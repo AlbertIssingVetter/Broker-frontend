@@ -5,6 +5,7 @@ import YourWallet from "./YourWallet";
 import AccountStatus from "./AccountStatus";
 import DashboardCoins from "./DashboardCoins";
 import axios from "axios";
+import LastTransactions from "./LastTransactions";
 
 class Dashboard extends React.Component {
 
@@ -52,6 +53,12 @@ class Dashboard extends React.Component {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <AccountStatus accountStatus={this.state.data.status}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                    <LastTransactions transactions={this.state.data.transactions}/>
                 </Grid>
 
             </Grid>

@@ -22,10 +22,11 @@ class AccountStatus extends React.Component {
                                            (this.props.accountStatus.status === 0 ? t('notVerified') :
                                                 t('verified')) : ''}
                                         {
-                                            this.props.accountStatus && this.props.accountStatus.status &&
+                                            (this.props.accountStatus && !this.props.accountStatus.status) ?
                                             <Button onClick={() => {this.props.history.push('/profile')}}
                                                     style={{margin: '0 10px'}} variant='outlined'
                                                     color='primary'>{t('verify')}</Button>
+                                                : ''
                                         }
                                     </TableCell>
                                 </TableRow>

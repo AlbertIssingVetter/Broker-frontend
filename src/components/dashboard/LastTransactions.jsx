@@ -35,7 +35,7 @@ class LastTransactions extends React.Component {
                                             <TableCell style={{color: transaction.type ?
                                                     this.props.theme.palette.success.main :
                                                     this.props.theme.palette.error.main}}>{transaction.type ? t('buy') : t('sell')}</TableCell>
-                                            <TableCell>{transaction.coin}</TableCell>
+                                            <TableCell>{numberWithCommas(transaction.price)}</TableCell>
                                             <TableCell>{numberWithCommas(transaction.volume)}</TableCell>
                                             <TableCell>{numberWithCommas(transaction.total)}</TableCell>
                                             <TableCell>{numberWithCommas(transaction.fee)}</TableCell>

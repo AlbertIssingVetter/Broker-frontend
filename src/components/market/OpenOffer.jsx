@@ -15,7 +15,7 @@ class OpenOffer extends React.Component {
     render() {
         return (
             <>
-                <Card className='open-offer'>
+                <Card className={this.props.dashboard ? 'open-offer' : 'open-offer open-offer-market'}>
                     <CardContent>
                         <Typography variant='h4'>{t('openOffer')}</Typography>
                         {

@@ -651,9 +651,10 @@ html, body, #root {
     font-size: rem(11px);
   }
 }
-
-.open-offer {
+.open-offer-market {
   height: rem(515.75px);
+}
+.open-offer {
   .deleting {
     filter: blur(3px);
     -webkit-filter: blur(3px);

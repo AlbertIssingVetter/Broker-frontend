@@ -68,7 +68,7 @@ class Chart extends React.Component {
                         locale="fa_IR"
                         autosize
                         allow_symbol_change={false}
-                        range='2D'
+                        range='5d'
                         hide_side_toolbar={false}
                         interval={60}
                     />

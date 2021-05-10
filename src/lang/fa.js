@@ -254,6 +254,10 @@ const fa =  {
     calculatedFee: 'کارمزد: {0} {1}',
     yourLastTransactions: 'معاملات اخیر شما',
     volume: 'حجم',
+    wink: 'وینک',
+    bittorrent: 'بیت تورنت',
+    holo: 'هولو',
+    theta: 'تتا',
 }
 
 export default fa;

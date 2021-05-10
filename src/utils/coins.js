@@ -119,6 +119,22 @@ const coins = {
     ali: {
         name: t('alive'),
         icon: <img src={ali}/>
+    },
+    win: {
+        name: t('wink'),
+        icon: <img src={win}/>
+    },
+    btt: {
+        name: t('bittorrent'),
+        icon: <img src={btt}/>
+    },
+    hot: {
+        name: t('holo'),
+        icon: <img src={hot}/>
+    },
+    theta: {
+        name: t('theta'),
+        icon: <img src={theta}/>
     }
 }
 

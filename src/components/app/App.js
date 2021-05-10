@@ -22,6 +22,7 @@ import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import IosInstallationGuide from "../install/IosInstallationGuide";
 import Callback from "../callback/Callback";
 import RTL from "../../RTL";
+import {version} from '../../../package.json';
 
 export default class App extends React.Component {
 
@@ -84,8 +85,9 @@ export default class App extends React.Component {
                         <Router>
                             <CssBaseline/>
                             <Helmet>
-                                <link rel="stylesheet"
-                                      href={getLang() === 'fa' ? '/style.rtl.css' : '/style.css'}/>
+                                <link rel="stylesheet" href={getLang() === 'fa' ?
+                                        '/style.rtl.css?version=' + version :
+                                        '/style.css?version=' + version}/>
                             </Helmet>
                             <Switch>
                                 <Route path="/login" component={Login}/>

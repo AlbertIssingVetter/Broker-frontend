@@ -1,6 +1,7 @@
 const buildDir = __dirname + '/../build';
 const fs = require('fs');
 const path = require('path');
+const {version} = require('../package.json')
 
 
 const walk = route => {
@@ -25,7 +26,11 @@ const createCacheList = files => {
     files.forEach(file => {
         const ext = file.substr(file.lastIndexOf('.') + 1);
         if (!ignores.includes(ext) && !file.includes('sw.js')) {
-            cacheFiles.push("." + file.substr(file.indexOf('/build/') + 6))
+            if (ext === 'css') {
+                cacheFiles.push("." + file.substr(file.indexOf('/build/') + 6) + '?version=' + version)
+            } else {
+                cacheFiles.push("." + file.substr(file.indexOf('/build/') + 6))
+            }
         }
     })
     let sw = fs.readFileSync(buildDir + "/sw.js", 'utf8');

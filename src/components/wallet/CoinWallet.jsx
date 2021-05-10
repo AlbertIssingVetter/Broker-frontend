@@ -39,7 +39,7 @@ class CoinWallet extends React.Component {
                 <CardContent className="display-table">
                     <div className='display-table-cell coin-wallet-name'>
                         <div className='width-100'>
-                            <this.props.coin.icon.type className='coin-wallet-logo'/>
+                            {this.props.coin.icon}
                             <Typography className=''>{this.props.coin.name}</Typography>
                         </div>
                     </div>

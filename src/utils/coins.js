@@ -1,119 +1,124 @@
 import t from "../lang/t";
-import BitcoinIcon from "../svg-icon/BitcoinIcon";
-import EthereumIcon from "../svg-icon/EthereumIcon";
-import TetherIcon from "../svg-icon/TetherIcon";
-import LitecoinIcon from "../svg-icon/LitecoinIcon";
-import CardanoIcon from "../svg-icon/CardanoIcon";
-import BinanceIcon from "../svg-icon/BinanceIcon";
-import DogeCoinIcon from "../svg-icon/DogeCoinIcon";
-import TronIcon from "../svg-icon/TronIcon";
-import RippleIcon from "../svg-icon/RippleIcon";
-import BitcoinCashIcon from "../svg-icon/BitcoinCashIcon";
-import EosioIcon from "../svg-icon/EosioIcon";
-import PolkadotIcon from "../svg-icon/PolkadotIcon";
-import VechainIcon from "../svg-icon/VechainIcon";
-import ZilliqaIcon from "../svg-icon/ZilliqaIcon";
-import StellarIcon from "../svg-icon/StellarIcon";
-import DashIcon from "../svg-icon/DashIcon";
-import UniswapIcon from "../svg-icon/UniswapIcon";
-import EngineCoinIcon from "../svg-icon/EngineCoinIcon";
-import MoneroIcon from "../svg-icon/MoneroIcon";
-import WebMoneyIcon from "../svg-icon/WebMoneyIcon";
-import SushiIcon from "../svg-icon/SushiIcon";
-import AliveIcon from "../svg-icon/AliveIcon";
+import btc from '../coin-icon/btc.png';
+import eth from '../coin-icon/eth.png';
+import usdt from '../coin-icon/usdt.png';
+import ltc from '../coin-icon/ltc.png';
+import ada from '../coin-icon/ada.png';
+import bnb from '../coin-icon/bnb.png';
+import doge from '../coin-icon/doge.png';
+import etc from '../coin-icon/etc.png';
+import trx from '../coin-icon/trx.png';
+import xrp from '../coin-icon/xrp.png';
+import bch from '../coin-icon/bch.png';
+import eos from '../coin-icon/eos.png';
+import dot from '../coin-icon/dot.png';
+import vet from '../coin-icon/vet.png';
+import zil from '../coin-icon/zil.png';
+import xlm from '../coin-icon/xlm.png';
+import dash from '../coin-icon/dash.png';
+import uni from '../coin-icon/uni.png';
+import enj from '../coin-icon/enj.png';
+import xmr from '../coin-icon/xmr.png';
+import wm from '../coin-icon/wm.png';
+import sushi from '../coin-icon/sushi.png';
+import ali from '../coin-icon/ali.png';
+import win from '../coin-icon/win.png';
+import btt from '../coin-icon/btt.png';
+import hot from '../coin-icon/hot.png';
+import theta from '../coin-icon/theta.png';
 
 const coins = {
     btc: {
         name: t('bitcoin'),
-        icon: <BitcoinIcon/>
+        icon: <img src={btc}/>
     },
     eth: {
         name: t('ethereum'),
-        icon: <EthereumIcon/>
+        icon: <img src={eth}/>
     },
     usdt: {
         name: t('tether'),
-        icon: <TetherIcon/>
+        icon: <img src={usdt}/>
     },
     ltc: {
         name: t('litecoin'),
-        icon: <LitecoinIcon/>
+        icon: <img src={ltc}/>
     },
     ada: {
         name: t('cardano'),
-        icon: <CardanoIcon/>
+        icon: <img src={ada}/>
     },
     bnb: {
         name: t('binance'),
-        icon: <BinanceIcon/>
+        icon: <img src={bnb}/>
     },
     doge: {
         name: t('dogeCoin'),
-        icon: <DogeCoinIcon/>
+        icon: <img src={doge}/>
     },
     etc: {
         name: t('ethereumClassic'),
-        icon: <EthereumIcon/>
+        icon: <img src={etc}/>
     },
     trx: {
         name: t('tron'),
-        icon: <TronIcon/>
+        icon: <img src={trx}/>
     },
     xrp: {
         name: t('ripple'),
-        icon: <RippleIcon/>
+        icon: <img src={xrp}/>
     },
     bch: {
         name: t('bitcoinCash'),
-        icon: <BitcoinCashIcon/>
+        icon: <img src={bch}/>
     },
     eos: {
         name: t('eosio'),
-        icon: <EosioIcon/>
+        icon: <img src={eos}/>
     },
     dot: {
         name: t('polkadot'),
-        icon: <PolkadotIcon/>
+        icon: <img src={dot}/>
     },
     vet: {
         name: t('vechain'),
-        icon: <VechainIcon/>
+        icon: <img src={vet}/>
     },
     zil: {
         name: t('zilliqa'),
-        icon: <ZilliqaIcon/>
+        icon: <img src={zil}/>
     },
     xlm: {
         name: t('stellar'),
-        icon: <StellarIcon/>
+        icon: <img src={xlm}/>
     },
     dash: {
         name: t('dash'),
-        icon: <DashIcon/>
+        icon: <img src={dash}/>
     },
     uni: {
         name: t('uniswap'),
-        icon: <UniswapIcon/>
+        icon: <img src={uni}/>
     },
     enj: {
         name: t('engineCoin'),
-        icon: <EngineCoinIcon/>
+        icon: <img src={enj}/>
     },
     xmr: {
         name: t('monero'),
-        icon: <MoneroIcon/>
+        icon: <img src={xmr}/>
     },
     wm: {
         name: t('webmoney'),
-        icon: <WebMoneyIcon/>
+        icon: <img src={wm}/>
     },
     sushi: {
         name: t('sushi'),
-        icon: <SushiIcon/>
+        icon: <img src={sushi}/>
     },
     ali: {
         name: t('alive'),
-        icon: <AliveIcon/>
+        icon: <img src={ali}/>
     }
 }
 

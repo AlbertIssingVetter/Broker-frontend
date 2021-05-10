@@ -21,7 +21,7 @@ class CoinCard extends React.Component {
             <ButtonBase onClick={this.handleClick} className='coin-card'>
                 <Card>
                     <CardContent>
-                        <this.props.coin.icon.type className='coin-card-icon'/>
+                        {this.props.coin.icon}
                         <Typography className='coin-card-name'>{this.props.coin.name}</Typography>
                         <div className='coin-card-price-div'>
                             {this.props.price ?

@@ -281,15 +281,6 @@ html, body, #root {
   }
 }
 
-.coin-card-icon {
-  width: rem(64px);
-  height: rem(64px);
-  position: absolute;
-  top: 50%;
-  @include positionStart(10px);
-  transform: translateY(-50%);
-}
-
 .coin-card-name {
   position: absolute;
   top: 50%;
@@ -302,6 +293,14 @@ html, body, #root {
   width: 100%;
   .MuiCard-root {
     width: 100%;
+  }
+  img {
+    width: rem(64px);
+    height: rem(64px);
+    position: absolute;
+    top: 50%;
+    @include positionStart(10px);
+    transform: translateY(-50%);
   }
 }
 
@@ -432,12 +431,12 @@ html, body, #root {
 .coin-wallet-name {
   min-width: rem(100px);
   text-align: center;
+  img {
+    width: rem(40px);
+    height: rem(40px);
+  }
 }
 
-.coin-wallet-logo {
-  width: rem(40px);
-  height: rem(40px);
-}
 
 .display-table-cell {
   display: table-cell;

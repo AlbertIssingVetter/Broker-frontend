@@ -6,6 +6,7 @@ import axios from "axios";
 import TomanIcon from "../../svg-icon/TomanIcon";
 import CoinWallet from "./CoinWallet";
 import coins from "../../utils/coins";
+import {numberWithCommas} from "../../utils/tools";
 
 class Wallet extends React.Component {
 
@@ -19,7 +20,8 @@ class Wallet extends React.Component {
                     icon: <TomanIcon/>
                 },
                 ...coins,
-            }
+            },
+            totalAssets: 0
         }
     }
 
@@ -31,12 +33,20 @@ class Wallet extends React.Component {
         }).then(res => {
             let wallets = res.data.data;
             let coins = this.state.coins;
+            let totalAssets = 0;
             Object.keys(coins).forEach(coinKey => {
                 coins[coinKey].address = wallets[coinKey] ? wallets[coinKey].address : '';
                 coins[coinKey].balance = wallets[coinKey] ? wallets[coinKey].balance : 0;
+                coins[coinKey].lastPrice = wallets[coinKey] ? wallets[coinKey].lastPrice : 0;
+                if (coinKey === 'irr') {
+                    totalAssets += coins[coinKey].balance;
+                } else {
+                    totalAssets += coins[coinKey].lastPrice * coins[coinKey].balance;
+                }
             })
             this.setState({
-                coins: coins
+                coins: coins,
+                totalAssets
             })
         }).catch(err => {
             console.log(err);
@@ -47,6 +57,7 @@ class Wallet extends React.Component {
         return (
             <>
                 <Typography variant="h4" className="content-header">{t('myWallet')}</Typography>
+                <Typography gutterBottom>{t('yourEstimateAsset', numberWithCommas(this.state.totalAssets))}</Typography>
                 <Grid container spacing={3}>
                     {
                         Object.keys(this.state.coins).map(coin => (

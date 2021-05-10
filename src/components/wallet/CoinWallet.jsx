@@ -44,11 +44,23 @@ class CoinWallet extends React.Component {
                         </div>
                     </div>
                     <div className='display-table-cell coin-wallet-count'>
-                        {this.props.coin.balance !== undefined ? numberWithCommas(this.props.coin.balance) : <Skeleton animation='wave'/>}
+                        {this.props.coin.balance !== undefined ?
+                            (
+                                <>
+                                    {numberWithCommas(this.props.coin.balance)}
+                                    {
+                                        this.props.id !== 'irr' &&
+                                        <Typography color="textSecondary" className='font-size-11'>
+                                            {t('price', numberWithCommas(this.props.coin.lastPrice * this.props.coin.balance))}
+                                        </Typography>
+                                    }
+                                </>
+                            ) : <Skeleton animation='wave'/>}
                     </div>
                     <Hidden xsDown>
                         <div className='display-table-cell coin-wallet-address'>
-                            {this.props.coin.balance !== undefined ? this.props.coin.address : <Skeleton animation='wave'/>}
+                            {this.props.coin.balance !== undefined ? this.props.coin.address :
+                                <Skeleton animation='wave'/>}
                         </div>
                     </Hidden>
                     <Hidden smDown>

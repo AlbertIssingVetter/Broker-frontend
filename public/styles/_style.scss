@@ -659,7 +659,9 @@ html, body, #root {
     -webkit-filter: blur(3px);
   }
 }
-
+.font-size-11 {
+  font-size: rem(11px);
+}
 .history-filter {
   @include floatEnd;
   margin-bottom: rem(10px);

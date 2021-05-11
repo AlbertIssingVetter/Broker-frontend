@@ -244,7 +244,7 @@ html, body, #root {
 
 .header-options {
   position: absolute;
-  left: 0;
+  @include positionEnd(0px);
 }
 
 .profile-drop-down-popover {
